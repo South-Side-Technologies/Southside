@@ -1,0 +1,344 @@
+'use client'
+
+import React, { useState } from 'react'
+import Link from 'next/link'
+
+const Logo = () => (
+  <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="2" y="2" width="36" height="36" rx="8" fill="#3B82F6" />
+    <path d="M12 20C12 15.58 15.58 12 20 12C24.42 12 28 15.58 28 20C28 24.42 24.42 28 20 28C15.58 28 12 24.42 12 20Z" fill="white" />
+    <circle cx="20" cy="20" r="4" fill="#3B82F6" />
+  </svg>
+)
+
+export default function Questionnaire() {
+  const [formData, setFormData] = useState({
+    companyName: '',
+    contactName: '',
+    email: '',
+    phone: '',
+    companySize: '',
+    interestedServices: [] as string[],
+    automationTechnologies: [] as string[],
+    otherTechnology: '',
+    budget: '',
+    timeline: '',
+    additionalInfo: '',
+  })
+
+  const [submitted, setSubmitted] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }))
+  }
+
+  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>, field: 'currentChallenges' | 'interestedServices') => {
+    const { value, checked } = e.target
+    setFormData(prev => ({
+      ...prev,
+      [field]: checked
+        ? [...prev[field], value]
+        : prev[field].filter(item => item !== value)
+    }))
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setLoading(true)
+    setError('')
+
+    try {
+      const response = await fetch('/api/submit-questionnaire', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to submit form')
+      }
+
+      setSubmitted(true)
+      setFormData({
+        companyName: '',
+        contactName: '',
+        email: '',
+        phone: '',
+        companySize: '',
+        interestedServices: [],
+        automationTechnologies: [],
+        otherTechnology: '',
+        budget: '',
+        timeline: '',
+        additionalInfo: '',
+      })
+    } catch (err) {
+      setError('Failed to submit the questionnaire. Please try again.')
+      console.error('Form submission error:', err)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  if (submitted) {
+    return (
+      <>
+        <header className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
+          <div className="max-w-6xl mx-auto px-4 md:px-6 py-4 md:py-6">
+            <Link href="/" className="flex items-center gap-3 mb-2 hover:opacity-80 transition-opacity w-fit">
+              <Logo />
+              <h1 className="text-2xl md:text-3xl font-bold text-black font-alfa">South Side Tech</h1>
+            </Link>
+          </div>
+        </header>
+
+        <main className="flex-grow flex items-center justify-center px-4 md:px-6 py-12 md:py-16">
+          <div className="max-w-2xl mx-auto text-center w-full">
+            <div className="bg-white rounded-lg p-6 md:p-12 shadow-md">
+              <div className="text-5xl mb-4">✅</div>
+              <h2 className="text-2xl md:text-3xl font-bold text-black mb-4 font-playfair">Thank You!</h2>
+              <p className="text-gray-700 mb-6 text-sm md:text-base">Your questionnaire has been submitted successfully. We'll review your information and get back to you shortly with tailored solutions for your business.</p>
+              <Link href="/" className="inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 md:px-8 rounded-lg transition-colors text-sm md:text-base">
+                Back to Home
+              </Link>
+            </div>
+          </div>
+        </main>
+      </>
+    )
+  }
+
+  return (
+    <>
+      <header className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
+        <div className="max-w-6xl mx-auto px-4 md:px-6 py-4 md:py-6">
+          <Link href="/" className="flex items-center gap-3 mb-2 hover:opacity-80 transition-opacity w-fit">
+            <Logo />
+            <h1 className="text-2xl md:text-3xl font-bold text-black font-alfa">South Side Tech</h1>
+          </Link>
+          <p className="text-gray-600 mt-2 text-sm md:text-base">Client Questionnaire</p>
+        </div>
+      </header>
+
+      <main className="flex-grow">
+        <section className="py-8 md:py-16 px-4 md:px-6">
+          <div className="max-w-2xl mx-auto">
+            <h2 className="text-2xl md:text-3xl font-bold text-black mb-6 md:mb-8 font-playfair">Let's Understand Your Needs</h2>
+            
+            {error && (
+              <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6 text-sm md:text-base">
+                {error}
+              </div>
+            )}
+
+            <form onSubmit={handleSubmit} className="bg-white rounded-lg p-6 md:p-8 shadow-md space-y-6">
+              {/* Contact Information */}
+              <div className="space-y-4">
+                <h3 className="text-lg md:text-xl font-bold text-black font-playfair">Contact Information</h3>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Company Name *</label>
+                  <input
+                    type="text"
+                    name="companyName"
+                    value={formData.companyName}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base"
+                    placeholder="Your company name"
+                  />
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Contact Name *</label>
+                    <input
+                      type="text"
+                      name="contactName"
+                      value={formData.contactName}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base"
+                      placeholder="Your name"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Email *</label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base"
+                      placeholder="your@email.com"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Phone *</label>
+                  <input
+                    type="tel"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base"
+                    placeholder="(555) 123-4567"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Company Size *</label>
+                  <select
+                    name="companySize"
+                    value={formData.companySize}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base"
+                  >
+                    <option value="">Select company size</option>
+                    <option value="1-10">1-10 employees</option>
+                    <option value="11-50">11-50 employees</option>
+                    <option value="51-200">51-200 employees</option>
+                    <option value="201-500">201-500 employees</option>
+                    <option value="500+">500+ employees</option>
+                  </select>
+                </div>
+              </div>
+
+              {/* Interested Services */}
+              <div className="space-y-4">
+                <h3 className="text-lg md:text-xl font-bold text-black font-playfair">Which services interest you?</h3>
+                <div className="space-y-3">
+                  {['Cloud Infrastructure Management', 'Cloud Cost Optimization', 'Business Process Automation', 'AI Services', 'Web Development', 'Web Hosting'].map(service => (
+                    <label key={service} className="flex items-center cursor-pointer">
+                      <input
+                        type="checkbox"
+                        value={service}
+                        checked={formData.interestedServices.includes(service)}
+                        onChange={(e) => handleCheckboxChange(e, 'interestedServices')}
+                        className="w-5 h-5 text-blue-500 rounded"
+                      />
+                      <span className="ml-3 text-gray-700 text-sm md:text-base">{service}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              {/* Automation Technologies */}
+              <div className="space-y-4">
+                <h3 className="text-lg md:text-xl font-bold text-black font-playfair">What technologies could we help you automate?</h3>
+                <p className="text-gray-600 text-sm md:text-base mb-3">Select any software or systems you currently use that could benefit from automation</p>
+                <div className="space-y-3">
+                  {['Salesforce', 'HubSpot', 'Slack', 'Microsoft Teams', 'Email (Gmail/Outlook)', 'Zapier', 'Airtable', 'Google Sheets', 'Excel', 'Asana', 'Monday.com', 'Jira', 'Stripe', 'PayPal', 'QuickBooks', 'Shopify', 'WooCommerce', 'Custom APIs', 'Other'].map(tech => (
+                    <label key={tech} className="flex items-center cursor-pointer">
+                      <input
+                        type="checkbox"
+                        value={tech}
+                        checked={formData.automationTechnologies.includes(tech)}
+                        onChange={(e) => handleCheckboxChange(e, 'automationTechnologies')}
+                        className="w-5 h-5 text-blue-500 rounded"
+                      />
+                      <span className="ml-3 text-gray-700 text-sm md:text-base">{tech}</span>
+                    </label>
+                  ))}
+                </div>
+                {formData.automationTechnologies.includes('Other') && (
+                  <div className="mt-3 pl-8">
+                    <input
+                      type="text"
+                      name="otherTechnology"
+                      value={formData.otherTechnology}
+                      onChange={handleInputChange}
+                      placeholder="Please describe the technology..."
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base"
+                    />
+                  </div>
+                )}
+              </div>
+
+              {/* Budget and Timeline */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Budget Range *</label>
+                  <select
+                    name="budget"
+                    value={formData.budget}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base"
+                  >
+                    <option value="">Select budget range</option>
+                    <option value="<$10k">Less than $10,000</option>
+                    <option value="$10k-$25k">$10,000 - $25,000</option>
+                    <option value="$25k-$50k">$25,000 - $50,000</option>
+                    <option value="$50k-$100k">$50,000 - $100,000</option>
+                    <option value=">$100k">More than $100,000</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Timeline *</label>
+                  <select
+                    name="timeline"
+                    value={formData.timeline}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base"
+                  >
+                    <option value="">Select timeline</option>
+                    <option value="ASAP">ASAP</option>
+                    <option value="1-3 months">1-3 months</option>
+                    <option value="3-6 months">3-6 months</option>
+                    <option value="6+ months">6+ months</option>
+                  </select>
+                </div>
+              </div>
+
+              {/* Additional Information */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Additional Information</label>
+                <textarea
+                  name="additionalInfo"
+                  value={formData.additionalInfo}
+                  onChange={handleInputChange}
+                  rows={4}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base"
+                  placeholder="Tell us more about your project or requirements..."
+                />
+              </div>
+
+              {/* Submit Button */}
+              <div className="pt-4">
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="w-full bg-blue-500 hover:bg-blue-600 disabled:bg-blue-400 text-white font-bold py-3 px-8 rounded-lg transition-colors text-base md:text-lg min-h-12"
+                >
+                  {loading ? 'Submitting...' : 'Submit Questionnaire'}
+                </button>
+              </div>
+            </form>
+          </div>
+        </section>
+      </main>
+
+      <footer className="bg-gray-900 text-white py-8 md:py-12 px-4 md:px-6 mt-8 md:mt-12">
+        <div className="max-w-6xl mx-auto">
+          <div className="border-t border-gray-800 pt-6 md:pt-8 text-center text-gray-400 text-sm md:text-base">
+            <p>&copy; 2026 South Side Technologies. All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
+    </>
+  )
+}

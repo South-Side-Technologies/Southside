@@ -1,0 +1,164 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Font Definitions - Uncomment and update paths when you add font files */
+/*
+@font-face {
+  font-family: 'YourCustomFont';
+  src: url('./fonts/your-font-regular.woff2') format('woff2'),
+       url('./fonts/your-font-regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'YourCustomFont';
+  src: url('./fonts/your-font-bold.woff2') format('woff2'),
+       url('./fonts/your-font-bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+*/
+
+body {
+  background-color: #f5f5f0;
+  color: #000000;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes bounceIn {
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.animate-fade-in {
+  opacity: 0;
+  animation: fadeIn 1s ease-in-out forwards;
+}
+
+.animate-slide-up {
+  opacity: 0;
+  transform: translateY(40px);
+  animation: slideUp 1s ease-out forwards;
+}
+
+.animate-slide-in-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  animation: slideInLeft 1s ease-out forwards;
+}
+
+.animate-slide-in-right {
+  opacity: 0;
+  transform: translateX(40px);
+  animation: slideInRight 1s ease-out forwards;
+}
+
+.animate-bounce-in {
+  opacity: 0;
+  transform: scale(0.85);
+  animation: bounceIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Initial hidden state - prevents flicker before animation triggers */
+.opacity-0 {
+  opacity: 0 !important;
+  transform: translateY(0) translateX(0) scale(1);
+}
+
+.animate-pulse-glow {
+  animation: pulse 3s ease-in-out infinite;
+}
+
+/* Stagger animations for cards */
+.animate-delay-100 {
+  animation-delay: 0.15s;
+}
+
+.animate-delay-200 {
+  animation-delay: 0.3s;
+}
+
+.animate-delay-300 {
+  animation-delay: 0.45s;
+}
+
+.animate-delay-400 {
+  animation-delay: 0.6s;
+}
+
+.animate-delay-500 {
+  animation-delay: 0.75s;
+}
+
+.animate-delay-600 {
+  animation-delay: 0.9s;
+}
