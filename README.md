@@ -1,5 +1,7 @@
 # South Side Technologies
 
+🇺🇸 **U.S.A Owned and Operated** — All work performed by U.S.-based team members. No overseas workers.
+
 A website for South Side Technologies, a tech company offering:
 
 - Cloud / Computing Infrastructure management

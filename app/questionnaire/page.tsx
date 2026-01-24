@@ -93,10 +93,12 @@ export default function Questionnaire() {
       <>
         <header className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
           <div className="max-w-6xl mx-auto px-4 md:px-6 py-4 md:py-6">
-            <Link href="/" className="flex items-center gap-3 mb-2 hover:opacity-80 transition-opacity w-fit">
-              <Logo />
-              <h1 className="text-2xl md:text-3xl font-bold text-black font-alfa">South Side Tech</h1>
-            </Link>
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+              <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity w-fit mx-auto sm:mx-0">
+                <Logo />
+                <h1 className="text-2xl md:text-3xl font-bold text-black font-alfa">South Side Tech</h1>
+              </Link>
+            </div>
           </div>
         </header>
 
@@ -120,11 +122,13 @@ export default function Questionnaire() {
     <>
       <header className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-4 md:px-6 py-4 md:py-6">
-          <Link href="/" className="flex items-center gap-3 mb-2 hover:opacity-80 transition-opacity w-fit">
-            <Logo />
-            <h1 className="text-2xl md:text-3xl font-bold text-black font-alfa">South Side Tech</h1>
-          </Link>
-          <p className="text-gray-600 mt-2 text-sm md:text-base">Client Questionnaire</p>
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+            <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity w-fit mx-auto sm:mx-0">
+              <Logo />
+              <h1 className="text-2xl md:text-3xl font-bold text-black font-alfa">South Side Tech</h1>
+            </Link>
+            <p className="text-gray-600 text-sm md:text-base text-center sm:text-right">Client Questionnaire</p>
+          </div>
         </div>
       </header>
 
@@ -220,14 +224,14 @@ export default function Questionnaire() {
               <div className="space-y-4">
                 <h3 className="text-lg md:text-xl font-bold text-black font-playfair">Which services interest you?</h3>
                 <div className="space-y-3">
-                  {['Cloud Infrastructure Management', 'Cloud Cost Optimization', 'Business Process Automation', 'AI Services', 'Web Development', 'Web Hosting'].map(service => (
-                    <label key={service} className="flex items-center cursor-pointer">
+                  {['Cloud Infrastructure Management', 'Cloud Cost Optimization', 'Business Process Automation', 'AI Services', 'Web Development', 'Web Hosting', 'Security Engineering & Zero Trust', 'CI/CD Pipelines'].map(service => (
+                    <label key={service} className="flex items-start cursor-pointer">
                       <input
                         type="checkbox"
                         value={service}
                         checked={formData.interestedServices.includes(service)}
                         onChange={(e) => handleCheckboxChange(e, 'interestedServices')}
-                        className="w-5 h-5 text-blue-500 rounded"
+                        className="w-5 h-5 text-blue-500 rounded mt-1"
                       />
                       <span className="ml-3 text-gray-700 text-sm md:text-base">{service}</span>
                     </label>
@@ -239,15 +243,49 @@ export default function Questionnaire() {
               <div className="space-y-4">
                 <h3 className="text-lg md:text-xl font-bold text-black font-playfair">What technologies could we help you automate?</h3>
                 <p className="text-gray-600 text-sm md:text-base mb-3">Select any software or systems you currently use that could benefit from automation</p>
-                <div className="space-y-3">
-                  {['Salesforce', 'HubSpot', 'Slack', 'Microsoft Teams', 'Email (Gmail/Outlook)', 'Zapier', 'Airtable', 'Google Sheets', 'Excel', 'Asana', 'Monday.com', 'Jira', 'Stripe', 'PayPal', 'QuickBooks', 'Shopify', 'WooCommerce', 'Custom APIs', 'Other'].map(tech => (
-                    <label key={tech} className="flex items-center cursor-pointer">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-3">
+                  {[
+                    'Airtable',
+                    'Asana',
+                    'AWS',
+                    'Azure',
+                    'Discord',
+                    'Dropbox',
+                    'Email (Gmail/Outlook)',
+                    'Excel',
+                    'Google Ads',
+                    'Google Drive',
+                    'Google Sheets',
+                    'HubSpot',
+                    'Instagram',
+                    'Jira',
+                    'Mailchimp',
+                    'Microsoft Teams',
+                    'Monday.com',
+                    'Notion',
+                    'PayPal',
+                    'QuickBooks',
+                    'Salesforce',
+                    'Shopify',
+                    'Slack',
+                    'Square',
+                    'Stripe',
+                    'Trello',
+                    'Twilio',
+                    'Webflow',
+                    'WooCommerce',
+                    'WordPress',
+                    'Zapier',
+                    'Custom APIs',
+                    'Other',
+                  ].map(tech => (
+                    <label key={tech} className="flex items-start cursor-pointer">
                       <input
                         type="checkbox"
                         value={tech}
                         checked={formData.automationTechnologies.includes(tech)}
                         onChange={(e) => handleCheckboxChange(e, 'automationTechnologies')}
-                        className="w-5 h-5 text-blue-500 rounded"
+                        className="w-5 h-5 text-blue-500 rounded mt-1"
                       />
                       <span className="ml-3 text-gray-700 text-sm md:text-base">{tech}</span>
                     </label>

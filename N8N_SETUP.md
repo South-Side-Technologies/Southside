@@ -16,6 +16,42 @@ To set up the n8n webhook:
 NEXT_PUBLIC_N8N_WEBHOOK_URL=https://your-n8n-instance.com/webhook/questionnaire
 ```
 
+If your webhook uses header auth, add this to `.env.local`:
+
+```
+N8N_WEBHOOK_AUTH=your-token-here
+```
+
+### Chatbot Configuration
+
+To connect the on-site chatbot:
+
+1. Create a new n8n webhook workflow for chat
+2. Copy the webhook URL
+3. Add the server-only variable to `.env.local`:
+
+```
+N8N_CHAT_WEBHOOK_URL=https://your-n8n-instance.com/webhook/chat
+```
+
+If your chat webhook requires header auth, reuse the same token:
+
+```
+N8N_WEBHOOK_AUTH=your-token-here
+```
+
+The chat endpoint receives:
+
+```json
+{
+  "message": "string",
+  "history": [
+    { "role": "assistant", "content": "string" },
+    { "role": "user", "content": "string" }
+  ]
+}
+```
+
 ### Form Data Structure
 
 The form sends the following data to your n8n webhook:

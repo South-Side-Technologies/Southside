@@ -162,3 +162,7 @@ body {
 .animate-delay-600 {
   animation-delay: 0.9s;
 }
+
+.animate-delay-700 {
+  animation-delay: 1.05s;
+}

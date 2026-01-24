@@ -48,3 +48,21 @@ export const HostingIcon = () => (
     <circle cx="16" cy="32" r="1.5" fill="#3B82F6"/>
   </svg>
 )
+
+export const SecurityIcon = () => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M24 6L38 12V22C38 30.28 32.3 37.5 24 41C15.7 37.5 10 30.28 10 22V12L24 6Z" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M18 24L22.5 28.5L30 20" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+)
+
+export const CiCdIcon = () => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="6" y="8" width="14" height="10" rx="2" stroke="#3B82F6" strokeWidth="2"/>
+    <rect x="28" y="30" width="14" height="10" rx="2" stroke="#3B82F6" strokeWidth="2"/>
+    <rect x="28" y="8" width="14" height="10" rx="2" stroke="#3B82F6" strokeWidth="2"/>
+    <path d="M20 13H28M20 35H28" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round"/>
+    <path d="M13 18V24C13 26.21 14.79 28 17 28H31" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round"/>
+    <path d="M31 20L34 23L31 26" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+)

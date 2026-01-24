@@ -97,12 +97,14 @@ export async function POST(request: NextRequest) {
 
     // Also send to n8n if configured
     const n8nWebhookUrl = process.env.NEXT_PUBLIC_N8N_WEBHOOK_URL
+    const n8nAuth = process.env.N8N_WEBHOOK_AUTH
     if (n8nWebhookUrl) {
       try {
         await fetch(n8nWebhookUrl, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
+            ...(n8nAuth ? { Auth: n8nAuth } : {}),
           },
           body: JSON.stringify(formData),
         })
