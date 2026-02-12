@@ -20,3 +20,6 @@ southside-485001-e3c7c1f69f92.json
 # Uploaded files
 public/uploads/
 .next/
+.claude/
+test-recent-activity.sh
+test.json
