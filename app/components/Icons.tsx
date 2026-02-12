@@ -66,3 +66,20 @@ export const CiCdIcon = () => (
     <path d="M31 20L34 23L31 26" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
   </svg>
 )
+
+export const VirtualTrainingIcon = () => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="6" y="10" width="36" height="22" rx="3" stroke="#3B82F6" strokeWidth="2"/>
+    <path d="M16 26C16 22.69 18.69 20 22 20H26C29.31 20 32 22.69 32 26" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round"/>
+    <circle cx="16" cy="22" r="3" stroke="#3B82F6" strokeWidth="2"/>
+    <circle cx="32" cy="22" r="3" stroke="#3B82F6" strokeWidth="2"/>
+    <path d="M18 36H30" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round"/>
+  </svg>
+)
+
+export const ManagedDeployIcon = () => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M24 6L38 14V30C38 35.52 31.73 40.28 24 42C16.27 40.28 10 35.52 10 30V14L24 6Z" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M18 24L22 28L30 20" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+)

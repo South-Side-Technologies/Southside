@@ -1,0 +1,84 @@
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: southside-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: southside
+      POSTGRES_PASSWORD: southside_password_change_in_production
+      POSTGRES_DB: southside
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U southside']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Next.js Application
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: southside-app
+    restart: unless-stopped
+    ports:
+      - '3000:3000'
+    environment:
+      # Database
+      DATABASE_URL: postgresql://southside:southside_password_change_in_production@postgres:5432/southside
+
+      # Cloudflare Access (update with your values)
+      CLOUDFLARE_ACCESS_TEAM_NAME: ${CLOUDFLARE_ACCESS_TEAM_NAME:-your-team-name}
+      CLOUDFLARE_ACCESS_CLIENT_AUD: ${CLOUDFLARE_ACCESS_CLIENT_AUD}
+      CLOUDFLARE_ACCESS_ADMIN_AUD: ${CLOUDFLARE_ACCESS_ADMIN_AUD}
+      # Legacy single AUD (for backward compatibility)
+      CLOUDFLARE_ACCESS_AUD: ${CLOUDFLARE_ACCESS_AUD}
+
+      # Development: Bypass Cloudflare Access for local testing
+      # Set to 'false' or remove for production deployment
+      BYPASS_CLOUDFLARE_AUTH: ${BYPASS_CLOUDFLARE_AUTH:-true}
+
+      # n8n Webhooks
+      N8N_CHAT_WEBHOOK_URL: ${N8N_CHAT_WEBHOOK_URL}
+      N8N_WEBHOOK_AUTH: ${N8N_WEBHOOK_AUTH}
+      NEXT_PUBLIC_N8N_WEBHOOK_URL: ${NEXT_PUBLIC_N8N_WEBHOOK_URL}
+
+      # Next.js
+      NODE_ENV: production
+      NEXT_TELEMETRY_DISABLED: 1
+    depends_on:
+      postgres:
+        condition: service_healthy
+    command: >
+      sh -c "
+        npx prisma@5.22.0 db push --accept-data-loss &&
+        node server.js
+      "
+
+  # pgAdmin (optional - for database management UI)
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: southside-pgadmin
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@southside.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    ports:
+      - '5050:80'
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    depends_on:
+      - postgres
+    profiles:
+      - admin # Only start with: docker-compose --profile admin up
+
+volumes:
+  postgres_data:
+    driver: local
+  pgadmin_data:
+    driver: local

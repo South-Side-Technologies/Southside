@@ -1,6 +1,7 @@
 import React from 'react'
 import type { Metadata } from 'next'
 import { Inter, Playfair_Display, Alfa_Slab_One } from 'next/font/google'
+import { Providers } from './providers'
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -19,7 +20,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} ${playfair.variable} ${alfaSlab.variable} bg-gray-50 text-black flex flex-col min-h-screen`}>{children}</body>
+      <body className={`${inter.className} ${playfair.variable} ${alfaSlab.variable} bg-gray-50 text-black flex flex-col min-h-screen`}>
+        <Providers>{children}</Providers>
+      </body>
     </html>
   )
 }

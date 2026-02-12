@@ -1,15 +1,9 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
-
-const Logo = () => (
-  <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect x="2" y="2" width="36" height="36" rx="8" fill="#3B82F6" />
-    <path d="M12 20C12 15.58 15.58 12 20 12C24.42 12 28 15.58 28 20C28 24.42 24.42 28 20 28C15.58 28 12 24.42 12 20Z" fill="white" />
-    <circle cx="20" cy="20" r="4" fill="#3B82F6" />
-  </svg>
-)
+import Header from '../components/Header'
+import Footer from '../components/Footer'
 
 export default function Questionnaire() {
   const [formData, setFormData] = useState({
@@ -29,6 +23,35 @@ export default function Questionnaire() {
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [isLoadingUserData, setIsLoadingUserData] = useState(true)
+
+  // Fetch existing user data on mount
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch('/api/auth/user')
+        if (response.ok) {
+          const data = await response.json()
+          const user = data.user
+
+          // Pre-fill form fields with existing user data
+          setFormData((prev) => ({
+            ...prev,
+            companyName: user.companyName || '',
+            contactName: user.name || '',
+            email: user.email || '',
+          }))
+        }
+      } catch (err) {
+        console.error('Error fetching user data:', err)
+        // Continue with empty form if fetch fails
+      } finally {
+        setIsLoadingUserData(false)
+      }
+    }
+
+    fetchUserData()
+  }, [])
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target
@@ -38,7 +61,7 @@ export default function Questionnaire() {
     }))
   }
 
-  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>, field: 'currentChallenges' | 'interestedServices') => {
+  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>, field: 'interestedServices' | 'automationTechnologies') => {
     const { value, checked } = e.target
     setFormData(prev => ({
       ...prev,
@@ -67,19 +90,11 @@ export default function Questionnaire() {
       }
 
       setSubmitted(true)
-      setFormData({
-        companyName: '',
-        contactName: '',
-        email: '',
-        phone: '',
-        companySize: '',
-        interestedServices: [],
-        automationTechnologies: [],
-        otherTechnology: '',
-        budget: '',
-        timeline: '',
-        additionalInfo: '',
-      })
+
+      // Redirect to dashboard after a short delay
+      setTimeout(() => {
+        window.location.href = '/dashboard'
+      }, 2000)
     } catch (err) {
       setError('Failed to submit the questionnaire. Please try again.')
       console.error('Form submission error:', err)
@@ -91,26 +106,20 @@ export default function Questionnaire() {
   if (submitted) {
     return (
       <>
-        <header className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
-          <div className="max-w-6xl mx-auto px-4 md:px-6 py-4 md:py-6">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-              <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity w-fit mx-auto sm:mx-0">
-                <Logo />
-                <h1 className="text-2xl md:text-3xl font-bold text-black font-alfa">South Side Tech</h1>
-              </Link>
-            </div>
-          </div>
-        </header>
+        <Header variant="public" subtitle="Consultation Submitted" />
 
         <main className="flex-grow flex items-center justify-center px-4 md:px-6 py-12 md:py-16">
           <div className="max-w-2xl mx-auto text-center w-full">
             <div className="bg-white rounded-lg p-6 md:p-12 shadow-md">
               <div className="text-5xl mb-4">✅</div>
               <h2 className="text-2xl md:text-3xl font-bold text-black mb-4 font-playfair">Thank You!</h2>
-              <p className="text-gray-700 mb-6 text-sm md:text-base">Your questionnaire has been submitted successfully. We'll review your information and get back to you shortly with tailored solutions for your business.</p>
-              <Link href="/" className="inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 md:px-8 rounded-lg transition-colors text-sm md:text-base">
-                Back to Home
-              </Link>
+              <p className="text-gray-700 mb-6 text-sm md:text-base">
+                Your questionnaire has been submitted successfully. We'll review your information and get back to you shortly with tailored solutions for your business.
+              </p>
+              <p className="text-gray-600 text-sm mb-6">
+                Redirecting you to your dashboard...
+              </p>
+              <div className="inline-block h-6 w-6 animate-spin rounded-full border-4 border-solid border-red-700 border-r-transparent"></div>
             </div>
           </div>
         </main>
@@ -118,25 +127,30 @@ export default function Questionnaire() {
     )
   }
 
+  if (isLoadingUserData) {
+    return (
+      <>
+        <Header variant="public" subtitle="Client Questionnaire" />
+        <main className="flex-grow flex items-center justify-center px-4 py-12">
+          <div className="text-center">
+            <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-red-700 border-r-transparent mb-4"></div>
+            <p className="text-gray-600">Loading your information...</p>
+          </div>
+        </main>
+        <Footer variant="minimal" />
+      </>
+    )
+  }
+
   return (
     <>
-      <header className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
-        <div className="max-w-6xl mx-auto px-4 md:px-6 py-4 md:py-6">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-            <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity w-fit mx-auto sm:mx-0">
-              <Logo />
-              <h1 className="text-2xl md:text-3xl font-bold text-black font-alfa">South Side Tech</h1>
-            </Link>
-            <p className="text-gray-600 text-sm md:text-base text-center sm:text-right">Client Questionnaire</p>
-          </div>
-        </div>
-      </header>
+      <Header variant="public" subtitle="Client Questionnaire" />
 
       <main className="flex-grow">
         <section className="py-8 md:py-16 px-4 md:px-6">
           <div className="max-w-2xl mx-auto">
             <h2 className="text-2xl md:text-3xl font-bold text-black mb-6 md:mb-8 font-playfair">Let's Understand Your Needs</h2>
-            
+
             {error && (
               <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6 text-sm md:text-base">
                 {error}
@@ -224,7 +238,18 @@ export default function Questionnaire() {
               <div className="space-y-4">
                 <h3 className="text-lg md:text-xl font-bold text-black font-playfair">Which services interest you?</h3>
                 <div className="space-y-3">
-                  {['Cloud Infrastructure Management', 'Cloud Cost Optimization', 'Business Process Automation', 'AI Services', 'Web Development', 'Web Hosting', 'Security Engineering & Zero Trust', 'CI/CD Pipelines'].map(service => (
+                  {[
+                    'Cloud Infrastructure Management',
+                    'Cloud Cost Optimization',
+                    'Business Process Automation',
+                    'AI Services',
+                    'Web Development',
+                    'Web Hosting',
+                    'Security Engineering & Zero Trust',
+                    'CI/CD Pipelines',
+                    'Virtual Training Environments',
+                    'Deployment & Managed Services',
+                  ].map(service => (
                     <label key={service} className="flex items-start cursor-pointer">
                       <input
                         type="checkbox"
@@ -370,13 +395,7 @@ export default function Questionnaire() {
         </section>
       </main>
 
-      <footer className="bg-gray-900 text-white py-8 md:py-12 px-4 md:px-6 mt-8 md:mt-12">
-        <div className="max-w-6xl mx-auto">
-          <div className="border-t border-gray-800 pt-6 md:pt-8 text-center text-gray-400 text-sm md:text-base">
-            <p>&copy; 2026 South Side Technologies. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
+      <Footer variant="minimal" />
     </>
   )
 }

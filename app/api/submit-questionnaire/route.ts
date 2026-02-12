@@ -1,11 +1,87 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '@/app/api/auth/[...nextauth]/route'
+import { getUserByEmail } from '@/app/lib/db/user'
+import { prisma } from '@/app/lib/db/prisma'
+import { createProjectFromQuestionnaire } from '@/app/lib/db/project'
 
 export async function POST(request: NextRequest) {
   try {
+    // Get authenticated user
+    const session = await getServerSession(authOptions)
+
+    if (!session?.user?.email) {
+      return NextResponse.json(
+        { error: 'Authentication required' },
+        { status: 401 }
+      )
+    }
+
     const formData = await request.json()
 
+    // Get or create user in database
+    let dbUser = await getUserByEmail(session.user.email)
+
+    if (!dbUser) {
+      // Create user if doesn't exist
+      dbUser = await prisma.user.create({
+        data: {
+          email: session.user.email,
+          name: session.user.name || '',
+        },
+      })
+    }
+
+    // Update user data if any values changed from the form
+    const updateData: {
+      questionnaireCompleted: boolean
+      name?: string
+      companyName?: string
+    } = {
+      questionnaireCompleted: true,
+    }
+
+    // Update name if changed
+    if (formData.contactName && formData.contactName !== dbUser.name) {
+      updateData.name = formData.contactName
+    }
+
+    // Update companyName if changed
+    if (formData.companyName && formData.companyName !== dbUser.companyName) {
+      updateData.companyName = formData.companyName
+    }
+
+    // Mark user as having completed the questionnaire and update any changed fields
+    await prisma.user.update({
+      where: { id: dbUser.id },
+      data: updateData,
+    })
+
+    // Create initial project from questionnaire data
+    try {
+      const project = await createProjectFromQuestionnaire(dbUser.id, {
+        companyName: formData.companyName,
+        interestedServices: formData.interestedServices,
+        automationTechnologies: formData.automationTechnologies,
+        otherTechnology: formData.otherTechnology,
+        budget: formData.budget,
+        companySize: formData.companySize,
+        timeline: formData.timeline,
+        additionalInfo: formData.additionalInfo,
+      })
+
+      console.log(`Created initial project for ${dbUser.email}: ${project.id}`)
+    } catch (projectError) {
+      // Log error but don't fail the entire questionnaire submission
+      console.error('Failed to create initial project:', projectError)
+      // Continue with the rest of the flow - project can be created manually by admin
+    }
+
+    // Note: Files are stored locally in public/uploads/ organized by company folders
+    // No external folder creation needed
+
     // Send to Discord
-    const discordWebhookUrl = 'https://discord.com/api/webhooks/1463327925007945728/8_Qan8OzLjvv9W1pK2zrOAKW87EfbBDFbU0qp18VTnqhsUxqToq6Kf0EqBHuIUpEMeeF'
+    const discordWebhookUrl = process.env.NEXT_PUBLIC_DISCORD_WEBHOOK_URL || 'https://discord.com/api/webhooks/1463327925007945728/8_Qan8OzLjvv9W1pK2zrOAKW87EfbBDFbU0qp18VTnqhsUxqToq6Kf0EqBHuIUpEMeeF'
 
     const discordMessage = {
       embeds: [

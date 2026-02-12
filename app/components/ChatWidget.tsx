@@ -59,7 +59,7 @@ export default function ChatWidget() {
     setError(null)
     setInput('')
 
-    const nextMessages = [...messagesRef.current, { role: 'user', content: trimmed }]
+    const nextMessages: ChatMessage[] = [...messagesRef.current, { role: 'user' as const, content: trimmed }]
     setMessages(nextMessages)
     setIsSending(true)
 
@@ -86,13 +86,13 @@ export default function ChatWidget() {
         data.output ||
         'Thanks for reaching out. A specialist will follow up shortly.'
 
-      setMessages((prev) => [...prev, { role: 'assistant', content: reply }])
+      setMessages((prev) => [...prev, { role: 'assistant' as const, content: reply }])
     } catch (err) {
       setError('Sorry, the chat is unavailable right now.')
       setMessages((prev) => [
         ...prev,
         {
-          role: 'assistant',
+          role: 'assistant' as const,
           content: 'Sorry, the chat is unavailable right now. Please try again soon.',
         },
       ])
