@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // your config
+  // Enable standalone output for Docker
+  output: 'standalone',
 }
 
 module.exports = nextConfig
