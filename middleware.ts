@@ -71,8 +71,14 @@ export const config = {
     // Admin routes
     '/admin/:path*',
 
-    // Contractor routes
-    '/contractor/:path*',
+    // Contractor routes EXCEPT Stripe callbacks
+    '/contractor/projects/:path*',
+    '/contractor/tickets/:path*',
+    '/contractor/dashboard/:path*',
+    '/contractor/onboarding',
+    '/contractor/application-status',
+    '/contractor/payments/onboarding',
+    '/contractor/payments',
 
     // API routes that require authentication
     '/api/dashboard/:path*',

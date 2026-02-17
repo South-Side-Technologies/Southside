@@ -141,11 +141,11 @@ export function calculateClientChargeForContractorEarnings(
   const baseAmount = contractorEarned
 
   // Calculate contractor payout fees (what will be deducted when paying them)
-  const payoutFees = calculatePayoutFees(baseAmount)
+  const initialPayoutFees = calculatePayoutFees(baseAmount)
 
   // Total amount platform needs to receive to pay contractor
   const amountPlatformNeeds = baseAmount // We'll deduct fees from this
-  const platformFees = payoutFees.platformFeeAmount
+  const platformFees = initialPayoutFees.platformFeeAmount
 
   // Client charge = amount + (amount * marginPercent) to cover platform margin + fees
   // We need to solve for: (clientCharge - clientFees) - payoutFees = contractorEarnings

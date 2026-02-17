@@ -1,7 +1,8 @@
 import { stripe } from './client'
 
-const CONNECT_RETURN_URL = process.env.STRIPE_CONNECT_RETURN_URL || 'http://localhost:3000/contractor/payments/onboarding/complete'
-const CONNECT_REFRESH_URL = process.env.STRIPE_CONNECT_REFRESH_URL || 'http://localhost:3000/contractor/payments/onboarding/refresh'
+const BASE_URL = process.env.NEXTAUTH_URL || 'http://localhost:3000'
+const CONNECT_RETURN_URL = `${BASE_URL}/contractor/payments/onboarding/complete`
+const CONNECT_REFRESH_URL = `${BASE_URL}/contractor/payments/onboarding/refresh`
 
 export async function createConnectAccount(email: string, name?: string) {
   try {
@@ -88,7 +89,7 @@ export async function createTransfer(accountId: string, amount: number, idempote
       success: true,
       transferId: transfer.id,
       amount: transfer.amount / 100,
-      status: transfer.status,
+      status: (transfer as any).status || 'pending',
     }
   } catch (error) {
     console.error('Error creating transfer:', error)
@@ -105,15 +106,32 @@ export async function getTransferStatus(transferId: string) {
 
     return {
       success: true,
-      status: transfer.status,
+      status: (transfer as any).status || 'pending',
       amount: transfer.amount / 100,
-      reversals: transfer.reversals,
+      reversals: (transfer as any).reversals,
     }
   } catch (error) {
     console.error('Error getting transfer status:', error)
     return {
       success: false,
       error: error instanceof Error ? error.message : 'Failed to get transfer status',
+    }
+  }
+}
+
+export async function createDashboardLink(accountId: string) {
+  try {
+    const loginLink = await stripe.accounts.createLoginLink(accountId)
+
+    return {
+      success: true,
+      url: loginLink.url,
+    }
+  } catch (error) {
+    console.error('Error creating dashboard link:', error)
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : 'Failed to create dashboard link',
     }
   }
 }

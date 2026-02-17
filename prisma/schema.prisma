@@ -45,6 +45,7 @@ model User {
   subscription          Subscription?
   invoices              Invoice[]
   projectAssignments    ProjectAssignment[] @relation("ProjectAssignments")
+  approvedAssignments   ProjectAssignment[] @relation("ApprovedAssignments")
   ticketAssignments     TicketAssignment[]  @relation("TicketAssignments")
   comments              Comment[]
   activityLogs          ActivityLog[]
@@ -291,8 +292,16 @@ model ProjectAssignment {
   paidAt          DateTime?
   payoutId        String?
 
+  // Approval tracking fields (NEW)
+  approvedForPayment  Boolean?   // null = not reviewed, true = approved, false = rejected
+  approvedBy          String?    // Admin user ID who made the approval decision
+  approvedAt          DateTime?  // When approval/rejection occurred
+  rejectionReason     String?    // If rejected, why
+  reviewNotes         String?    // Optional admin notes during review
+
   project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
   user      User    @relation("ProjectAssignments", fields: [userId], references: [id], onDelete: Cascade)
+  approver  User?   @relation("ApprovedAssignments", fields: [approvedBy], references: [id], onDelete: SetNull)
   payout    ContractorPayout? @relation(fields: [payoutId], references: [id], onDelete: SetNull)
 
   @@unique([projectId, userId])
@@ -300,6 +309,8 @@ model ProjectAssignment {
   @@index([projectId])
   @@index([paymentStatus])
   @@index([payoutId])
+  @@index([approvedForPayment])
+  @@index([approvedAt])
   @@map("project_assignments")
 }
 

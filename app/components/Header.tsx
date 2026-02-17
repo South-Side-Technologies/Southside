@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 import type { CloudflareUser } from '../lib/types/auth'
 import { getUserDisplayName, getUserInitials } from '../lib/auth/session'
+import DarkModeToggle from './DarkModeToggle'
 
 const Logo = () => (
   <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -23,12 +24,12 @@ export default function Header({ variant = 'public', currentUser, subtitle }: He
   const [showUserMenu, setShowUserMenu] = useState(false)
 
   return (
-    <header className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50 animate-fade-in">
+    <header className="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50 animate-fade-in">
       <div className="max-w-6xl mx-auto px-4 md:px-6">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 md:gap-3 py-4 md:py-6">
           <Link href="/" className="flex items-center gap-2 md:gap-3 animate-slide-in-left hover:opacity-80 transition-opacity justify-center md:justify-start">
             <Logo />
-            <h1 className="text-2xl md:text-3xl font-bold text-black font-alfa">South Side Tech</h1>
+            <h1 className="text-2xl md:text-3xl font-bold text-black dark:text-white font-alfa">South Side Tech</h1>
           </Link>
 
           {variant === 'public' && !currentUser && (
@@ -38,16 +39,18 @@ export default function Header({ variant = 'public', currentUser, subtitle }: He
           )}
 
           {variant === 'authenticated' && currentUser && (
-            <div className="relative">
+            <div className="flex items-center gap-4">
+              <DarkModeToggle />
+              <div className="relative">
               <button
                 onClick={() => setShowUserMenu(!showUserMenu)}
-                className="flex items-center gap-2 px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors"
+                className="flex items-center gap-2 px-4 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
               >
                 <div className="w-8 h-8 rounded-full bg-red-700 text-white flex items-center justify-center font-semibold text-sm">
                   {getUserInitials(currentUser)}
                 </div>
-                <span className="text-gray-700 font-medium hidden md:block">{getUserDisplayName(currentUser)}</span>
-                <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <span className="text-gray-700 dark:text-gray-200 font-medium hidden md:block">{getUserDisplayName(currentUser)}</span>
+                <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
               </button>
@@ -60,33 +63,33 @@ export default function Header({ variant = 'public', currentUser, subtitle }: He
                     onClick={() => setShowUserMenu(false)}
                   />
                   {/* Dropdown menu */}
-                  <div className="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-20">
-                    <div className="px-4 py-2 border-b border-gray-200">
-                      <p className="text-sm font-medium text-gray-900">{getUserDisplayName(currentUser)}</p>
-                      <p className="text-sm text-gray-500 truncate">{currentUser.email}</p>
+                  <div className="absolute right-0 mt-2 w-56 bg-white dark:bg-gray-700 rounded-lg shadow-lg border border-gray-200 dark:border-gray-600 py-2 z-20">
+                    <div className="px-4 py-2 border-b border-gray-200 dark:border-gray-600">
+                      <p className="text-sm font-medium text-gray-900 dark:text-white">{getUserDisplayName(currentUser)}</p>
+                      <p className="text-sm text-gray-500 dark:text-gray-400 truncate">{currentUser.email}</p>
                     </div>
                     <Link
                       href="/dashboard"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600"
                       onClick={() => setShowUserMenu(false)}
                     >
                       Dashboard
                     </Link>
                     <Link
                       href="/dashboard/projects"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600"
                       onClick={() => setShowUserMenu(false)}
                     >
                       Projects
                     </Link>
                     <Link
                       href="/dashboard/support"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600"
                       onClick={() => setShowUserMenu(false)}
                     >
                       Support
                     </Link>
-                    <div className="border-t border-gray-200 my-2" />
+                    <div className="border-t border-gray-200 dark:border-gray-600 my-2" />
                     <button
                       onClick={() => {
                         // Logout handled by Cloudflare Access
@@ -99,19 +102,20 @@ export default function Header({ variant = 'public', currentUser, subtitle }: He
                   </div>
                 </>
               )}
+              </div>
             </div>
           )}
         </div>
 
         {variant === 'public' && (
-          <nav className="flex flex-wrap gap-2 pb-4 border-t border-gray-100 justify-center md:justify-start">
-            <Link href="/customer-login" className="px-4 py-2 text-gray-700 font-semibold border-b-2 border-transparent hover:border-b-2 hover:border-red-700 hover:text-red-700 transition-colors duration-300 text-sm md:text-base">
+          <nav className="flex flex-wrap gap-2 pb-4 border-t border-gray-100 dark:border-gray-700 justify-center md:justify-start">
+            <Link href="/customer-login" className="px-4 py-2 text-gray-700 dark:text-gray-200 font-semibold border-b-2 border-transparent hover:border-b-2 hover:border-red-700 hover:text-red-700 transition-colors duration-300 text-sm md:text-base">
               Customer Login
             </Link>
-            <Link href="/customer-login" className="px-4 py-2 text-gray-700 font-semibold border-b-2 border-transparent hover:border-b-2 hover:border-red-700 hover:text-red-700 transition-colors duration-300 text-sm md:text-base">
+            <Link href="/customer-login" className="px-4 py-2 text-gray-700 dark:text-gray-200 font-semibold border-b-2 border-transparent hover:border-b-2 hover:border-red-700 hover:text-red-700 transition-colors duration-300 text-sm md:text-base">
               Start Consultation
             </Link>
-            <Link href="/#chatbot" className="px-4 py-2 text-gray-700 font-semibold border-b-2 border-transparent hover:border-b-2 hover:border-red-700 hover:text-red-700 transition-colors duration-300 text-sm md:text-base">
+            <Link href="/#chatbot" className="px-4 py-2 text-gray-700 dark:text-gray-200 font-semibold border-b-2 border-transparent hover:border-b-2 hover:border-red-700 hover:text-red-700 transition-colors duration-300 text-sm md:text-base">
               Chatbot
             </Link>
           </nav>

@@ -71,6 +71,7 @@ export const authOptions: NextAuthOptions = {
               role: true,
               roles: true,
               questionnaireCompleted: true,
+              stripeOnboardingComplete: true,
             },
           })
 
@@ -81,6 +82,7 @@ export const authOptions: NextAuthOptions = {
             token.role = dbUser.role || 'CLIENT'
             token.roles = (dbUser.roles && dbUser.roles.length > 0) ? dbUser.roles : [dbUser.role || 'CLIENT']
             token.questionnaireCompleted = dbUser.questionnaireCompleted as boolean
+            token.stripeOnboardingComplete = dbUser.stripeOnboardingComplete as boolean
             console.log('[NextAuth JWT] User roles from DB:', token.roles)
           }
         }
@@ -106,6 +108,7 @@ export const authOptions: NextAuthOptions = {
           // For backward compatibility, set 'role' to primary role
           session.user.role = (token.role as string) || 'CLIENT'
           session.user.questionnaireCompleted = (token.questionnaireCompleted as boolean) || false
+          session.user.stripeOnboardingComplete = (token.stripeOnboardingComplete as boolean) || false
           console.log('[NextAuth session] Session built successfully with roles:', session.user.roles)
         }
         return session

@@ -28,6 +28,41 @@ body {
   color: #000000;
 }
 
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  body.dark {
+    background-color: #111827;
+    color: #ffffff;
+  }
+}
+
+/* Utility classes for dark mode cards and components */
+.card-dark {
+  @apply bg-white dark:bg-dark-card border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white;
+}
+
+/* Dashboard cards - darker in dark mode */
+.dashboard-card {
+  @apply bg-white dark:bg-dark-card border border-gray-200 dark:border-gray-700 rounded-lg p-6 text-gray-900 dark:text-white;
+}
+
+.input-dark {
+  @apply bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400;
+}
+
+.text-muted {
+  @apply text-gray-600 dark:text-gray-400;
+}
+
+/* Automatically style white backgrounds in dark mode */
+.dark .bg-white {
+  @apply bg-dark-card;
+}
+
+.dark [class*="bg-white"] {
+  background-color: #1a202c;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;

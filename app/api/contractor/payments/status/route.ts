@@ -53,6 +53,9 @@ export async function GET(request: NextRequest) {
         where: { id: session.user.id },
         data: { stripeOnboardingComplete: true },
       })
+
+      // Update the session callback to refresh token
+      // NextAuth will use the updated user data on next request
     }
 
     return NextResponse.json({

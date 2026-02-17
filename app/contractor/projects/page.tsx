@@ -69,7 +69,7 @@ export default function ContractorProjects() {
 
   if (error) {
     return (
-      <div className="text-red-600 p-4 bg-red-50 rounded-lg">
+      <div className="text-red-600 dark:text-red-400 p-4 bg-red-50 dark:bg-red-900 dark:bg-opacity-20 rounded-lg">
         {error}
       </div>
     )
@@ -78,8 +78,8 @@ export default function ContractorProjects() {
   return (
     <>
       <div className="mb-8">
-        <h1 className="text-4xl font-bold text-gray-900">Projects</h1>
-        <p className="text-gray-600 mt-2">Manage your assigned projects</p>
+        <h1 className="text-4xl font-bold text-gray-900 dark:text-white">Projects</h1>
+        <p className="text-gray-600 dark:text-gray-400 mt-2">Manage your assigned projects</p>
       </div>
 
       {/* Status Filters */}
@@ -91,7 +91,7 @@ export default function ContractorProjects() {
             className={`px-4 py-2 rounded-lg font-medium whitespace-nowrap transition ${
               statusFilter === status
                 ? 'bg-red-700 text-white'
-                : 'bg-white text-gray-700 border border-gray-200 hover:bg-gray-50'
+                : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700'
             }`}
           >
             {status === 'ALL' ? 'All' : status.replace(/_/g, ' ')} ({statusCounts[status]})
@@ -100,42 +100,42 @@ export default function ContractorProjects() {
       </div>
 
       {/* Projects Table */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
         {loading ? (
-          <div className="px-6 py-8 text-center text-gray-500">Loading projects...</div>
+          <div className="px-6 py-8 text-center text-gray-500 dark:text-gray-400">Loading projects...</div>
         ) : filteredProjects.length > 0 ? (
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="bg-gray-50 border-b border-gray-200">
+              <thead className="bg-gray-50 dark:bg-gray-700 border-b border-gray-200 dark:border-gray-600">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                     Project Name
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                     Customer
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                     Status
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                     Progress
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                     Updated
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-200">
+              <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
                 {filteredProjects.map((project) => (
                   <tr
                     key={project.id}
-                    className="hover:bg-gray-50 transition cursor-pointer"
+                    className="hover:bg-gray-50 dark:hover:bg-gray-700 transition cursor-pointer"
                     onClick={() => window.location.href = `/contractor/projects/${project.id}`}
                   >
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">
                       {project.name}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-400">
                       {project.user.companyName || project.user.name || 'N/A'}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
@@ -145,16 +145,16 @@ export default function ContractorProjects() {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center gap-2">
-                        <div className="w-20 bg-gray-200 rounded-full h-2">
+                        <div className="w-20 bg-gray-200 dark:bg-gray-600 rounded-full h-2">
                           <div
                             className="bg-red-700 h-2 rounded-full"
                             style={{ width: `${project.progress}%` }}
                           ></div>
                         </div>
-                        <span className="text-xs text-gray-600">{project.progress}%</span>
+                        <span className="text-xs text-gray-600 dark:text-gray-400">{project.progress}%</span>
                       </div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-400">
                       {new Date(project.lastUpdated).toLocaleDateString()}
                     </td>
                   </tr>
@@ -163,7 +163,7 @@ export default function ContractorProjects() {
             </table>
           </div>
         ) : (
-          <div className="px-6 py-8 text-center text-gray-500">
+          <div className="px-6 py-8 text-center text-gray-500 dark:text-gray-400">
             No projects found with the selected status
           </div>
         )}

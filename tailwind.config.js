@@ -5,12 +5,16 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       fontFamily: {
         playfair: ['var(--font-playfair)', 'serif'],
         alfa: ['var(--font-alfa)', 'sans-serif'],
         custom: ['YourCustomFont', 'sans-serif'],
+      },
+      colors: {
+        'dark-card': '#1a202c',
       },
     },
   },

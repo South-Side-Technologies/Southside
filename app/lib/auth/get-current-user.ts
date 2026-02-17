@@ -16,7 +16,7 @@ export async function getCurrentUser() {
     return null
   }
 
-  // Fetch fresh user data from database to ensure we have the latest questionnaireCompleted status
+  // Fetch fresh user data from database to ensure we have the latest status
   const dbUser = await prisma.user.findUnique({
     where: { email: session.user.email },
     select: {
@@ -27,6 +27,7 @@ export async function getCurrentUser() {
       role: true,
       roles: true,
       questionnaireCompleted: true,
+      stripeOnboardingComplete: true,
     },
   })
 
@@ -42,6 +43,7 @@ export async function getCurrentUser() {
     role: dbUser.role,
     roles: (dbUser.roles && dbUser.roles.length > 0) ? dbUser.roles : [dbUser.role || 'CLIENT'],
     questionnaireCompleted: dbUser.questionnaireCompleted,
+    stripeOnboardingComplete: dbUser.stripeOnboardingComplete,
   }
 }
 

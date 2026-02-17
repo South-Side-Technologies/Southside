@@ -4,11 +4,7 @@ import prisma from '@/app/lib/db/prisma'
 import { calculatePaymentFees } from '@/app/lib/stripe/fees'
 import Stripe from 'stripe'
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-}
+export const maxDuration = 60
 
 /**
  * POST /api/webhooks/stripe

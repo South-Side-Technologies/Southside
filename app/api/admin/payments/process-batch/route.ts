@@ -100,18 +100,54 @@ export async function POST(request: NextRequest) {
           },
         })
 
-        await prisma.projectAssignment.updateMany(
-          {
-            where: {
-              userId: contractorId,
-              paymentStatus: 'PENDING',
-            },
+        // Get all APPROVED assignments for this contractor that are PENDING payment
+        const approvalsToProcess = await prisma.projectAssignment.findMany({
+          where: {
+            userId: contractorId,
+            paymentStatus: 'PENDING',
+            approvedForPayment: true, // ONLY approved assignments
           },
-          {
-            paymentStatus: 'PROCESSING',
-            payoutId: payout.id,
+          include: {
+            project: { select: { status: true } },
+          },
+        })
+
+        // Validate each assignment before updating
+        const validAssignmentIds: string[] = []
+        const validationErrors: string[] = []
+
+        for (const assignment of approvalsToProcess) {
+          if (assignment.project.status !== 'COMPLETED') {
+            validationErrors.push(
+              `Assignment ${assignment.id}: Project no longer completed`
+            )
+            continue
           }
-        )
+          validAssignmentIds.push(assignment.id)
+        }
+
+        if (validAssignmentIds.length > 0) {
+          // Update only valid assignments to PROCESSING
+          await prisma.projectAssignment.updateMany(
+            {
+              where: {
+                id: { in: validAssignmentIds },
+              },
+            },
+            {
+              paymentStatus: 'PROCESSING',
+              payoutId: payout.id,
+            }
+          )
+        }
+
+        // Log any validation errors but continue processing
+        if (validationErrors.length > 0) {
+          console.warn(
+            `Validation warnings for contractor ${contractorId}:`,
+            validationErrors
+          )
+        }
 
         results.push({
           contractorId,

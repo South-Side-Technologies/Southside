@@ -19,8 +19,22 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={`${inter.className} ${playfair.variable} ${alfaSlab.variable} bg-gray-50 text-black flex flex-col min-h-screen`}>
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              const darkMode = localStorage.getItem('darkMode');
+              const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+              const shouldBeDark = darkMode ? darkMode === 'true' : prefersDark;
+              if (shouldBeDark) {
+                document.documentElement.classList.add('dark');
+              }
+            `,
+          }}
+        />
+      </head>
+      <body className={`${inter.className} ${playfair.variable} ${alfaSlab.variable} bg-gray-50 dark:bg-gray-900 text-black dark:text-white flex flex-col min-h-screen transition-colors`}>
         <Providers>{children}</Providers>
       </body>
     </html>
