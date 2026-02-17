@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import RichTextEditor from './RichTextEditor'
 
 function formatTimeAgo(date: string): string {
   const now = new Date()
@@ -63,7 +64,10 @@ export default function CommentsSection({ projectId, supportTicketId }: Comments
 
   const handleSubmitComment = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!newComment.trim()) return
+
+    // Check if comment is empty (TipTap empty state is just <p></p>)
+    const trimmedContent = newComment.trim().replace(/^<p><\/p>$/, '').trim()
+    if (!trimmedContent) return
 
     setSubmitting(true)
     try {
@@ -90,44 +94,42 @@ export default function CommentsSection({ projectId, supportTicketId }: Comments
 
   return (
     <div className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 p-6">
-      <h3 className="text-lg font-semibold text-gray-900 mb-6">Comments</h3>
+      <h3 className="text-lg font-semibold text-white mb-6">Comments</h3>
 
       {/* Comments List */}
       <div className="space-y-4 mb-6 max-h-96 overflow-y-auto">
         {loading ? (
           <p className="text-gray-400 text-center py-4">Loading comments...</p>
         ) : error ? (
-          <p className="text-red-600 text-center py-4">{error}</p>
+          <p className="text-red-400 text-center py-4">{error}</p>
         ) : comments.length === 0 ? (
           <p className="text-gray-400 text-center py-4">No comments yet. Be the first to comment!</p>
         ) : (
           comments.map((comment) => (
             <div key={comment.id} className="border-l-4 border-red-700 pl-4 py-2">
               <div className="flex items-center justify-between mb-1">
-                <p className="font-medium text-gray-900 text-sm">{comment.user.name || comment.user.email}</p>
+                <p className="font-medium text-white text-sm">{comment.user.name || comment.user.email}</p>
                 <p className="text-xs text-gray-400">
                   {formatTimeAgo(comment.createdAt)}
                 </p>
               </div>
-              <p className="text-gray-300 text-sm">{comment.content}</p>
+              <div className="comment-content text-gray-300 text-sm" dangerouslySetInnerHTML={{ __html: comment.content }} />
             </div>
           ))
         )}
       </div>
 
       {/* New Comment Form */}
-      <form onSubmit={handleSubmitComment} className="border-t border-gray-700 pt-4">
-        <textarea
-          value={newComment}
-          onChange={(e) => setNewComment(e.target.value)}
+      <form onSubmit={handleSubmitComment} className="border-t border-gray-700 pt-4 space-y-3">
+        <RichTextEditor
+          content={newComment}
+          onChange={setNewComment}
           placeholder="Add a comment..."
-          rows={3}
-          className="w-full px-3 py-2 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-700 resize-none"
         />
         <button
           type="submit"
-          disabled={submitting || !newComment.trim()}
-          className="mt-2 px-4 py-2 bg-red-700 text-white rounded-lg font-medium hover:bg-red-800 disabled:opacity-50 disabled:cursor-not-allowed"
+          disabled={submitting || !newComment.trim() || newComment.trim().replace(/^<p><\/p>$/, '').trim() === ''}
+          className="px-4 py-2 bg-red-700 text-white rounded-lg font-medium hover:bg-red-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
           {submitting ? 'Posting...' : 'Post Comment'}
         </button>
