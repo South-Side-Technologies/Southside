@@ -329,6 +329,23 @@ Example: To change all service card border color:
 }
 ```
 
+## Mobile Responsiveness
+
+All components must be mobile-ready. See [MOBILE.md](MOBILE.md) for:
+- Responsive breakpoints (mobile, tablet, desktop)
+- Mobile-first design patterns
+- Touch target requirements (≥44px)
+- Testing checklist
+
+**Always use responsive classes:**
+```tsx
+// DO: Scale by screen size
+className="p-4 md:p-6 lg:p-8 text-sm md:text-base lg:text-lg"
+
+// DON'T: Fixed sizes
+className="p-8 text-lg"
+```
+
 ## Files Modified
 
 - `app/globals.css` - Component class definitions

@@ -24,6 +24,7 @@ export default function RichTextEditor({
   const [mounted, setMounted] = useState(false)
 
   const editor = useEditor({
+    immediatelyRender: false,
     extensions: [
       StarterKit.configure({
         paragraph: {

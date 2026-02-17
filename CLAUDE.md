@@ -24,6 +24,7 @@
 - Prisma ORM with proper indexes on common queries
 - Activity logging for audit trails
 - PII handling: delegate to third-party services
+- **See [SECURITY.md](SECURITY.md) for comprehensive security & compliance guidelines**
 
 ## Project Structure
 - `app/` - Next.js app directory
@@ -31,12 +32,17 @@
 - `app/lib/` - Utilities (auth, db, stripe, etc.)
 - `prisma/schema.prisma` - Single source of truth for data model
 - `middleware.ts` - Route protection and auth flow
+- **See [STYLING.md](STYLING.md) for CSS component classes and styling guidelines**
+- **See [MOBILE.md](MOBILE.md) for mobile responsiveness standards and best practices**
+- **See [MOBILE_AUDIT.md](MOBILE_AUDIT.md) for comprehensive mobile audit and fixes needed**
 
 ## Recent Work
 - Fixed redirect flow: users sent back to original destination after login
 - Removed taxId field from contractor onboarding
 - Added `/contractor/application-status` page
-- Sidebar only shows for approved contractors
+- Sidebar only shows for approved contractor applications
+- Made contractor page mobile-responsive (responsive padding, text sizes, buttons)
+- Created MOBILE.md with mobile-first responsive design standards
 
 ## Key Files
 - `middleware.ts` - Authentication flow with callbackUrl
@@ -118,6 +124,8 @@ Run Stripe CLI webhook listener: `stripe listen --forward-to localhost:3000/api/
 4. Contractor onboarding & payout
 5. Project deposit payment
 
+**See [TESTING.md](TESTING.md) for comprehensive testing procedures and payment approval workflow**
+
 ### Security Checklist
 - ✅ Webhook signatures verified
 - ✅ API auth + role-based access control
@@ -126,6 +134,8 @@ Run Stripe CLI webhook listener: `stripe listen --forward-to localhost:3000/api/
 - ✅ Transaction atomicity for credit operations
 - ⚠️ Rate limiting (not yet implemented)
 - ⚠️ GDPR compliance (data deletion/export endpoints needed)
+
+**For detailed security requirements, pre-deployment checklist, incident response, and compliance procedures: See [SECURITY.md](SECURITY.md)**
 
 ### Deployment
 **Environment variables needed:**
@@ -146,15 +156,6 @@ npx prisma migrate dev --name add_payment_system
 - [ ] Monitoring/alerting configured
 - [ ] Database backups verified
 - [ ] Team trained on troubleshooting
-
-### N8N Integration (Questionnaire)
-Configure in `.env`:
-```
-NEXT_PUBLIC_N8N_WEBHOOK_URL=https://your-n8n.com/webhook/questionnaire
-N8N_WEBHOOK_AUTH=token-if-needed
-```
-
-Form data sent: companyName, contactName, email, phone, currentChallenges[], interestedServices[], budget, timeline, additionalInfo
 
 ### Common Patterns
 

@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { getCurrentUser } from '../lib/auth/get-current-user'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
+import prisma from '../lib/db/prisma'
 
 export default async function ContractorLayout({
   children,
@@ -13,20 +14,25 @@ export default async function ContractorLayout({
   const currentUser = await getCurrentUser()
 
   // If not authenticated, redirect to login
-  // Note: Role-specific logic is handled by the page components themselves
-  // - /contractor/page.tsx shows onboarding for non-contractors
-  // - /contractor/dashboard redirects already-approved contractors
   if (!currentUser) {
     redirect('/login')
   }
+
+  // Check if user has an APPROVED contractor application
+  const contractorApplication = await prisma.contractorApplication.findUnique({
+    where: { userId: currentUser.id },
+    select: { status: true },
+  })
+
+  const hasApprovedApplication = contractorApplication?.status === 'APPROVED'
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-900">
       <Header variant="authenticated" currentUser={currentUser} />
 
-      <div className="flex flex-1 lg:ml-64">
-        {/* Contractor Sidebar - Only show for approved contractors */}
-        {currentUser.roles?.includes('CONTRACTOR') && (
+      <div className={`flex flex-1 ${hasApprovedApplication ? 'lg:ml-64' : ''}`}>
+        {/* Contractor Sidebar - Only show for approved contractor applications */}
+        {hasApprovedApplication && (
           <nav className="w-64 bg-gray-950 border-r border-gray-800 px-4 py-6 hidden lg:block fixed left-0 top-[73px] h-[calc(100vh-73px)] z-40">
             <div className="mb-6">
               <h2 className="text-xl font-bold text-red-400 mb-2">Contractor Panel</h2>
@@ -83,7 +89,7 @@ export default async function ContractorLayout({
         )}
 
         {/* Main Content */}
-        <main className="flex-1 p-6 md:p-8 overflow-auto bg-gray-900">
+        <main className="flex-1 p-4 md:p-6 lg:p-8 overflow-auto bg-gray-900">
           <div className="max-w-7xl mx-auto">{children}</div>
         </main>
       </div>

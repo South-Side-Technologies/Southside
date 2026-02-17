@@ -1,5 +1,6 @@
 'use client'
 
+import React from 'react'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { useState, useEffect } from 'react'
@@ -206,90 +207,91 @@ export default function ContractorOnboarding() {
           <p className="text-green-700 mb-4">
             Thank you for applying! Your application is under review. In the meantime, you can set up your payment information.
           </p>
-          <p className="text-sm text-green-600 to application status...</p>
+          <p className="text-sm text-green-600">Redirecting to application status...</p>
         </div>
       </div>
     )
   }
 
-  return ("
-    <<div className="max-w-4xl mx-auto p-8 min-h-screen bg-gray-800"
-      <<div className="mb-8">
+  return (
+    <div className="max-w-4xl mx-auto p-4 md:p-8 min-h-screen bg-gray-800">
+      <div className="mb-8">
         <Link href="/contractor" className="text-blue-600 hover:underline">
           ← Back to Contractor
         </Link>
-        <h1 className="text-4xl font-bold mt-4 mb-2 text-gray-900 Onboarding</h1>"
-        <<p className="text-gray-400
+        <h1 className="text-3xl md:text-4xl font-bold mt-4 mb-2 text-gray-100">Contractor Onboarding</h1>
+        <p className="text-gray-400">
           Complete your profile to become a contractor. An admin will review and approve
           your application.
         </p>
       </div>
 
-      {error && ("
-        <<div className="bg-red-50 border border-red-200 rounded p-4 mb-6">
-          <p className="text-red-700
+      {error && (
+        <div className="bg-red-50 border border-red-200 rounded p-4 mb-6">
+          <p className="text-red-700">{error}</p>
         </div>
-      )}"
-      <<form onSubmit={handleSubmit} className="space-y-8">
+      )}
+
+      <form onSubmit={handleSubmit} className="space-y-8">
         {/* Basic Information */}
         <div className="bg-gray-800 border border-gray-700 rounded-lg p-6">
-          <h2 className="text-2xl font-bold mb-6 text-gray-900 Information</h2>"
-          <<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <h2 className="text-2xl font-bold mb-6 text-gray-100">Basic Information</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium mb-2 text-gray-300
+              <label className="block text-sm font-medium mb-2 text-gray-300">
                 Full Name *
-              </label>"
-              <<input
+              </label>
+              <input
                 type="text"
                 name="fullName"
                 value={formData.fullName}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-2 border border-gray-600 rounded bg-gray-800"
+                className="w-full px-4 py-2 border border-gray-600 rounded bg-gray-900 text-gray-300"
                 disabled
               />
               <p className="text-xs text-gray-400 mt-1">Auto-filled from account</p>
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2 text-gray-300
+              <label className="block text-sm font-medium mb-2 text-gray-300">
                 Email *
-              </label>"
-              <<input
+              </label>
+              <input
                 type="email"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-2 border border-gray-600 rounded bg-gray-800"
+                className="w-full px-4 py-2 border border-gray-600 rounded bg-gray-900 text-gray-300"
                 disabled
               />
               <p className="text-xs text-gray-400 mt-1">Auto-filled from account</p>
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2 text-gray-300
+              <label className="block text-sm font-medium mb-2 text-gray-300">
                 Company Name
-              </label>"
-              <<input
+              </label>
+              <input
                 type="text"
                 name="companyName"
                 value={formData.companyName}
                 onChange={handleChange}
-                className="w-full px-4 py-2 border border-gray-600 rounded bg-gray-800 text-gray-900"
+                className="w-full px-4 py-2 border border-gray-600 rounded bg-gray-900 text-gray-300"
                 placeholder="Your business name"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2 text-gray-300
+              <label className="block text-sm font-medium mb-2 text-gray-300">
                 Business Type
-              </label>"
-              <<select
+              </label>
+              <select
                 name="businessType"
                 value={formData.businessType}
                 onChange={handleChange}
-                className="w-full px-4 py-2 border border-gray-600 rounded bg-gray-800 text-gray-900"
+                className="w-full px-4 py-2 border border-gray-600 rounded bg-gray-900 text-gray-300"
               >
                 <option value="">Select...</option>
                 <option value="Freelancer">Freelancer</option>
@@ -301,15 +303,15 @@ export default function ContractorOnboarding() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2 text-gray-300
+              <label className="block text-sm font-medium mb-2 text-gray-300">
                 Phone Number
-              </label>"
-              <<input
+              </label>
+              <input
                 type="tel"
                 name="phone"
                 value={formData.phone}
                 onChange={handleChange}
-                className="w-full px-4 py-2 border border-gray-600 rounded bg-gray-800 text-gray-900"
+                className="w-full px-4 py-2 border border-gray-600 rounded bg-gray-900 text-gray-300"
                 placeholder="+1 (555) 000-0000"
               />
             </div>
@@ -318,41 +320,41 @@ export default function ContractorOnboarding() {
 
         {/* Contact & Portfolio */}
         <div className="bg-gray-800 border border-gray-700 rounded-lg p-6">
-          <h2 className="text-2xl font-bold mb-6 text-gray-900 & Portfolio</h2>"
-          <<div className="space-y-4">
+          <h2 className="text-2xl font-bold mb-6 text-gray-100">Contact & Portfolio</h2>
+          <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium mb-2 text-gray-300
+              <label className="block text-sm font-medium mb-2 text-gray-300">
                 Website
-              </label>"
-              <<input
+              </label>
+              <input
                 type="url"
                 name="website"
                 value={formData.website}
                 onChange={handleChange}
-                className="w-full px-4 py-2 border border-gray-600 rounded bg-gray-800 text-gray-900"
+                className="w-full px-4 py-2 border border-gray-600 rounded bg-gray-900 text-gray-300"
                 placeholder="https://yourwebsite.com"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2 text-gray-300
+              <label className="block text-sm font-medium mb-2 text-gray-300">
                 Portfolio URL
-              </label>"
-              <<input
+              </label>
+              <input
                 type="url"
                 name="portfolio"
                 value={formData.portfolio}
                 onChange={handleChange}
-                className="w-full px-4 py-2 border border-gray-600 rounded bg-gray-800 text-gray-900"
+                className="w-full px-4 py-2 border border-gray-600 rounded bg-gray-900 text-gray-300"
                 placeholder="Link to your work samples"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2 text-gray-300
-                Services Categories
-              </label>"
-              <<div className="grid grid-cols-2 gap-2">
+              <label className="block text-sm font-medium mb-2 text-gray-300">
+                Service Categories
+              </label>
+              <div className="grid grid-cols-2 gap-2">
                 {SERVICE_CATEGORIES.map((category) => (
                   <label key={category} className="flex items-center">
                     <input
@@ -361,21 +363,21 @@ export default function ContractorOnboarding() {
                       onChange={() => handleCategoryToggle(category)}
                       className="mr-2"
                     />
-                    <span className="text-sm">{category}</span>
+                    <span className="text-sm text-gray-300">{category}</span>
                   </label>
                 ))}
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2 text-gray-300
+              <label className="block text-sm font-medium mb-2 text-gray-300">
                 Bio / About You
-              </label>"
-              <<textarea
+              </label>
+              <textarea
                 name="bio"
                 value={formData.bio}
                 onChange={handleChange}
-                className="w-full px-4 py-2 border border-gray-600 rounded bg-gray-800 text-gray-900"
+                className="w-full px-4 py-2 border border-gray-600 rounded bg-gray-900 text-gray-300"
                 rows={4}
                 placeholder="Tell us about your experience and expertise..."
               />
@@ -385,52 +387,56 @@ export default function ContractorOnboarding() {
 
         {/* Address Information */}
         <div className="bg-gray-800 border border-gray-700 rounded-lg p-6">
-          <h2 className="text-2xl font-bold mb-6 text-gray-900 Information</h2>"
-          <<div className="space-y-4">
+          <h2 className="text-2xl font-bold mb-6 text-gray-100">Address Information</h2>
+          <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium mb-2 text-gray-300
+              <label className="block text-sm font-medium mb-2 text-gray-300">
                 Address Line 1
-              </label>"
-              <<input
+              </label>
+              <input
                 type="text"
                 name="addressLine1"
                 value={formData.addressLine1}
                 onChange={handleChange}
-                className="w-full px-4 py-2 border border-gray-600 rounded bg-gray-800 text-gray-900"
+                className="w-full px-4 py-2 border border-gray-600 rounded bg-gray-900 text-gray-300"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2 text-gray-300
+              <label className="block text-sm font-medium mb-2 text-gray-300">
                 Address Line 2
-              </label>"
-              <<input
+              </label>
+              <input
                 type="text"
                 name="addressLine2"
                 value={formData.addressLine2}
                 onChange={handleChange}
-                className="w-full px-4 py-2 border border-gray-600 rounded bg-gray-800 text-gray-900"
+                className="w-full px-4 py-2 border border-gray-600 rounded bg-gray-900 text-gray-300"
               />
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               <div>
-                <label className="block text-sm font-medium mb-2 text-gray-300"
-                <<input
+                <label className="block text-sm font-medium mb-2 text-gray-300">
+                  City
+                </label>
+                <input
                   type="text"
                   name="city"
                   value={formData.city}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-600 rounded bg-gray-800 text-gray-900"
+                  className="w-full px-4 py-2 border border-gray-600 rounded bg-gray-900 text-gray-300"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium mb-2 text-gray-300"
-                <<select
+                <label className="block text-sm font-medium mb-2 text-gray-300">
+                  State
+                </label>
+                <select
                   name="state"
                   value={formData.state}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-600 rounded bg-gray-800 text-gray-900"
+                  className="w-full px-4 py-2 border border-gray-600 rounded bg-gray-900 text-gray-300"
                 >
                   <option value="">Select a state...</option>
                   {US_STATES.map((state) => (
@@ -441,24 +447,26 @@ export default function ContractorOnboarding() {
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium mb-2 text-gray-300
+                <label className="block text-sm font-medium mb-2 text-gray-300">
                   Postal Code
-                </label>"
-                <<input
+                </label>
+                <input
                   type="text"
                   name="postalCode"
                   value={formData.postalCode}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-600 rounded bg-gray-800 text-gray-900"
+                  className="w-full px-4 py-2 border border-gray-600 rounded bg-gray-900 text-gray-300"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium mb-2 text-gray-300"
-                <<select
+                <label className="block text-sm font-medium mb-2 text-gray-300">
+                  Country
+                </label>
+                <select
                   name="country"
                   value={formData.country}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-600 rounded bg-gray-800 text-gray-900"
+                  className="w-full px-4 py-2 border border-gray-600 rounded bg-gray-900 text-gray-300"
                 >
                   <option value="">Select a country...</option>
                   {COUNTRIES.map((country) => (
@@ -474,8 +482,8 @@ export default function ContractorOnboarding() {
 
         {/* Payment Setup (Optional) */}
         <div className="bg-gray-800 border border-gray-700 rounded-lg p-6">
-          <h2 className="text-2xl font-bold mb-6 text-gray-900 Setup (Optional)</h2>"
-          <<div className="mb-6">
+          <h2 className="text-2xl font-bold mb-6 text-gray-100">Payment Setup (Optional)</h2>
+          <div className="mb-6">
             <label className="flex items-center">
               <input
                 type="checkbox"
@@ -484,7 +492,7 @@ export default function ContractorOnboarding() {
                 onChange={handleChange}
                 className="mr-3"
               />
-              <span className="text-sm font-medium">
+              <span className="text-sm font-medium text-gray-300">
                 Set up payment account now (can also be done later)
               </span>
             </label>
@@ -500,54 +508,54 @@ export default function ContractorOnboarding() {
               </p>
 
               <div>
-                <label className="block text-sm font-medium mb-2 text-gray-300
+                <label className="block text-sm font-medium mb-2 text-gray-300">
                   Account Holder Name
-                </label>"
-                <<input
+                </label>
+                <input
                   type="text"
                   name="bankAccountName"
                   value={formData.bankAccountName}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-600 rounded bg-gray-800 text-gray-900"
+                  className="w-full px-4 py-2 border border-gray-600 rounded bg-gray-900 text-gray-300"
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium mb-2 text-gray-300
+                  <label className="block text-sm font-medium mb-2 text-gray-300">
                     Routing Number
-                  </label>"
-                  <<input
+                  </label>
+                  <input
                     type="text"
                     name="bankRoutingNumber"
                     value={formData.bankRoutingNumber}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 border border-gray-600 rounded bg-gray-800 text-gray-900"
+                    className="w-full px-4 py-2 border border-gray-600 rounded bg-gray-900 text-gray-300"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-2 text-gray-300
+                  <label className="block text-sm font-medium mb-2 text-gray-300">
                     Account Number
-                  </label>"
-                  <<input
+                  </label>
+                  <input
                     type="password"
                     name="bankAccountNumber"
                     value={formData.bankAccountNumber}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 border border-gray-600 rounded bg-gray-800 text-gray-900"
+                    className="w-full px-4 py-2 border border-gray-600 rounded bg-gray-900 text-gray-300"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-2 text-gray-300
+                <label className="block text-sm font-medium mb-2 text-gray-300">
                   Account Type
-                </label>"
-                <<select
+                </label>
+                <select
                   name="bankAccountType"
                   value={formData.bankAccountType}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-600 rounded bg-gray-800 text-gray-900"
+                  className="w-full px-4 py-2 border border-gray-600 rounded bg-gray-900 text-gray-300"
                 >
                   <option value="checking">Checking</option>
                   <option value="savings">Savings</option>
@@ -555,7 +563,7 @@ export default function ContractorOnboarding() {
               </div>
 
               <div className="bg-yellow-50 border border-yellow-200 rounded p-4">
-                <p className="text-xs text-yellow-800
+                <p className="text-xs text-yellow-800">
                   🔒 Your bank information is encrypted and sent directly to Stripe.
                   We never store it on our servers.
                 </p>
@@ -564,19 +572,19 @@ export default function ContractorOnboarding() {
           )}
         </div>
 
-        {/* Submit */}"
-        <<div className="flex gap-4">
+        {/* Submit */}
+        <div className="flex flex-col sm:flex-row gap-4">
           <button
             type="submit"
             disabled={loading}
-            className="flex-1 px-6 py-3 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition"
+            className="flex-1 px-6 py-3 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition min-h-[44px]"
           >
             {loading ? 'Submitting...' : 'Submit Application'}
           </button>
           <button
             type="button"
             onClick={() => router.back()}
-            className="px-6 py-3 border border-gray-600 rounded font-medium hover:bg-gray-700 transition"
+            className="flex-1 sm:flex-none px-6 py-3 border border-gray-600 rounded font-medium text-gray-300 hover:bg-gray-700 transition min-h-[44px]"
           >
             Cancel
           </button>

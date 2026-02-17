@@ -4,7 +4,6 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 import type { CloudflareUser } from '../lib/types/auth'
 import { getUserDisplayName, getUserInitials } from '../lib/auth/session'
-import DarkModeToggle from './DarkModeToggle'
 
 const Logo = () => (
   <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -40,7 +39,6 @@ export default function Header({ variant = 'public', currentUser, subtitle }: He
 
           {variant === 'authenticated' && currentUser && (
             <div className="flex items-center gap-4">
-              <DarkModeToggle />
               <div className="relative">
               <button
                 onClick={() => setShowUserMenu(!showUserMenu)}
@@ -63,7 +61,7 @@ export default function Header({ variant = 'public', currentUser, subtitle }: He
                     onClick={() => setShowUserMenu(false)}
                   />
                   {/* Dropdown menu */}
-                  <div className="absolute right-0 mt-2 w-56 bg-gray-800 rounded-lg shadow-lg border border-gray-700 py-2 z-20">
+                  <div className="absolute left-0 md:right-0 md:left-auto mt-2 w-48 md:w-56 bg-gray-800 rounded-lg shadow-lg border border-gray-700 py-2 z-20">
                     <div className="px-4 py-2 border-b border-gray-700">
                       <p className="text-sm font-medium text-gray-300">{getUserDisplayName(currentUser)}</p>
                       <p className="text-sm text-gray-400 truncate">{currentUser.email}</p>
