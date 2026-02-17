@@ -152,7 +152,7 @@ export default function Questionnaire() {
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-6 md:mb-8 font-playfair">Let's Understand Your Needs</h2>
 
             {error && (
-              <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6 text-sm md:text-base">
+              <div className="bg-red-900/20 border border-red-800 text-red-300 px-4 py-3 rounded-lg mb-6 text-sm md:text-base">
                 {error}
               </div>
             )}
@@ -170,7 +170,7 @@ export default function Questionnaire() {
                     value={formData.companyName}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base"
+                    className="w-full px-4 py-2 border border-gray-600 bg-gray-700 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-400 text-base"
                     placeholder="Your company name"
                   />
                 </div>
@@ -184,7 +184,7 @@ export default function Questionnaire() {
                       value={formData.contactName}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base"
+                      className="w-full px-4 py-2 border border-gray-600 bg-gray-700 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-400 text-base"
                       placeholder="Your name"
                     />
                   </div>
@@ -196,7 +196,7 @@ export default function Questionnaire() {
                       value={formData.email}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base"
+                      className="w-full px-4 py-2 border border-gray-600 bg-gray-700 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-400 text-base"
                       placeholder="your@email.com"
                     />
                   </div>
@@ -210,7 +210,7 @@ export default function Questionnaire() {
                     value={formData.phone}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base"
+                    className="w-full px-4 py-2 border border-gray-600 bg-gray-700 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-400 text-base"
                     placeholder="(555) 123-4567"
                   />
                 </div>
@@ -222,7 +222,7 @@ export default function Questionnaire() {
                     value={formData.companySize}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base"
+                    className="w-full px-4 py-2 border border-gray-600 bg-gray-700 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-400 text-base"
                   >
                     <option value="">Select company size</option>
                     <option value="1-10">1-10 employees</option>
@@ -324,7 +324,7 @@ export default function Questionnaire() {
                       value={formData.otherTechnology}
                       onChange={handleInputChange}
                       placeholder="Please describe the technology..."
-                      className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base"
+                      className="w-full px-4 py-2 border border-gray-600 bg-gray-700 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-400 text-base"
                     />
                   </div>
                 )}
@@ -339,7 +339,7 @@ export default function Questionnaire() {
                     value={formData.budget}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base"
+                    className="w-full px-4 py-2 border border-gray-600 bg-gray-700 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-400 text-base"
                   >
                     <option value="">Select budget range</option>
                     <option value="<$10k">Less than $10,000</option>
@@ -356,7 +356,7 @@ export default function Questionnaire() {
                     value={formData.timeline}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base"
+                    className="w-full px-4 py-2 border border-gray-600 bg-gray-700 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-400 text-base"
                   >
                     <option value="">Select timeline</option>
                     <option value="ASAP">ASAP</option>
@@ -375,7 +375,7 @@ export default function Questionnaire() {
                   value={formData.additionalInfo}
                   onChange={handleInputChange}
                   rows={4}
-                  className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base"
+                  className="w-full px-4 py-2 border border-gray-600 bg-gray-700 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-400 text-base"
                   placeholder="Tell us more about your project or requirements..."
                 />
               </div>
