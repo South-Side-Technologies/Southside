@@ -49,7 +49,7 @@ function NavLink({ href, icon, label, isActive }: NavLinkProps) {
       className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
         isActive
           ? 'bg-red-700 text-white font-semibold'
-          : 'text-gray-700 hover:bg-red-50 hover:text-red-700'
+          : 'text-gray-300 hover:bg-red-900/20 hover:text-red-400'
       }`}
     >
       {icon}
@@ -102,7 +102,7 @@ export default function DashboardNav({ showFullNav = false }: DashboardNavProps)
   const navItems = showFullNav ? allNavItems : [allNavItems[0]]
 
   return (
-    <nav className="w-64 bg-white border-r border-gray-200 px-4 py-6 hidden lg:block">
+    <nav className="w-64 bg-gray-950 border-r border-gray-800 px-4 py-6 hidden lg:block fixed left-0 top-[73px] h-[calc(100vh-73px)] z-40">
       <div className="space-y-2">
         {navItems.map((item) => (
           <NavLink key={item.href} {...item} />
