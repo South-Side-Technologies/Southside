@@ -84,30 +84,30 @@ export default function AdminTicketsPage() {
   const getStatusBadgeColor = (status: string) => {
     switch (status.toLowerCase()) {
       case 'open':
-        return 'bg-red-100 text-red-700'
+        return 'bg-red-900/30 text-red-300'
       case 'in_progress':
-        return 'bg-yellow-100 text-yellow-700'
+        return 'bg-yellow-900/30 text-yellow-300'
       case 'resolved':
-        return 'bg-green-100 text-green-700'
+        return 'bg-green-900/30 text-green-300'
       case 'closed':
-        return 'bg-gray-100 text-gray-700'
+        return 'bg-gray-700 text-gray-300'
       default:
-        return 'bg-gray-100 text-gray-700'
+        return 'bg-gray-700 text-gray-300'
     }
   }
 
   const getPriorityBadgeColor = (priority: string) => {
     switch (priority.toLowerCase()) {
       case 'low':
-        return 'bg-blue-100 text-blue-700'
+        return 'bg-blue-900/30 text-blue-300'
       case 'medium':
-        return 'bg-orange-100 text-orange-700'
+        return 'bg-orange-900/30 text-orange-300'
       case 'high':
-        return 'bg-red-100 text-red-700'
+        return 'bg-red-900/30 text-red-300'
       case 'urgent':
-        return 'bg-red-200 text-red-900'
+        return 'bg-red-900/40 text-red-200'
       default:
-        return 'bg-gray-100 text-gray-700'
+        return 'bg-gray-700 text-gray-300'
     }
   }
 
@@ -124,7 +124,7 @@ export default function AdminTicketsPage() {
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="text-center">
           <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-red-700 border-r-transparent mb-4"></div>
-          <p className="text-gray-600">Loading tickets...</p>
+          <p className="text-gray-400">Loading tickets...</p>
         </div>
       </div>
     )
@@ -132,9 +132,9 @@ export default function AdminTicketsPage() {
 
   if (error) {
     return (
-      <div className="bg-red-50 border border-red-200 rounded-lg p-6 text-center">
-        <p className="text-red-800 font-semibold mb-2">Error Loading Tickets</p>
-        <p className="text-red-600 mb-4">{error}</p>
+      <div className="bg-red-900/20 border border-red-800 rounded-lg p-6 text-center">
+        <p className="text-red-300 font-semibold mb-2">Error Loading Tickets</p>
+        <p className="text-red-400 mb-4">{error}</p>
         <button
           onClick={fetchTickets}
           className="bg-red-700 hover:bg-red-800 text-white font-semibold py-2 px-4 rounded-lg"
@@ -149,20 +149,20 @@ export default function AdminTicketsPage() {
     <div>
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-3xl md:text-4xl font-bold text-black mb-2 font-playfair">
+        <h1 className="text-3xl md:text-4xl font-bold text-white mb-2 font-playfair">
           Support Tickets
-        </h1>
-        <p className="text-gray-600 text-lg">
+</h1>
+        <p className="text-gray-400 text-lg">
           Manage and track all customer support tickets
-        </p>
+</p>
       </div>
 
       {/* Status and Priority Filters */}
-      <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 mb-6">
+      <div className="bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-700 mb-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Status Filter */}
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-3">Status</label>
+            <label className="block text-sm font-semibold text-gray-300 mb-3">Status</label>
             <div className="flex gap-2 flex-wrap">
               {['all', 'open', 'in_progress', 'resolved', 'closed'].map((status) => (
                 <button
@@ -171,7 +171,7 @@ export default function AdminTicketsPage() {
                   className={`px-4 py-2 rounded-lg font-semibold transition-colors ${
                     selectedStatus === status
                       ? 'bg-red-700 text-white'
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                      : 'bg-gray-700 text-gray-300 hover:bg-gray-200'
                   }`}
                 >
                   {formatStatus(status)}
@@ -182,7 +182,7 @@ export default function AdminTicketsPage() {
 
           {/* Priority Filter */}
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-3">Priority</label>
+            <label className="block text-sm font-semibold text-gray-300 mb-3">Priority</label>
             <div className="flex gap-2 flex-wrap">
               {['all', 'low', 'medium', 'high', 'urgent'].map((priority) => (
                 <button
@@ -191,7 +191,7 @@ export default function AdminTicketsPage() {
                   className={`px-4 py-2 rounded-lg font-semibold transition-colors ${
                     selectedPriority === priority
                       ? 'bg-red-700 text-white'
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                      : 'bg-gray-700 text-gray-300 hover:bg-gray-200'
                   }`}
                 >
                   {formatStatus(priority)}
@@ -207,11 +207,11 @@ export default function AdminTicketsPage() {
       </div>
 
       {/* Tickets Table */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+      <div className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full">
-            <thead className="bg-gray-50">
-              <tr className="border-b border-gray-200">
+            <thead className="bg-gray-900">
+              <tr className="border-b border-gray-700">
                 <th className="text-left py-4 px-6 text-sm font-semibold text-gray-700">Ticket #</th>
                 <th className="text-left py-4 px-6 text-sm font-semibold text-gray-700">Subject</th>
                 <th className="text-left py-4 px-6 text-sm font-semibold text-gray-700">Customer</th>
@@ -231,14 +231,14 @@ export default function AdminTicketsPage() {
                 tickets.map((ticket) => (
                   <tr
                     key={ticket.id}
-                    className="border-b border-gray-100 last:border-0 hover:bg-gray-50 cursor-pointer"
+                    className="border-b border-gray-700 last:border-0 hover:bg-gray-700 cursor-pointer"
                     onClick={() => window.location.href = `/admin/tickets/${ticket.id}`}
                   >
                     <td className="py-4 px-6">
                       <div className="font-semibold text-red-700">#{ticket.ticketNumber}</div>
                     </td>
                     <td className="py-4 px-6">
-                      <div className="font-medium text-gray-900 max-w-xs truncate">
+                      <div className="font-medium text-white max-w-xs truncate">
                         {ticket.subject}
                       </div>
                       {ticket.description && (
@@ -248,7 +248,7 @@ export default function AdminTicketsPage() {
                       )}
                     </td>
                     <td className="py-4 px-6">
-                      <div className="text-sm text-gray-900">
+                      <div className="text-sm text-gray-300">
                         {ticket.user.companyName || ticket.user.name || 'N/A'}
                       </div>
                       <div className="text-xs text-gray-500">{ticket.user.email}</div>
