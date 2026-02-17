@@ -5,7 +5,7 @@ import StarterKit from '@tiptap/starter-kit'
 import Image from '@tiptap/extension-image'
 import Link from '@tiptap/extension-link'
 import Placeholder from '@tiptap/extension-placeholder'
-import { useRef } from 'react'
+import { useRef, useEffect, useState } from 'react'
 
 interface RichTextEditorProps {
   content: string
@@ -21,10 +21,17 @@ export default function RichTextEditor({
   disabled = false,
 }: RichTextEditorProps) {
   const fileInputRef = useRef<HTMLInputElement>(null)
+  const [mounted, setMounted] = useState(false)
 
   const editor = useEditor({
     extensions: [
-      StarterKit,
+      StarterKit.configure({
+        paragraph: {
+          HTMLAttributes: {
+            class: 'paragraph',
+          },
+        },
+      }),
       Image.configure({
         allowBase64: false,
         HTMLAttributes: {
@@ -41,7 +48,7 @@ export default function RichTextEditor({
         placeholder,
       }),
     ],
-    content,
+    content: mounted ? content : '',
     onUpdate: ({ editor }) => {
       onChange(editor.getHTML())
     },
@@ -53,8 +60,12 @@ export default function RichTextEditor({
     },
   })
 
-  if (!editor) {
-    return null
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  if (!editor || !mounted) {
+    return <div className="border border-gray-600 bg-gray-700 rounded-lg h-32" />
   }
 
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
