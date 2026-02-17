@@ -293,7 +293,7 @@ export default function AdminPaymentsPage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <p className="text-gray-600">Loading payment data...</p>
+        <p className="text-gray-400">Loading payment data...</p>
       </div>
     )
   }
@@ -301,33 +301,33 @@ export default function AdminPaymentsPage() {
   return (
     <>
       <div className="mb-8">
-        <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">
+        <h1 className="text-4xl font-bold text-white mb-2">
           Contractor Payments
         </h1>
-        <p className="text-gray-600 dark:text-gray-400">Review and process contractor payouts</p>
+        <p className="text-gray-400">Review and process contractor payouts</p>
       </div>
 
       {error && (
-        <div className="mb-6 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4">
-          <p className="text-red-700 dark:text-red-300">{error}</p>
+        <div className="mb-6 bg-red-900/20 border border-red-800 rounded-lg p-4">
+          <p className="text-red-300">{error}</p>
         </div>
       )}
 
       {successMessage && (
-        <div className="mb-6 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-4">
-          <p className="text-green-700 dark:text-green-300">{successMessage}</p>
+        <div className="mb-6 bg-green-900/20 border border-green-800 rounded-lg p-4">
+          <p className="text-green-300">{successMessage}</p>
         </div>
       )}
 
       {/* Tabs */}
-      <div className="mb-6 border-b border-gray-200 dark:border-gray-700">
+      <div className="mb-6 border-b border-gray-700">
         <div className="flex gap-8">
           <button
             onClick={() => setActiveTab('review')}
             className={`py-4 px-2 font-medium border-b-2 transition-colors ${
               activeTab === 'review'
                 ? 'border-blue-600 text-blue-600'
-                : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-300'
+                : 'border-transparent text-gray-400 hover:text-gray-300'
             }`}
           >
             📋 Review Assignments
@@ -337,7 +337,7 @@ export default function AdminPaymentsPage() {
             className={`py-4 px-2 font-medium border-b-2 transition-colors ${
               activeTab === 'process'
                 ? 'border-blue-600 text-blue-600'
-                : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-300'
+                : 'border-transparent text-gray-400 hover:text-gray-300'
             }`}
           >
             💳 Process Payments
@@ -350,32 +350,32 @@ export default function AdminPaymentsPage() {
         <>
           {/* Summary Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-              <p className="text-gray-600 dark:text-gray-400 text-sm font-medium">Not Reviewed</p>
-              <p className="text-3xl font-bold text-gray-900 dark:text-white mt-2">
+            <div className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 p-6">
+              <p className="text-gray-400 text-sm font-medium">Not Reviewed</p>
+              <p className="text-3xl font-bold text-white mt-2">
                 {formatCurrency(summary.totalNotReviewed)}
               </p>
-              <p className="text-xs text-gray-500 dark:text-gray-500 mt-2">
+              <p className="text-xs text-gray-500 mt-2">
                 {allAssignments.filter((a) => a.approvedForPayment === null).length} assignments
               </p>
             </div>
 
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-              <p className="text-gray-600 dark:text-gray-400 text-sm font-medium">Approved</p>
-              <p className="text-3xl font-bold text-green-600 dark:text-green-400 mt-2">
+            <div className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 p-6">
+              <p className="text-gray-400 text-sm font-medium">Approved</p>
+              <p className="text-3xl font-bold text-green-400 mt-2">
                 {formatCurrency(summary.totalApproved)}
               </p>
-              <p className="text-xs text-gray-500 dark:text-gray-500 mt-2">
+              <p className="text-xs text-gray-500 mt-2">
                 {allAssignments.filter((a) => a.approvedForPayment === true).length} assignments
               </p>
             </div>
 
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-              <p className="text-gray-600 dark:text-gray-400 text-sm font-medium">Rejected</p>
-              <p className="text-3xl font-bold text-red-600 dark:text-red-400 mt-2">
+            <div className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 p-6">
+              <p className="text-gray-400 text-sm font-medium">Rejected</p>
+              <p className="text-3xl font-bold text-red-400 mt-2">
                 {formatCurrency(summary.totalRejected)}
               </p>
-              <p className="text-xs text-gray-500 dark:text-gray-500 mt-2">
+              <p className="text-xs text-gray-500 mt-2">
                 {allAssignments.filter((a) => a.approvedForPayment === false).length} assignments
               </p>
             </div>
@@ -386,7 +386,7 @@ export default function AdminPaymentsPage() {
             <select
               value={approvalFilter}
               onChange={(e) => setApprovalFilter(e.target.value as ApprovalStatus)}
-              className="px-4 py-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-gray-900 dark:text-white"
+              className="px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white"
             >
               <option value="pending">Not Reviewed</option>
               <option value="approved">Approved</option>
@@ -398,50 +398,50 @@ export default function AdminPaymentsPage() {
           {/* Contractor Groups */}
           <div className="space-y-4">
             {contractors.length === 0 ? (
-              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-8 text-center">
-                <p className="text-gray-500 dark:text-gray-400">No assignments to review</p>
+              <div className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 p-8 text-center">
+                <p className="text-gray-400">No assignments to review</p>
               </div>
             ) : (
               contractors.map((contractor) => (
                 <div
                   key={contractor.contractorId}
-                  className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden"
+                  className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 overflow-hidden"
                 >
                   {/* Contractor Header */}
                   <button
                     onClick={() => toggleContractor(contractor.contractorId)}
-                    className="w-full px-6 py-4 hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center justify-between transition"
+                    className="w-full px-6 py-4 hover:bg-gray-700 flex items-center justify-between transition"
                   >
                     <div className="flex items-center gap-4 flex-1">
                       <span className="text-xl">
                         {expandedContractors.has(contractor.contractorId) ? '▼' : '▶'}
                       </span>
                       <div className="text-left">
-                        <p className="font-semibold text-gray-900 dark:text-white">
+                        <p className="font-semibold text-white">
                           {contractor.contractorName || 'Unknown'}
                         </p>
-                        <p className="text-sm text-gray-500 dark:text-gray-400">
+                        <p className="text-sm text-gray-400">
                           {contractor.contractorEmail}
                         </p>
                       </div>
                     </div>
                     <div className="flex items-center gap-4">
                       <div className="text-right">
-                        <p className="text-sm text-gray-500 dark:text-gray-400">
+                        <p className="text-sm text-gray-400">
                           {contractor.totalPending > 0 && (
-                            <span className="text-yellow-600 dark:text-yellow-400 font-medium">
+                            <span className="text-yellow-400 font-medium">
                               {formatCurrency(contractor.totalPending)} pending •{' '}
                             </span>
                           )}
                           {contractor.totalApproved > 0 && (
-                            <span className="text-green-600 dark:text-green-400 font-medium">
+                            <span className="text-green-400 font-medium">
                               {formatCurrency(contractor.totalApproved)} approved
                             </span>
                           )}
                         </p>
                       </div>
                       {!contractor.stripeOnboardingComplete && (
-                        <span className="px-2 py-1 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300 text-xs rounded font-medium">
+                        <span className="px-2 py-1 bg-yellow-900/30 text-yellow-300 text-xs rounded font-medium">
                           ⚠️ Setup Pending
                         </span>
                       )}
@@ -450,9 +450,9 @@ export default function AdminPaymentsPage() {
 
                   {/* Expanded Assignments */}
                   {expandedContractors.has(contractor.contractorId) && (
-                    <div className="border-t border-gray-200 dark:border-gray-700 divide-y divide-gray-200 dark:divide-gray-700">
+                    <div className="border-t border-gray-700 divide-y divide-gray-700">
                       {contractor.assignments.length === 0 ? (
-                        <div className="px-6 py-8 text-center text-gray-500 dark:text-gray-400">
+                        <div className="px-6 py-8 text-center text-gray-400">
                           No assignments
                         </div>
                       ) : (
@@ -460,26 +460,26 @@ export default function AdminPaymentsPage() {
                           <div key={assignment.id} className="px-6 py-4">
                             <div className="flex items-start justify-between gap-4 mb-3">
                               <div>
-                                <p className="font-medium text-gray-900 dark:text-white">
+                                <p className="font-medium text-white">
                                   {assignment.projectName}
                                 </p>
-                                <p className="text-sm text-gray-500 dark:text-gray-400">
+                                <p className="text-sm text-gray-400">
                                   Amount: {formatCurrency(assignment.paymentAmount)}
                                 </p>
                               </div>
                               <div className="flex gap-2">
                                 {assignment.approvedForPayment === null && (
-                                  <span className="px-2 py-1 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300 text-xs rounded font-medium">
+                                  <span className="px-2 py-1 bg-yellow-900/30 text-yellow-300 text-xs rounded font-medium">
                                     Pending Review
                                   </span>
                                 )}
                                 {assignment.approvedForPayment === true && (
-                                  <span className="px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 text-xs rounded font-medium">
+                                  <span className="px-2 py-1 bg-green-900/30 text-green-300 text-xs rounded font-medium">
                                     ✓ Approved
                                   </span>
                                 )}
                                 {assignment.approvedForPayment === false && (
-                                  <span className="px-2 py-1 bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300 text-xs rounded font-medium">
+                                  <span className="px-2 py-1 bg-red-900/30 text-red-300 text-xs rounded font-medium">
                                     ✗ Rejected
                                   </span>
                                 )}
@@ -487,16 +487,16 @@ export default function AdminPaymentsPage() {
                             </div>
 
                             {assignment.rejectionReason && (
-                              <div className="mb-3 p-3 bg-red-50 dark:bg-red-900/20 rounded border border-red-200 dark:border-red-800">
-                                <p className="text-sm text-red-700 dark:text-red-300">
+                              <div className="mb-3 p-3 bg-red-900/20 rounded border border-red-800">
+                                <p className="text-sm text-red-300">
                                   <strong>Rejection reason:</strong> {assignment.rejectionReason}
                                 </p>
                               </div>
                             )}
 
                             {assignment.reviewNotes && (
-                              <div className="mb-3 p-3 bg-gray-50 dark:bg-gray-700 rounded">
-                                <p className="text-sm text-gray-700 dark:text-gray-300">
+                              <div className="mb-3 p-3 bg-gray-700 rounded">
+                                <p className="text-sm text-gray-300">
                                   <strong>Notes:</strong> {assignment.reviewNotes}
                                 </p>
                               </div>
@@ -518,7 +518,7 @@ export default function AdminPaymentsPage() {
                                 </button>
                                 <button
                                   onClick={() => handleAssignmentAction(assignment.id, 'edit')}
-                                  className="px-3 py-1.5 bg-gray-600 dark:bg-gray-700 hover:bg-gray-700 dark:hover:bg-gray-600 text-white text-sm rounded font-medium transition"
+                                  className="px-3 py-1.5 bg-gray-700 hover:bg-gray-600 text-white text-sm rounded font-medium transition"
                                 >
                                   ✎ Edit Amount
                                 </button>
@@ -528,7 +528,7 @@ export default function AdminPaymentsPage() {
                             {assignment.approvedForPayment === true && (
                               <button
                                 onClick={() => handleAssignmentAction(assignment.id, 'reject')}
-                                className="px-3 py-1.5 bg-gray-600 dark:bg-gray-700 hover:bg-gray-700 dark:hover:bg-gray-600 text-white text-sm rounded font-medium transition"
+                                className="px-3 py-1.5 bg-gray-700 hover:bg-gray-600 text-white text-sm rounded font-medium transition"
                               >
                                 Revert to Review
                               </button>
@@ -537,7 +537,7 @@ export default function AdminPaymentsPage() {
                             {assignment.approvedForPayment === false && (
                               <button
                                 onClick={() => handleAssignmentAction(assignment.id, 'approve')}
-                                className="px-3 py-1.5 bg-gray-600 dark:bg-gray-700 hover:bg-gray-700 dark:hover:bg-gray-600 text-white text-sm rounded font-medium transition"
+                                className="px-3 py-1.5 bg-gray-700 hover:bg-gray-600 text-white text-sm rounded font-medium transition"
                               >
                                 Approve
                               </button>
@@ -559,48 +559,48 @@ export default function AdminPaymentsPage() {
         <>
           {/* Summary Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-              <p className="text-gray-600 dark:text-gray-400 text-sm font-medium">Total Approved</p>
-              <p className="text-3xl font-bold text-gray-900 dark:text-white mt-2">
+            <div className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 p-6">
+              <p className="text-gray-400 text-sm font-medium">Total Approved</p>
+              <p className="text-3xl font-bold text-white mt-2">
                 {formatCurrency(
                   contractors.reduce((sum, c) => sum + c.totalApproved, 0)
                 )}
               </p>
-              <p className="text-xs text-gray-500 dark:text-gray-500 mt-2">
+              <p className="text-xs text-gray-500 mt-2">
                 {contractors.filter((c) => c.totalApproved > 0).length} contractors
               </p>
             </div>
 
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-              <p className="text-gray-600 dark:text-gray-400 text-sm font-medium">Selected Amount</p>
-              <p className="text-3xl font-bold text-blue-600 dark:text-blue-400 mt-2">
+            <div className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 p-6">
+              <p className="text-gray-400 text-sm font-medium">Selected Amount</p>
+              <p className="text-3xl font-bold text-blue-400 mt-2">
                 {formatCurrency(totalSelected)}
               </p>
-              <p className="text-xs text-gray-500 dark:text-gray-500 mt-2">
+              <p className="text-xs text-gray-500 mt-2">
                 {selectedContractors.size} contractor(s) selected
               </p>
             </div>
 
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-              <p className="text-gray-600 dark:text-gray-400 text-sm font-medium">Onboarded</p>
-              <p className="text-3xl font-bold text-green-600 dark:text-green-400 mt-2">
+            <div className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 p-6">
+              <p className="text-gray-400 text-sm font-medium">Onboarded</p>
+              <p className="text-3xl font-bold text-green-400 mt-2">
                 {contractors.filter((c) => c.stripeOnboardingComplete).length}
               </p>
-              <p className="text-xs text-gray-500 dark:text-gray-500 mt-2">Ready for payments</p>
+              <p className="text-xs text-gray-500 mt-2">Ready for payments</p>
             </div>
           </div>
 
           {/* Contractors Table */}
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden mb-8">
-            <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
-              <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
+          <div className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 overflow-hidden mb-8">
+            <div className="px-6 py-4 border-b border-gray-700 flex items-center justify-between">
+              <h2 className="text-lg font-semibold text-white">
                 Approved Payments
               </h2>
             </div>
 
             <div className="overflow-x-auto">
               <table className="w-full">
-                <thead className="bg-gray-50 dark:bg-gray-700 border-b border-gray-200 dark:border-gray-700">
+                <thead className="bg-gray-700 border-b border-gray-700">
                   <tr>
                     <th className="px-6 py-3 text-left">
                       <input
@@ -616,24 +616,24 @@ export default function AdminPaymentsPage() {
                         className="w-4 h-4 rounded border-gray-300"
                       />
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
                       Contractor
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
                       Approved Amount
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
                       Assignments
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
                       Status
                     </th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+                <tbody className="divide-y divide-gray-700">
                   {contractors.filter((c) => c.totalApproved > 0).length === 0 ? (
                     <tr>
-                      <td colSpan={5} className="px-6 py-8 text-center text-gray-500 dark:text-gray-400">
+                      <td colSpan={5} className="px-6 py-8 text-center text-gray-400">
                         No approved payments to process
                       </td>
                     </tr>
@@ -641,7 +641,7 @@ export default function AdminPaymentsPage() {
                     contractors
                       .filter((c) => c.totalApproved > 0)
                       .map((contractor) => (
-                        <tr key={contractor.contractorId} className="hover:bg-gray-50 dark:hover:bg-gray-700 transition">
+                        <tr key={contractor.contractorId} className="hover:bg-gray-700 transition">
                           <td className="px-6 py-4">
                             <input
                               type="checkbox"
@@ -655,28 +655,28 @@ export default function AdminPaymentsPage() {
                           </td>
                           <td className="px-6 py-4">
                             <div>
-                              <p className="font-medium text-gray-900 dark:text-white">
+                              <p className="font-medium text-white">
                                 {contractor.contractorName}
                               </p>
-                              <p className="text-sm text-gray-500 dark:text-gray-400">
+                              <p className="text-sm text-gray-400">
                                 {contractor.contractorEmail}
                               </p>
                             </div>
                           </td>
-                          <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">
+                          <td className="px-6 py-4 font-semibold text-white">
                             {formatCurrency(contractor.totalApproved)}
                           </td>
-                          <td className="px-6 py-4 text-sm text-gray-900 dark:text-gray-300">
+                          <td className="px-6 py-4 text-sm text-gray-300">
                             {contractor.assignments.filter((a) => a.approvedForPayment === true)
                               .length}
                           </td>
                           <td className="px-6 py-4">
                             {contractor.stripeOnboardingComplete ? (
-                              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300">
+                              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-900/30 text-green-300">
                                 Ready
                               </span>
                             ) : (
-                              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300">
+                              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-900/30 text-yellow-300">
                                 ⚠️ Setup Pending
                               </span>
                             )}
@@ -691,13 +691,13 @@ export default function AdminPaymentsPage() {
 
           {/* Actions */}
           {contractors.some((c) => c.totalApproved > 0) && (
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+            <div className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                  <h3 className="text-lg font-semibold text-white">
                     Ready to process?
                   </h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                  <p className="text-sm text-gray-400 mt-1">
                     {selectedContractors.size > 0
                       ? `You have selected ${selectedContractors.size} contractor(s) for a total of ${formatCurrency(totalSelected)}`
                       : 'Select contractors above to process payments'}
@@ -706,7 +706,7 @@ export default function AdminPaymentsPage() {
                 <button
                   onClick={handleProcessPayments}
                   disabled={selectedContractors.size === 0 || processing}
-                  className="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 dark:disabled:bg-gray-600 text-white font-semibold py-3 px-8 rounded-lg transition-colors"
+                  className="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600 text-white font-semibold py-3 px-8 rounded-lg transition-colors"
                 >
                   {processing ? 'Processing...' : 'Process Selected Payments'}
                 </button>
@@ -719,44 +719,44 @@ export default function AdminPaymentsPage() {
       {/* Modals */}
       {modals.type === 'reject' && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg max-w-md w-full">
-            <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Reject Payment</h3>
+          <div className="bg-gray-800 rounded-xl shadow-lg max-w-md w-full">
+            <div className="px-6 py-4 border-b border-gray-700">
+              <h3 className="text-lg font-semibold text-white">Reject Payment</h3>
             </div>
             <div className="px-6 py-4 space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-gray-300 mb-2">
                   Rejection Reason *
                 </label>
                 <textarea
                   value={rejectReason}
                   onChange={(e) => setRejectReason(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  className="w-full px-3 py-2 border border-gray-600 rounded-lg bg-gray-700 text-white"
                   rows={3}
                   placeholder="Why are you rejecting this payment?"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-gray-300 mb-2">
                   Notes (Optional)
                 </label>
                 <textarea
                   value={reviewNotes}
                   onChange={(e) => setReviewNotes(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  className="w-full px-3 py-2 border border-gray-600 rounded-lg bg-gray-700 text-white"
                   rows={2}
                   placeholder="Additional notes..."
                 />
               </div>
             </div>
-            <div className="px-6 py-4 border-t border-gray-200 dark:border-gray-700 flex gap-3">
+            <div className="px-6 py-4 border-t border-gray-700 flex gap-3">
               <button
                 onClick={() => {
                   setModals({ type: null, assignmentId: null })
                   setRejectReason('')
                   setReviewNotes('')
                 }}
-                className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 font-medium"
+                className="flex-1 px-4 py-2 border border-gray-600 rounded-lg text-gray-300 hover:bg-gray-700 font-medium"
               >
                 Cancel
               </button>
@@ -773,52 +773,52 @@ export default function AdminPaymentsPage() {
 
       {modals.type === 'edit' && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg max-w-md w-full">
-            <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Edit Payment Amount</h3>
+          <div className="bg-gray-800 rounded-xl shadow-lg max-w-md w-full">
+            <div className="px-6 py-4 border-b border-gray-700">
+              <h3 className="text-lg font-semibold text-white">Edit Payment Amount</h3>
             </div>
             <div className="px-6 py-4 space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-gray-300 mb-2">
                   Payment Amount *
                 </label>
                 <div className="flex items-center gap-2">
-                  <span className="text-gray-600 dark:text-gray-400">$</span>
+                  <span className="text-gray-400">$</span>
                   <input
                     type="number"
                     step="0.01"
                     value={editAmount || ''}
                     onChange={(e) => setEditAmount(e.target.value ? parseFloat(e.target.value) : null)}
-                    className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                    className="flex-1 px-3 py-2 border border-gray-600 rounded-lg bg-gray-700 text-white"
                   />
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-gray-300 mb-2">
                   Notes (Optional)
                 </label>
                 <textarea
                   value={reviewNotes}
                   onChange={(e) => setReviewNotes(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  className="w-full px-3 py-2 border border-gray-600 rounded-lg bg-gray-700 text-white"
                   rows={2}
                   placeholder="Why are you changing the amount?"
                 />
               </div>
-              <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-3">
-                <p className="text-sm text-blue-800 dark:text-blue-300">
+              <div className="bg-blue-900/20 border border-blue-800 rounded-lg p-3">
+                <p className="text-sm text-blue-300">
                   ℹ️ Changing the amount will reset the approval status and require re-review.
                 </p>
               </div>
             </div>
-            <div className="px-6 py-4 border-t border-gray-200 dark:border-gray-700 flex gap-3">
+            <div className="px-6 py-4 border-t border-gray-700 flex gap-3">
               <button
                 onClick={() => {
                   setModals({ type: null, assignmentId: null })
                   setEditAmount(null)
                   setReviewNotes('')
                 }}
-                className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 font-medium"
+                className="flex-1 px-4 py-2 border border-gray-600 rounded-lg text-gray-300 hover:bg-gray-700 font-medium"
               >
                 Cancel
               </button>
@@ -836,7 +836,7 @@ export default function AdminPaymentsPage() {
       <div className="mt-8">
         <Link
           href="/admin/payments/history"
-          className="inline-flex items-center gap-2 px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors text-sm font-medium"
+          className="inline-flex items-center gap-2 px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition-colors text-sm font-medium"
         >
           View Payment History →
         </Link>
