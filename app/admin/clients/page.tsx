@@ -54,8 +54,8 @@ export default function AdminClientsPage() {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="text-center">
-          <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-red-700 border-r-transparent mb-4"></div>
-          <p className="text-gray-600">Loading clients...</p>
+          <div className="loading-spinner mb-4"></div>
+          <p className="text-secondary">Loading clients...</p>
         </div>
       </div>
     )
@@ -63,12 +63,12 @@ export default function AdminClientsPage() {
 
   if (error) {
     return (
-      <div className="bg-red-50 border border-red-200 rounded-lg p-6 text-center">
-        <p className="text-red-800 font-semibold mb-2">Error Loading Clients</p>
-        <p className="text-red-600 mb-4">{error}</p>
+      <div className="alert-error text-center">
+        <p className="font-semibold mb-2">Error Loading Clients</p>
+        <p className="mb-4">{error}</p>
         <button
           onClick={fetchClients}
-          className="bg-red-700 hover:bg-red-800 text-white font-semibold py-2 px-4 rounded-lg"
+          className="btn-primary py-2 px-4"
         >
           Try Again
         </button>
@@ -80,16 +80,16 @@ export default function AdminClientsPage() {
     <div>
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-3xl md:text-4xl font-bold text-black mb-2 font-playfair">
+        <h1 className="text-3xl md:text-4xl font-bold text-primary mb-2 font-playfair">
           Client Management
         </h1>
-        <p className="text-gray-600 text-lg">
+        <p className="text-secondary text-lg">
           View and manage all registered clients
         </p>
       </div>
 
       {/* Search and Stats */}
-      <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 mb-6">
+      <div className="card-light mb-6">
         <div className="flex items-center justify-between mb-4">
           <div className="flex-1 max-w-md">
             <input
@@ -97,66 +97,62 @@ export default function AdminClientsPage() {
               placeholder="Search by name or email..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-700 focus:border-transparent"
+              className="form-input"
             />
           </div>
-          <div className="text-sm text-gray-600">
+          <div className="text-sm text-secondary">
             <strong>{filteredClients.length}</strong> {filteredClients.length === 1 ? 'client' : 'clients'}
           </div>
         </div>
       </div>
 
       {/* Clients Table */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+      <div className="card-light overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full">
-            <thead className="bg-gray-50">
-              <tr className="border-b border-gray-200">
-                <th className="text-left py-4 px-6 text-sm font-semibold text-gray-700">Client</th>
-                <th className="text-left py-4 px-6 text-sm font-semibold text-gray-700">Email</th>
-                <th className="text-left py-4 px-6 text-sm font-semibold text-gray-700">Status</th>
-                <th className="text-left py-4 px-6 text-sm font-semibold text-gray-700">Documents</th>
-                <th className="text-left py-4 px-6 text-sm font-semibold text-gray-700">Joined</th>
-                <th className="text-left py-4 px-6 text-sm font-semibold text-gray-700">Actions</th>
+            <thead className="bg-gray-900">
+              <tr>
+                <th className="table-header-cell">Client</th>
+                <th className="table-header-cell">Email</th>
+                <th className="table-header-cell">Status</th>
+                <th className="table-header-cell">Documents</th>
+                <th className="table-header-cell">Joined</th>
+                <th className="table-header-cell">Actions</th>
               </tr>
             </thead>
             <tbody>
               {filteredClients.length === 0 ? (
                 <tr>
-                  <td colSpan={6} className="py-8 text-center text-gray-500">
+                  <td colSpan={6} className="table-cell text-center text-muted">
                     {searchTerm ? 'No clients found matching your search.' : 'No clients yet.'}
                   </td>
                 </tr>
               ) : (
                 filteredClients.map((client) => (
-                  <tr key={client.id} className="border-b border-gray-100 last:border-0 hover:bg-gray-50 transition-colors">
-                    <td className="py-4 px-6">
-                      <div className="font-medium text-gray-900">
+                  <tr key={client.id} className="table-row">
+                    <td className="table-cell">
+                      <div className="font-medium text-primary">
                         {client.name || 'N/A'}
                       </div>
                     </td>
-                    <td className="py-4 px-6 text-sm text-gray-900">{client.email}</td>
-                    <td className="py-4 px-6">
+                    <td className="table-cell text-primary">{client.email}</td>
+                    <td className="table-cell">
                       {client.questionnaireCompleted ? (
-                        <span className="inline-block px-3 py-1 text-xs font-semibold text-green-700 bg-green-100 rounded-full">
-                          Active
-                        </span>
+                        <span className="badge-success">Active</span>
                       ) : (
-                        <span className="inline-block px-3 py-1 text-xs font-semibold text-yellow-700 bg-yellow-100 rounded-full">
-                          Pending Setup
-                        </span>
+                        <span className="badge-warning">Pending Setup</span>
                       )}
                     </td>
-                    <td className="py-4 px-6 text-sm text-gray-600">
+                    <td className="table-cell text-secondary">
                       {client._count.documents}
                     </td>
-                    <td className="py-4 px-6 text-sm text-gray-600">
+                    <td className="table-cell text-secondary">
                       {new Date(client.createdAt).toLocaleDateString()}
                     </td>
-                    <td className="py-4 px-6">
+                    <td className="table-cell">
                       <Link
                         href={`/admin/clients/${client.id}`}
-                        className="text-sm text-red-600 hover:text-red-700 font-semibold"
+                        className="text-sm text-red-400 hover:text-red-300 font-semibold"
                       >
                         View Details →
                       </Link>

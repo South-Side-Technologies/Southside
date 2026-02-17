@@ -41,22 +41,22 @@ export default function AdminSettingsPage() {
     <div>
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-3xl md:text-4xl font-bold text-black mb-2 font-playfair">
+        <h1 className="text-3xl md:text-4xl font-bold text-white mb-2 font-playfair">
           Admin Settings
-        </h1>
-        <p className="text-gray-600 text-lg">
+</h1>
+        <p className="text-gray-400 text-lg">
           Platform configuration and maintenance
         </p>
       </div>
 
       {/* Folder Initialization Card */}
-      <div className="bg-white rounded-xl p-8 shadow-sm border border-gray-200">
-        <h2 className="text-lg font-semibold text-gray-900 mb-6">Folder Management</h2>
+      <div className="bg-gray-800 rounded-xl p-8 shadow-sm border border-gray-700">
+        <h2 className="text-lg font-semibold text-white mb-6">Folder Management</h2>
 
         <div className="space-y-4">
           <div>
-            <h3 className="font-medium text-gray-900 mb-2">Initialize User Folders</h3>
-            <p className="text-sm text-gray-600 mb-4">
+            <h3 className="font-medium text-white mb-2">Initialize User Folders</h3>
+            <p className="text-sm text-gray-400 mb-4">
               Create default folders (Billing, Technical) for all users. This action is safe to run multiple times - existing folders won't be duplicated.
             </p>
           </div>
@@ -70,7 +70,7 @@ export default function AdminSettingsPage() {
           </button>
 
           {error && (
-            <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-red-800">
+            <div className="bg-red-900/20 border border-red-800 rounded-lg p-4 text-red-300">
               {error}
             </div>
           )}

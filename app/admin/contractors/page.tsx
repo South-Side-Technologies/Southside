@@ -121,70 +121,77 @@ export default function ContractorsPage() {
     })
 
   if (loading) {
-    return <div className="p-8 text-center">Loading applications...</div>
+    return (
+      <div className="flex items-center justify-center min-h-[400px]">
+        <div className="text-center">
+          <div className="loading-spinner mb-4"></div>
+          <p className="text-secondary">Loading applications...</p>
+        </div>
+      </div>
+    )
   }
 
   return (
     <div className="space-y-8">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">Contractor Applications</h1>
-        <p className="text-gray-600">Review and approve contractor applications</p>
+        <h1 className="text-3xl font-bold text-primary mb-2">Contractor Applications</h1>
+        <p className="text-secondary">Review and approve contractor applications</p>
       </div>
 
       {/* Metrics Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div
-          className={`bg-white rounded-xl p-6 shadow-sm border ${
+          className={`stat-card cursor-pointer transition-colors ${
             statusFilter === 'all' || statusFilter === 'PENDING'
-              ? 'border-yellow-200 bg-yellow-50'
-              : 'border-gray-200'
-          } cursor-pointer transition-colors hover:shadow-md`}
+              ? 'ring-2 ring-yellow-500 bg-yellow-500/10'
+              : ''
+          }`}
           onClick={() => setStatusFilter(statusFilter === 'PENDING' ? 'all' : 'PENDING')}
         >
           <div className="flex items-center justify-between mb-2">
-            <span className="text-gray-600 text-sm font-medium">Pending Applications</span>
+            <span className="stat-label">Pending Applications</span>
             <span className="text-2xl">⏳</span>
           </div>
-          <p className="text-3xl font-bold text-yellow-700">{pendingApps.length}</p>
-          <p className="text-sm text-gray-500 mt-2">Awaiting review</p>
+          <p className="stat-value text-yellow-400">{pendingApps.length}</p>
+          <p className="stat-subtext">Awaiting review</p>
         </div>
 
         <div
-          className={`bg-white rounded-xl p-6 shadow-sm border ${
+          className={`stat-card cursor-pointer transition-colors ${
             statusFilter === 'all' || statusFilter === 'APPROVED'
-              ? 'border-green-200 bg-green-50'
-              : 'border-gray-200'
-          } cursor-pointer transition-colors hover:shadow-md`}
+              ? 'ring-2 ring-green-500 bg-green-500/10'
+              : ''
+          }`}
           onClick={() => setStatusFilter(statusFilter === 'APPROVED' ? 'all' : 'APPROVED')}
         >
           <div className="flex items-center justify-between mb-2">
-            <span className="text-gray-600 text-sm font-medium">Approved Applications</span>
+            <span className="stat-label">Approved Applications</span>
             <span className="text-2xl">✅</span>
           </div>
-          <p className="text-3xl font-bold text-green-700">{approvedApps.length}</p>
-          <p className="text-sm text-gray-500 mt-2">Active contractors</p>
+          <p className="stat-value text-green-400">{approvedApps.length}</p>
+          <p className="stat-subtext">Active contractors</p>
         </div>
 
         <div
-          className={`bg-white rounded-xl p-6 shadow-sm border ${
+          className={`stat-card cursor-pointer transition-colors ${
             statusFilter === 'all' || statusFilter === 'REJECTED'
-              ? 'border-red-200 bg-red-50'
-              : 'border-gray-200'
-          } cursor-pointer transition-colors hover:shadow-md`}
+              ? 'ring-2 ring-red-500 bg-red-900/200/10'
+              : ''
+          }`}
           onClick={() => setStatusFilter(statusFilter === 'REJECTED' ? 'all' : 'REJECTED')}
         >
           <div className="flex items-center justify-between mb-2">
-            <span className="text-gray-600 text-sm font-medium">Rejected Applications</span>
+            <span className="stat-label">Rejected Applications</span>
             <span className="text-2xl">❌</span>
           </div>
-          <p className="text-3xl font-bold text-red-700">{rejectedApps.length}</p>
-          <p className="text-sm text-gray-500 mt-2">Did not qualify</p>
+          <p className="stat-value text-red-400">{rejectedApps.length}</p>
+          <p className="stat-subtext">Did not qualify</p>
         </div>
       </div>
 
       {error && (
-        <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-red-700">
+        <div className="alert-error">
           {error}
           <button
             onClick={() => setError(null)}
@@ -202,14 +209,14 @@ export default function ContractorsPage() {
           placeholder="Search by name, email, or company..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="form-input w-full"
         />
       </div>
 
       {/* Applications List */}
       <div>
         {filteredApplications.length === 0 ? (
-          <p className="text-gray-600">No applications found</p>
+          <p className="text-secondary">No applications found</p>
         ) : (
           <div className="space-y-4">
             {filteredApplications.map(app => (
@@ -217,24 +224,22 @@ export default function ContractorsPage() {
                 key={app.id}
                 href={`/admin/contractors/${app.id}`}
               >
-                <div
-                  className="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md hover:border-blue-300 transition cursor-pointer"
-                >
+                <div className="card-light hover:shadow-md hover:ring-2 hover:ring-blue-500/30 transition cursor-pointer">
                 <div className="flex justify-between items-start">
                   <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-gray-900">{app.user.name}</h3>
-                    <p className="text-sm text-gray-600">{app.user.email}</p>
+                    <h3 className="text-lg font-semibold text-primary">{app.user.name}</h3>
+                    <p className="text-sm text-secondary">{app.user.email}</p>
                     {app.companyName && (
-                      <p className="text-sm text-gray-600 mt-1">{app.companyName}</p>
+                      <p className="text-sm text-secondary mt-1">{app.companyName}</p>
                     )}
                   </div>
                   <span
                     className={`px-3 py-1 rounded-full text-sm font-medium ${
                       app.status === 'PENDING'
-                        ? 'bg-yellow-100 text-yellow-800'
+                        ? 'badge-warning'
                         : app.status === 'APPROVED'
-                        ? 'bg-green-100 text-green-800'
-                        : 'bg-red-100 text-red-800'
+                        ? 'badge-success'
+                        : 'badge-error'
                     }`}
                   >
                     {app.status === 'PENDING' ? 'Pending' : app.status === 'APPROVED' ? 'Approved' : 'Rejected'}
@@ -245,16 +250,14 @@ export default function ContractorsPage() {
                   {app.status === 'PENDING' ? (
                     selectedAppId === app.id ? (
                       <div
-                        className="p-4 bg-red-50 border border-red-200 rounded-lg"
+                        className="p-4 alert-error rounded-lg"
                         onClick={(e) => e.preventDefault()}
                       >
-                        <label className="block text-sm font-medium text-gray-900 mb-2">
-                          Rejection Reason
-                        </label>
+                        <label className="form-label mb-2">Rejection Reason</label>
                         <textarea
                           value={rejectionReason}
                           onChange={(e) => setRejectionReason(e.target.value)}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm mb-3"
+                          className="form-textarea w-full mb-3"
                           rows={2}
                           placeholder="Explain why the application was rejected..."
                         />
@@ -268,7 +271,7 @@ export default function ContractorsPage() {
                           </button>
                           <button
                             onClick={() => setSelectedAppId(null)}
-                            className="px-3 py-1 bg-gray-200 text-gray-900 rounded hover:bg-gray-300 text-xs font-medium"
+                            className="px-3 py-1 btn-filter-inactive"
                           >
                             Cancel
                           </button>
@@ -288,7 +291,7 @@ export default function ContractorsPage() {
                         </button>
                         <button
                           onClick={() => setSelectedAppId(app.id)}
-                          className="px-3 py-1 bg-red-100 text-red-700 rounded hover:bg-red-200 text-xs font-medium"
+                          className="px-3 py-1 badge-error cursor-pointer"
                         >
                           Reject
                         </button>
@@ -299,10 +302,10 @@ export default function ContractorsPage() {
                       Approved on {app.reviewedAt ? new Date(app.reviewedAt).toLocaleDateString() : 'N/A'}
                     </p>
                   ) : (
-                    <p className="text-xs text-red-600 font-medium">
+                    <p className="text-xs text-red-400 font-medium">
                       Rejected on {app.reviewedAt ? new Date(app.reviewedAt).toLocaleDateString() : 'N/A'}
                       {app.rejectionReason && (
-                        <span className="block text-gray-700 mt-1">Reason: {app.rejectionReason}</span>
+                        <span className="block text-primary mt-1">Reason: {app.rejectionReason}</span>
                       )}
                     </p>
                   )}

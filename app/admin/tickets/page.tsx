@@ -201,7 +201,7 @@ export default function AdminTicketsPage() {
           </div>
         </div>
 
-        <div className="mt-4 text-sm text-gray-600">
+        <div className="mt-4 text-sm text-gray-400">
           <strong>{tickets.length}</strong> {tickets.length === 1 ? 'ticket' : 'tickets'}
         </div>
       </div>
@@ -263,7 +263,7 @@ export default function AdminTicketsPage() {
                         {formatStatus(ticket.priority)}
                       </span>
                     </td>
-                    <td className="py-4 px-6 text-sm text-gray-600">
+                    <td className="py-4 px-6 text-sm text-gray-400">
                       {formatDate(ticket.createdAt)}
                     </td>
                   </tr>

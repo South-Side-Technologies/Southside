@@ -109,9 +109,9 @@ export default function TicketDetail() {
       case 'resolved':
         return 'bg-green-100 text-green-700'
       case 'closed':
-        return 'bg-gray-100 text-gray-700'
+        return 'bg-gray-800 text-gray-300'
       default:
-        return 'bg-gray-100 text-gray-700'
+        return 'bg-gray-800 text-gray-300'
     }
   }
 
@@ -126,7 +126,7 @@ export default function TicketDetail() {
       case 'urgent':
         return 'bg-red-200 text-red-900'
       default:
-        return 'bg-gray-100 text-gray-700'
+        return 'bg-gray-800 text-gray-300'
     }
   }
 
@@ -145,7 +145,7 @@ export default function TicketDetail() {
   }
 
   if (loading) return <div className="text-center py-8">Loading ticket...</div>
-  if (error) return <div className="text-red-600 p-4 bg-red-50 rounded-lg">{error}</div>
+  if (error) return <div className="text-red-400 p-4 bg-red-900/20 rounded-lg">{error}</div>
   if (!ticket) return <div className="text-center py-8">Ticket not found</div>
 
   return (
@@ -159,11 +159,11 @@ export default function TicketDetail() {
         <div className="lg:col-span-2">
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Ticket Header */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 p-6">
               <div className="flex items-start justify-between mb-4">
                 <div>
-                  <h2 className="text-2xl font-bold text-gray-900">#{ticket.ticketNumber}</h2>
-                  <p className="text-gray-600 text-sm mt-1">{formatDate(ticket.createdAt)}</p>
+                  <h2 className="text-2xl font-bold text-white">#{ticket.ticketNumber}</h2>
+                  <p className="text-gray-400 text-sm mt-1">{formatDate(ticket.createdAt)}</p>
                 </div>
                 <div className="flex gap-2">
                   <span className={`inline-block px-3 py-1 text-xs font-semibold rounded-full ${getStatusBadgeColor(ticket.status)}`}>
@@ -174,39 +174,39 @@ export default function TicketDetail() {
                   </span>
                 </div>
               </div>
-              <p className="text-gray-700">{ticket.subject}</p>
+              <p className="text-gray-300">{ticket.subject}</p>
             </div>
 
             {/* Subject */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-              <label className="block text-sm font-medium text-gray-700 mb-2">Subject</label>
+            <div className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 p-6">
+              <label className="block text-sm font-medium text-gray-300 mb-2">Subject</label>
               <input
                 type="text"
                 value={formData.subject}
                 onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-700"
+                className="w-full px-3 py-2 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-700"
               />
             </div>
 
             {/* Description */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-              <label className="block text-sm font-medium text-gray-700 mb-2">Description</label>
+            <div className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 p-6">
+              <label className="block text-sm font-medium text-gray-300 mb-2">Description</label>
               <textarea
                 value={formData.description}
                 onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                 rows={4}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-700"
+                className="w-full px-3 py-2 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-700"
               />
             </div>
 
             {/* Status and Priority */}
             <div className="grid grid-cols-2 gap-6">
-              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-                <label className="block text-sm font-medium text-gray-700 mb-2">Status</label>
+              <div className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 p-6">
+                <label className="block text-sm font-medium text-gray-300 mb-2">Status</label>
                 <select
                   value={formData.status}
                   onChange={(e) => setFormData({ ...formData, status: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-700"
+                  className="w-full px-3 py-2 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-700"
                 >
                   <option value="OPEN">Open</option>
                   <option value="IN_PROGRESS">In Progress</option>
@@ -215,12 +215,12 @@ export default function TicketDetail() {
                 </select>
               </div>
 
-              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-                <label className="block text-sm font-medium text-gray-700 mb-2">Priority</label>
+              <div className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 p-6">
+                <label className="block text-sm font-medium text-gray-300 mb-2">Priority</label>
                 <select
                   value={formData.priority}
                   onChange={(e) => setFormData({ ...formData, priority: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-700"
+                  className="w-full px-3 py-2 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-700"
                 >
                   <option value="LOW">Low</option>
                   <option value="MEDIUM">Medium</option>
@@ -249,42 +249,42 @@ export default function TicketDetail() {
         {/* Sidebar */}
         <div className="space-y-6">
           {/* Customer Info */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-            <h3 className="font-semibold text-gray-900 mb-4">Customer Information</h3>
+          <div className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 p-6">
+            <h3 className="font-semibold text-white mb-4">Customer Information</h3>
             <div className="space-y-3">
               <div>
-                <p className="text-xs text-gray-600">Name</p>
-                <p className="font-medium text-gray-900">{ticket.user.name || 'N/A'}</p>
+                <p className="text-xs text-gray-400">Name</p>
+                <p className="font-medium text-white">{ticket.user.name || 'N/A'}</p>
               </div>
               <div>
-                <p className="text-xs text-gray-600">Company</p>
-                <p className="font-medium text-gray-900">{ticket.user.companyName || 'N/A'}</p>
+                <p className="text-xs text-gray-400">Company</p>
+                <p className="font-medium text-white">{ticket.user.companyName || 'N/A'}</p>
               </div>
               <div>
-                <p className="text-xs text-gray-600">Email</p>
-                <p className="font-medium text-gray-900">{ticket.user.email}</p>
+                <p className="text-xs text-gray-400">Email</p>
+                <p className="font-medium text-white">{ticket.user.email}</p>
               </div>
             </div>
           </div>
 
           {/* Ticket Info */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-            <h3 className="font-semibold text-gray-900 mb-4">Ticket Info</h3>
+          <div className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 p-6">
+            <h3 className="font-semibold text-white mb-4">Ticket Info</h3>
             <div className="space-y-3 text-sm">
               <div>
-                <p className="text-gray-600">Created</p>
-                <p className="font-medium text-gray-900">{formatDate(ticket.createdAt)}</p>
+                <p className="text-gray-400">Created</p>
+                <p className="font-medium text-white">{formatDate(ticket.createdAt)}</p>
               </div>
               <div>
-                <p className="text-gray-600">Last Updated</p>
-                <p className="font-medium text-gray-900">{formatDate(ticket.updatedAt)}</p>
+                <p className="text-gray-400">Last Updated</p>
+                <p className="font-medium text-white">{formatDate(ticket.updatedAt)}</p>
               </div>
             </div>
           </div>
 
           {/* Actions */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-            <h3 className="font-semibold text-gray-900 mb-4">Actions</h3>
+          <div className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 p-6">
+            <h3 className="font-semibold text-white mb-4">Actions</h3>
             <button
               onClick={handleDelete}
               disabled={saving}

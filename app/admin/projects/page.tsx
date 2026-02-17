@@ -84,7 +84,7 @@ export default function AdminProjectsPage() {
       case 'completed':
         return 'bg-green-100 text-green-700'
       default:
-        return 'bg-gray-100 text-gray-700'
+        return 'bg-gray-800 text-gray-300'
     }
   }
 
@@ -96,8 +96,8 @@ export default function AdminProjectsPage() {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="text-center">
-          <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-red-700 border-r-transparent mb-4"></div>
-          <p className="text-gray-600">Loading projects...</p>
+          <div className="loading-spinner mb-4"></div>
+          <p className="text-muted">Loading projects...</p>
         </div>
       </div>
     )
@@ -105,12 +105,12 @@ export default function AdminProjectsPage() {
 
   if (error) {
     return (
-      <div className="bg-red-50 border border-red-200 rounded-lg p-6 text-center">
-        <p className="text-red-800 font-semibold mb-2">Error Loading Projects</p>
-        <p className="text-red-600 mb-4">{error}</p>
+      <div className="alert-error text-center">
+        <p className="font-semibold mb-2">Error Loading Projects</p>
+        <p className="mb-4">{error}</p>
         <button
           onClick={fetchProjects}
-          className="bg-red-700 hover:bg-red-800 text-white font-semibold py-2 px-4 rounded-lg"
+          className="btn-primary py-2 px-4"
         >
           Try Again
         </button>
@@ -122,93 +122,52 @@ export default function AdminProjectsPage() {
     <div>
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-3xl md:text-4xl font-bold text-black mb-2 font-playfair">
+        <h1 className="text-3xl md:text-4xl font-bold text-primary mb-2 font-playfair">
           Project Management
         </h1>
-        <p className="text-gray-600 text-lg">
+        <p className="text-secondary text-lg">
           View and manage all customer projects
         </p>
       </div>
 
       {/* Status Filter and Stats */}
-      <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 mb-6">
+      <div className="stat-card mb-6">
         <div className="flex items-center justify-between mb-4">
           <div className="flex gap-2 flex-wrap">
-            <button
-              onClick={() => setSelectedStatus('all')}
-              className={`px-4 py-2 rounded-lg font-semibold transition-colors ${
-                selectedStatus === 'all'
-                  ? 'bg-red-700 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-              }`}
-            >
-              All
-            </button>
-            <button
-              onClick={() => setSelectedStatus('planning')}
-              className={`px-4 py-2 rounded-lg font-semibold transition-colors ${
-                selectedStatus === 'planning'
-                  ? 'bg-red-700 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-              }`}
-            >
-              Planning
-            </button>
-            <button
-              onClick={() => setSelectedStatus('in_progress')}
-              className={`px-4 py-2 rounded-lg font-semibold transition-colors ${
-                selectedStatus === 'in_progress'
-                  ? 'bg-red-700 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-              }`}
-            >
-              In Progress
-            </button>
-            <button
-              onClick={() => setSelectedStatus('review')}
-              className={`px-4 py-2 rounded-lg font-semibold transition-colors ${
-                selectedStatus === 'review'
-                  ? 'bg-red-700 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-              }`}
-            >
-              Review
-            </button>
-            <button
-              onClick={() => setSelectedStatus('completed')}
-              className={`px-4 py-2 rounded-lg font-semibold transition-colors ${
-                selectedStatus === 'completed'
-                  ? 'bg-red-700 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-              }`}
-            >
-              Completed
-            </button>
+            {['all', 'planning', 'in_progress', 'review', 'completed'].map((status) => (
+              <button
+                key={status}
+                onClick={() => setSelectedStatus(status)}
+                className={selectedStatus === status ? 'btn-filter-active' : 'btn-filter-inactive'}
+              >
+                {formatStatus(status)}
+              </button>
+            ))}
           </div>
-          <div className="text-sm text-gray-600">
+          <div className="text-sm text-muted">
             <strong>{projects.length}</strong> {projects.length === 1 ? 'project' : 'projects'}
           </div>
         </div>
       </div>
 
       {/* Projects Table */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+      <div className="stat-card overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full">
-            <thead className="bg-gray-50">
-              <tr className="border-b border-gray-200">
-                <th className="text-left py-4 px-6 text-sm font-semibold text-gray-700">Project Name</th>
-                <th className="text-left py-4 px-6 text-sm font-semibold text-gray-700">Customer</th>
-                <th className="text-left py-4 px-6 text-sm font-semibold text-gray-700">Status</th>
-                <th className="text-left py-4 px-6 text-sm font-semibold text-gray-700">Progress</th>
-                <th className="text-left py-4 px-6 text-sm font-semibold text-gray-700">Team</th>
-                <th className="text-left py-4 px-6 text-sm font-semibold text-gray-700">Actions</th>
+            <thead>
+              <tr className="bg-gray-800 border-b border-gray-700">
+                <th className="table-header-cell">Project Name</th>
+                <th className="table-header-cell">Customer</th>
+                <th className="table-header-cell">Status</th>
+                <th className="table-header-cell">Progress</th>
+                <th className="table-header-cell">Team</th>
+                <th className="table-header-cell">Actions</th>
               </tr>
             </thead>
             <tbody>
               {projects.length === 0 ? (
                 <tr>
-                  <td colSpan={6} className="py-8 text-center text-gray-500">
+                  <td colSpan={6} className="py-8 text-center text-muted">
                     No projects found{selectedStatus !== 'all' ? ` in ${formatStatus(selectedStatus)}` : ''}.
                   </td>
                 </tr>
@@ -216,27 +175,27 @@ export default function AdminProjectsPage() {
                 projects.map((project) => (
                   <tr
                     key={project.id}
-                    className="border-b border-gray-100 last:border-0 hover:bg-gray-50 cursor-pointer"
+                    className="table-row cursor-pointer"
                     onClick={() => window.location.href = `/admin/projects/${project.id}/edit`}
                   >
-                    <td className="py-4 px-6">
-                      <div className="font-medium text-gray-900">
+                    <td className="table-cell">
+                      <div className="font-medium text-primary">
                         {project.name}
                       </div>
                       {project.description && (
-                        <div className="text-xs text-gray-500 mt-1 truncate max-w-xs">
+                        <div className="text-xs text-muted mt-1 truncate max-w-xs">
                           {project.description.split('\n')[0]}
                         </div>
                       )}
                     </td>
-                    <td className="py-4 px-6">
-                      <div className="text-sm text-gray-900">
+                    <td className="table-cell">
+                      <div className="text-sm font-medium text-primary">
                         {project.user.companyName || project.user.name || 'N/A'}
                       </div>
-                      <div className="text-xs text-gray-500">{project.user.email}</div>
+                      <div className="text-xs text-muted">{project.user.email}</div>
                     </td>
-                    <td className="py-4 px-6">
-                      <span className={`inline-block px-3 py-1 text-xs font-semibold rounded-full ${getStatusBadgeColor(project.status)}`}>
+                    <td className="table-cell">
+                      <span className={`badge-base ${getStatusBadgeColor(project.status)}`}>
                         {formatStatus(project.status)}
                       </span>
                     </td>
@@ -248,34 +207,34 @@ export default function AdminProjectsPage() {
                             style={{ width: `${project.progress}%` }}
                           ></div>
                         </div>
-                        <span className="text-sm text-gray-600">{project.progress}%</span>
+                        <span className="text-sm text-gray-400">{project.progress}%</span>
                       </div>
                     </td>
-                    <td className="py-4 px-6 text-sm text-gray-600">
+                    <td className="py-4 px-6 text-sm text-gray-400">
                       {project.assignedTeam.length > 0 ? (
                         <div className="flex flex-wrap gap-1">
                           {project.assignedTeam.slice(0, 2).map((member, idx) => (
-                            <span key={idx} className="inline-block px-2 py-1 text-xs bg-gray-100 rounded">
+                            <span key={idx} className="inline-block px-2 py-1 text-xs bg-gray-800 rounded">
                               {member}
                             </span>
                           ))}
                           {project.assignedTeam.length > 2 && (
-                            <span className="inline-block px-2 py-1 text-xs text-gray-500">
+                            <span className="inline-block px-2 py-1 text-xs text-muted">
                               +{project.assignedTeam.length - 2}
                             </span>
                           )}
                         </div>
                       ) : (
-                        <span className="text-gray-400">No team assigned</span>
+                        <span className="text-muted">No team assigned</span>
                       )}
                     </td>
-                    <td className="py-4 px-6">
+                    <td className="table-cell">
                       <button
                         onClick={(e) => {
                           e.stopPropagation()
                           handleDelete(project.id, project.name)
                         }}
-                        className="text-sm text-red-600 hover:text-red-700 font-semibold"
+                        className="text-sm text-red-400 hover:text-red-700:text-red-300 font-semibold"
                       >
                         Delete
                       </button>

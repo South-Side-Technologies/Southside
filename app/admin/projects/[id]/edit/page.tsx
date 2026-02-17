@@ -118,7 +118,7 @@ export default function AdminEditProjectPage({ params }: { params: { id: string 
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="text-center">
           <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-red-700 border-r-transparent mb-4"></div>
-          <p className="text-gray-600">Loading project...</p>
+          <p className="text-gray-400">Loading project...</p>
         </div>
       </div>
     )
@@ -126,9 +126,9 @@ export default function AdminEditProjectPage({ params }: { params: { id: string 
 
   if (error && !project) {
     return (
-      <div className="bg-red-50 border border-red-200 rounded-lg p-6 text-center">
-        <p className="text-red-800 font-semibold mb-2">Error Loading Project</p>
-        <p className="text-red-600 mb-4">{error}</p>
+      <div className="bg-red-900/20 border border-red-800 rounded-lg p-6 text-center">
+        <p className="text-red-300 font-semibold mb-2">Error Loading Project</p>
+        <p className="text-red-400 mb-4">{error}</p>
         <button
           onClick={handleCancel}
           className="bg-red-700 hover:bg-red-800 text-white font-semibold py-2 px-4 rounded-lg"
@@ -143,18 +143,18 @@ export default function AdminEditProjectPage({ params }: { params: { id: string 
     <div>
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-3xl md:text-4xl font-bold text-black mb-2 font-playfair">
+        <h1 className="text-3xl md:text-4xl font-bold text-white mb-2 font-playfair">
           Edit Project
         </h1>
-        <p className="text-gray-600 text-lg">
+        <p className="text-gray-400 text-lg">
           {project?.user.companyName || project?.user.name || project?.user.email}
         </p>
       </div>
 
       {/* Form */}
-      <div className="bg-white rounded-xl p-8 shadow-sm border border-gray-200">
+      <div className="bg-gray-800 rounded-xl p-8 shadow-sm border border-gray-700">
         {error && (
-          <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6">
+          <div className="bg-red-900/20 border border-red-800 text-red-700 px-4 py-3 rounded-lg mb-6">
             {error}
           </div>
         )}
@@ -162,7 +162,7 @@ export default function AdminEditProjectPage({ params }: { params: { id: string 
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Project Name */}
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-2">
+            <label className="block text-sm font-semibold text-gray-300 mb-2">
               Project Name *
             </label>
             <input
@@ -170,20 +170,20 @@ export default function AdminEditProjectPage({ params }: { params: { id: string 
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
               required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-700 focus:border-transparent"
+              className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-700 focus:border-transparent"
             />
           </div>
 
           {/* Description */}
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-2">
+            <label className="block text-sm font-semibold text-gray-300 mb-2">
               Description
             </label>
             <textarea
               value={formData.description}
               onChange={(e) => setFormData({ ...formData, description: e.target.value })}
               rows={4}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-700 focus:border-transparent"
+              className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-700 focus:border-transparent"
               placeholder="Project description..."
             />
           </div>
@@ -191,13 +191,13 @@ export default function AdminEditProjectPage({ params }: { params: { id: string 
           {/* Status and Progress */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
+              <label className="block text-sm font-semibold text-gray-300 mb-2">
                 Status *
               </label>
               <select
                 value={formData.status}
                 onChange={(e) => setFormData({ ...formData, status: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-700 focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-700 focus:border-transparent"
               >
                 <option value="PLANNING">Planning</option>
                 <option value="IN_PROGRESS">In Progress</option>
@@ -207,7 +207,7 @@ export default function AdminEditProjectPage({ params }: { params: { id: string 
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
+              <label className="block text-sm font-semibold text-gray-300 mb-2">
                 Progress (0-100) *
               </label>
               <input
@@ -217,7 +217,7 @@ export default function AdminEditProjectPage({ params }: { params: { id: string 
                 value={formData.progress}
                 onChange={(e) => setFormData({ ...formData, progress: parseInt(e.target.value) })}
                 required
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-700 focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-700 focus:border-transparent"
               />
             </div>
           </div>
@@ -225,7 +225,7 @@ export default function AdminEditProjectPage({ params }: { params: { id: string 
           {/* Dates */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
+              <label className="block text-sm font-semibold text-gray-300 mb-2">
                 Start Date *
               </label>
               <input
@@ -233,26 +233,26 @@ export default function AdminEditProjectPage({ params }: { params: { id: string 
                 value={formData.startDate}
                 onChange={(e) => setFormData({ ...formData, startDate: e.target.value })}
                 required
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-700 focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-700 focus:border-transparent"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
+              <label className="block text-sm font-semibold text-gray-300 mb-2">
                 Estimated Completion
               </label>
               <input
                 type="date"
                 value={formData.estimatedCompletion}
                 onChange={(e) => setFormData({ ...formData, estimatedCompletion: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-700 focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-700 focus:border-transparent"
               />
             </div>
           </div>
 
           {/* Assigned Team */}
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-2">
+            <label className="block text-sm font-semibold text-gray-300 mb-2">
               Assigned Team
             </label>
             <input
@@ -260,9 +260,9 @@ export default function AdminEditProjectPage({ params }: { params: { id: string 
               value={formData.assignedTeam}
               onChange={(e) => setFormData({ ...formData, assignedTeam: e.target.value })}
               placeholder="Enter names separated by commas (e.g., John Doe, Jane Smith)"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-700 focus:border-transparent"
+              className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-700 focus:border-transparent"
             />
-            <p className="text-xs text-gray-500 mt-1">
+            <p className="text-xs text-gray-400 mt-1">
               Separate multiple team members with commas
             </p>
           </div>
@@ -280,7 +280,7 @@ export default function AdminEditProjectPage({ params }: { params: { id: string 
               type="button"
               onClick={handleCancel}
               disabled={isSaving}
-              className="flex-1 bg-gray-200 hover:bg-gray-300 disabled:bg-gray-100 text-gray-700 font-semibold py-3 px-6 rounded-lg transition-colors"
+              className="flex-1 bg-gray-200 hover:bg-gray-300 disabled:bg-gray-800 text-gray-300 font-semibold py-3 px-6 rounded-lg transition-colors"
             >
               Cancel
             </button>

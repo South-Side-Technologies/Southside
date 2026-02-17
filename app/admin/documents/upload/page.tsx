@@ -79,51 +79,51 @@ export default function AdminDocumentUpload() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8 px-4">
+    <div className="min-h-screen bg-gray-800 py-8 px-4">
       <div className="max-w-2xl mx-auto">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-black mb-2 font-playfair">
+          <h1 className="text-3xl md:text-4xl font-bold text-white mb-2 font-playfair">
             Upload Customer Document
           </h1>
-          <p className="text-gray-600">
+          <p className="text-gray-400">
             Upload documents to Google Drive for your customers
           </p>
         </div>
 
         {/* Upload Form */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+        <div className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 p-6">
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Customer Email */}
             <div>
-              <label htmlFor="customerEmail" className="block text-sm font-semibold text-gray-700 mb-2">
-                Customer Email <span className="text-red-600">*</span>
+              <label htmlFor="customerEmail" className="block text-sm font-semibold text-gray-300 mb-2">
+                Customer Email <span className="text-red-400">*</span>
               </label>
               <input
                 type="email"
                 id="customerEmail"
                 value={customerEmail}
                 onChange={(e) => setCustomerEmail(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-700 focus:border-transparent"
+                className="w-full px-4 py-3 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-700 focus:border-transparent"
                 placeholder="customer@example.com"
                 required
                 disabled={isUploading}
               />
-              <p className="text-sm text-gray-500 mt-1">
+              <p className="text-sm text-gray-400 mt-1">
                 Email must match an existing customer in the database
               </p>
             </div>
 
             {/* Category */}
             <div>
-              <label htmlFor="category" className="block text-sm font-semibold text-gray-700 mb-2">
-                Document Category <span className="text-red-600">*</span>
+              <label htmlFor="category" className="block text-sm font-semibold text-gray-300 mb-2">
+                Document Category <span className="text-red-400">*</span>
               </label>
               <select
                 id="category"
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-700 focus:border-transparent"
+                className="w-full px-4 py-3 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-700 focus:border-transparent"
                 disabled={isUploading}
               >
                 <option value="CONTRACT">Contract</option>
@@ -135,10 +135,10 @@ export default function AdminDocumentUpload() {
 
             {/* File Upload */}
             <div>
-              <label htmlFor="file" className="block text-sm font-semibold text-gray-700 mb-2">
-                Select File <span className="text-red-600">*</span>
+              <label htmlFor="file" className="block text-sm font-semibold text-gray-300 mb-2">
+                Select File <span className="text-red-400">*</span>
               </label>
-              <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg hover:border-red-700 transition-colors">
+              <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-600 border-dashed rounded-lg hover:border-red-700 transition-colors">
                 <div className="space-y-2 text-center">
                   <svg
                     className="mx-auto h-12 w-12 text-gray-400"
@@ -153,10 +153,10 @@ export default function AdminDocumentUpload() {
                       strokeLinejoin="round"
                     />
                   </svg>
-                  <div className="flex text-sm text-gray-600">
+                  <div className="flex text-sm text-gray-400">
                     <label
                       htmlFor="file"
-                      className="relative cursor-pointer bg-white rounded-md font-semibold text-red-700 hover:text-red-800 focus-within:outline-none"
+                      className="relative cursor-pointer bg-gray-800 rounded-md font-semibold text-red-700 hover:text-red-300 focus-within:outline-none"
                     >
                       <span>Upload a file</span>
                       <input
@@ -170,7 +170,7 @@ export default function AdminDocumentUpload() {
                     </label>
                     <p className="pl-1">or drag and drop</p>
                   </div>
-                  <p className="text-xs text-gray-500">
+                  <p className="text-xs text-gray-400">
                     PDF, DOC, DOCX, XLS, XLSX, PPT, PPTX up to 50MB
                   </p>
                 </div>
@@ -178,7 +178,7 @@ export default function AdminDocumentUpload() {
 
               {/* Selected File Info */}
               {file && (
-                <div className="mt-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                <div className="mt-4 p-4 bg-gray-800 rounded-lg border border-gray-700">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <svg
@@ -195,8 +195,8 @@ export default function AdminDocumentUpload() {
                         />
                       </svg>
                       <div>
-                        <p className="text-sm font-semibold text-gray-900">{file.name}</p>
-                        <p className="text-xs text-gray-500">{formatFileSize(file.size)}</p>
+                        <p className="text-sm font-semibold text-white">{file.name}</p>
+                        <p className="text-xs text-gray-400">{formatFileSize(file.size)}</p>
                       </div>
                     </div>
                     <button
@@ -208,7 +208,7 @@ export default function AdminDocumentUpload() {
                           fileInput.value = ''
                         }
                       }}
-                      className="text-red-600 hover:text-red-800"
+                      className="text-red-400 hover:text-red-300"
                       disabled={isUploading}
                     >
                       <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -265,7 +265,7 @@ export default function AdminDocumentUpload() {
                 className={`p-4 rounded-lg ${
                   messageType === 'success'
                     ? 'bg-green-50 border border-green-200 text-green-800'
-                    : 'bg-red-50 border border-red-200 text-red-800'
+                    : 'bg-red-900/20 border border-red-800 text-red-300'
                 }`}
               >
                 <div className="flex items-start gap-3">
@@ -285,7 +285,7 @@ export default function AdminDocumentUpload() {
                     </svg>
                   ) : (
                     <svg
-                      className="h-5 w-5 text-red-600 flex-shrink-0 mt-0.5"
+                      className="h-5 w-5 text-red-400 flex-shrink-0 mt-0.5"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"

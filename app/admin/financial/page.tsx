@@ -126,9 +126,10 @@ export default function FinancialDashboardPage() {
   if (loading) {
     return (
       <div className="space-y-4">
-        <h1 className="text-3xl font-bold text-gray-900">Financial Overview</h1>
-        <div className="bg-white rounded-lg shadow p-6 text-center">
-          <p className="text-gray-600">Loading financial data...</p>
+        <h1 className="text-3xl font-bold text-primary">Financial Overview</h1>
+        <div className="card-light p-6 text-center">
+          <div className="loading-spinner mb-4 mx-auto"></div>
+          <p className="text-secondary">Loading financial data...</p>
         </div>
       </div>
     )
@@ -137,9 +138,9 @@ export default function FinancialDashboardPage() {
   if (error || !metrics) {
     return (
       <div className="space-y-4">
-        <h1 className="text-3xl font-bold text-gray-900">Financial Overview</h1>
-        <div className="bg-red-50 border border-red-200 rounded-lg p-4">
-          <p className="text-sm text-red-700">{error || 'Failed to load data'}</p>
+        <h1 className="text-3xl font-bold text-primary">Financial Overview</h1>
+        <div className="alert-error">
+          {error || 'Failed to load data'}
         </div>
       </div>
     )
@@ -154,76 +155,60 @@ export default function FinancialDashboardPage() {
     <div className="space-y-8">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">Financial Overview</h1>
-        <p className="text-gray-600">Platform revenue, contractor payouts, and profitability</p>
+        <h1 className="text-3xl font-bold text-primary mb-2">Financial Overview</h1>
+        <p className="text-secondary">Platform revenue, contractor payouts, and profitability</p>
       </div>
 
       {/* Key Metrics */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {/* Total Revenue */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-          <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-2">
-            Total Revenue
-          </p>
+        <div className="stat-card">
+          <p className="stat-label">Total Revenue</p>
           <p className="text-3xl font-bold text-green-600 mb-2">
             {formatCurrency(metrics.totalRevenue)}
           </p>
-          <p className="text-xs text-gray-600">
-            +{formatCurrency(metrics.pendingRevenue)} pending
-          </p>
+          <p className="stat-subtext">+{formatCurrency(metrics.pendingRevenue)} pending</p>
         </div>
 
         {/* Total Payouts */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-          <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-2">
-            Contractor Payouts
-          </p>
+        <div className="stat-card">
+          <p className="stat-label">Contractor Payouts</p>
           <p className="text-3xl font-bold text-orange-600 mb-2">
             {formatCurrency(metrics.totalPayouts)}
           </p>
-          <p className="text-xs text-gray-600">
-            +{formatCurrency(metrics.pendingPayouts)} pending
-          </p>
+          <p className="stat-subtext">+{formatCurrency(metrics.pendingPayouts)} pending</p>
         </div>
 
         {/* Net Profit */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-          <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-2">
-            Net Profit
-          </p>
-          <p className={`text-3xl font-bold mb-2 ${metrics.netProfit >= 0 ? 'text-blue-600' : 'text-red-600'}`}>
+        <div className="stat-card">
+          <p className="stat-label">Net Profit</p>
+          <p className={`text-3xl font-bold mb-2 ${metrics.netProfit >= 0 ? 'text-blue-600 : 'text-red-400'}`}>
             {formatCurrency(metrics.netProfit)}
           </p>
-          <p className="text-xs text-gray-600">
-            {marginPercent}% margin
-          </p>
+          <p className="stat-subtext">{marginPercent}% margin</p>
         </div>
 
-        {/* Profitability */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-          <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-2">
-            Active Projects
-          </p>
-          <p className="text-3xl font-bold text-gray-900 mb-2">
+        {/* Active Projects */}
+        <div className="stat-card">
+          <p className="stat-label">Active Projects</p>
+          <p className="text-3xl font-bold text-primary mb-2">
             {metrics.projectCount}
           </p>
-          <p className="text-xs text-gray-600">
-            {metrics.activeContractors} active contractors
-          </p>
+          <p className="stat-subtext">{metrics.activeContractors} active contractors</p>
         </div>
       </div>
 
       {/* Revenue Breakdown */}
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-        <h2 className="text-lg font-semibold text-gray-900 mb-4">Revenue Summary</h2>
+      <div className="card-light p-6">
+        <h2 className="text-lg font-semibold text-primary mb-4">Revenue Summary</h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div>
-            <p className="text-sm text-gray-600 mb-2">Total Revenue</p>
-            <p className="text-2xl font-bold text-gray-900">
+            <p className="text-sm text-secondary mb-2">Total Revenue</p>
+            <p className="text-2xl font-bold text-primary">
               {formatCurrency(metrics.totalRevenue)}
             </p>
-            <div className="mt-4 w-full bg-gray-200 rounded-full h-2">
+            <div className="mt-4 w-full bg-gray-300 rounded-full h-2">
               <div
                 className="bg-green-600 h-2 rounded-full"
                 style={{
@@ -237,11 +222,11 @@ export default function FinancialDashboardPage() {
           </div>
 
           <div>
-            <p className="text-sm text-gray-600 mb-2">Contractor Costs</p>
-            <p className="text-2xl font-bold text-gray-900">
+            <p className="text-sm text-secondary mb-2">Contractor Costs</p>
+            <p className="text-2xl font-bold text-primary">
               {formatCurrency(metrics.totalPayouts)}
             </p>
-            <div className="mt-4 w-full bg-gray-200 rounded-full h-2">
+            <div className="mt-4 w-full bg-gray-300 rounded-full h-2">
               <div
                 className="bg-orange-600 h-2 rounded-full"
                 style={{
@@ -255,11 +240,11 @@ export default function FinancialDashboardPage() {
           </div>
 
           <div>
-            <p className="text-sm text-gray-600 mb-2">Net Profit</p>
-            <p className={`text-2xl font-bold ${metrics.netProfit >= 0 ? 'text-blue-600' : 'text-red-600'}`}>
+            <p className="text-sm text-secondary mb-2">Net Profit</p>
+            <p className={`text-2xl font-bold ${metrics.netProfit >= 0 ? 'text-blue-600 : 'text-red-400'}`}>
               {formatCurrency(metrics.netProfit)}
             </p>
-            <div className="mt-4 w-full bg-gray-200 rounded-full h-2">
+            <div className="mt-4 w-full bg-gray-300 rounded-full h-2">
               <div
                 className={`h-2 rounded-full ${metrics.netProfit >= 0 ? 'bg-blue-600' : 'bg-red-600'}`}
                 style={{
@@ -277,28 +262,28 @@ export default function FinancialDashboardPage() {
       {/* Quick Links */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Link href="/admin/invoices">
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow cursor-pointer">
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">
+          <div className="card-light p-6 hover:shadow-md transition-shadow cursor-pointer">
+            <h3 className="text-lg font-semibold text-primary mb-2">
               Invoices & Revenue
             </h3>
-            <p className="text-sm text-gray-600 mb-4">
+            <p className="text-sm text-secondary mb-4">
               View and manage all client invoices and revenue tracking
             </p>
-            <span className="text-red-600 hover:text-red-700 font-medium text-sm">
+            <span className="text-red-400 hover:text-red-700:text-red-300 font-medium text-sm">
               Manage Invoices →
             </span>
           </div>
         </Link>
 
         <Link href="/admin/payments">
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow cursor-pointer">
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">
+          <div className="card-light p-6 hover:shadow-md transition-shadow cursor-pointer">
+            <h3 className="text-lg font-semibold text-primary mb-2">
               Contractor Payouts
             </h3>
-            <p className="text-sm text-gray-600 mb-4">
+            <p className="text-sm text-secondary mb-4">
               Process and track batch payments to contractors
             </p>
-            <span className="text-red-600 hover:text-red-700 font-medium text-sm">
+            <span className="text-red-400 hover:text-red-700:text-red-300 font-medium text-sm">
               Manage Payouts →
             </span>
           </div>

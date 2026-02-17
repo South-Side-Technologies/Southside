@@ -77,9 +77,9 @@ export default function ClientDetail() {
       case 'resolved':
         return 'bg-green-100 text-green-700'
       case 'closed':
-        return 'bg-gray-100 text-gray-700'
+        return 'bg-gray-800 text-gray-300'
       default:
-        return 'bg-gray-100 text-gray-700'
+        return 'bg-gray-800 text-gray-300'
     }
   }
 
@@ -94,7 +94,7 @@ export default function ClientDetail() {
       case 'urgent':
         return 'bg-red-200 text-red-900'
       default:
-        return 'bg-gray-100 text-gray-700'
+        return 'bg-gray-800 text-gray-300'
     }
   }
 
@@ -107,7 +107,7 @@ export default function ClientDetail() {
   }
 
   if (loading) return <div className="text-center py-8">Loading client...</div>
-  if (error) return <div className="text-red-600 p-4 bg-red-50 rounded-lg">{error}</div>
+  if (error) return <div className="text-red-400 p-4 bg-red-900/20 rounded-lg">{error}</div>
   if (!client) return <div className="text-center py-8">Client not found</div>
 
   return (
@@ -117,13 +117,13 @@ export default function ClientDetail() {
       </Link>
 
       {/* Client Header */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-8">
+      <div className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 p-6 mb-8">
         <div className="flex items-start justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">{client.name || 'N/A'}</h1>
-            <p className="text-gray-600">{client.email}</p>
+            <h1 className="text-3xl font-bold text-white mb-2">{client.name || 'N/A'}</h1>
+            <p className="text-gray-400">{client.email}</p>
             {client.companyName && (
-              <p className="text-gray-600 mt-1">Company: {client.companyName}</p>
+              <p className="text-gray-400 mt-1">Company: {client.companyName}</p>
             )}
           </div>
           <div className="flex gap-2">
@@ -138,35 +138,35 @@ export default function ClientDetail() {
             )}
           </div>
         </div>
-        <p className="text-gray-600 text-sm mt-4">Member since {formatDate(client.createdAt)}</p>
+        <p className="text-gray-400 text-sm mt-4">Member since {formatDate(client.createdAt)}</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Projects Section */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-          <div className="px-6 py-4 border-b border-gray-200 bg-gray-50">
-            <h2 className="text-lg font-semibold text-gray-900">
+        <div className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 overflow-hidden">
+          <div className="px-6 py-4 border-b border-gray-700 bg-gray-800">
+            <h2 className="text-lg font-semibold text-white">
               Projects ({client.projects.length})
             </h2>
           </div>
 
           <div className="divide-y divide-gray-200">
             {client.projects.length === 0 ? (
-              <div className="p-6 text-center text-gray-500">
+              <div className="p-6 text-center text-gray-400">
                 No projects assigned yet
               </div>
             ) : (
               client.projects.map((project) => (
-                <div key={project.id} className="p-6 hover:bg-gray-50 transition-colors cursor-pointer"
+                <div key={project.id} className="p-6 hover:bg-gray-800 transition-colors cursor-pointer"
                   onClick={() => window.location.href = `/admin/projects/${project.id}/edit`}>
                   <div className="flex items-start justify-between mb-2">
-                    <h3 className="font-semibold text-gray-900">{project.name}</h3>
+                    <h3 className="font-semibold text-white">{project.name}</h3>
                     <span className={`inline-block px-3 py-1 text-xs font-semibold rounded-full ${getStatusBadgeColor(project.status)}`}>
                       {formatStatus(project.status)}
                     </span>
                   </div>
                   {project.description && (
-                    <p className="text-sm text-gray-600 mb-3 line-clamp-2">{project.description}</p>
+                    <p className="text-sm text-gray-400 mb-3 line-clamp-2">{project.description}</p>
                   )}
                   <div className="flex items-center gap-2 mb-2">
                     <div className="flex-1 bg-gray-200 rounded-full h-2">
@@ -175,9 +175,9 @@ export default function ClientDetail() {
                         style={{ width: `${project.progress}%` }}
                       ></div>
                     </div>
-                    <span className="text-sm text-gray-600">{project.progress}%</span>
+                    <span className="text-sm text-gray-400">{project.progress}%</span>
                   </div>
-                  <p className="text-xs text-gray-500">
+                  <p className="text-xs text-gray-400">
                     {project.startDate && `Start: ${formatDate(project.startDate)}`}
                   </p>
                 </div>
@@ -187,26 +187,26 @@ export default function ClientDetail() {
         </div>
 
         {/* Support Tickets Section */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-          <div className="px-6 py-4 border-b border-gray-200 bg-gray-50">
-            <h2 className="text-lg font-semibold text-gray-900">
+        <div className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 overflow-hidden">
+          <div className="px-6 py-4 border-b border-gray-700 bg-gray-800">
+            <h2 className="text-lg font-semibold text-white">
               Support Tickets ({client.supportTickets.length})
             </h2>
           </div>
 
           <div className="divide-y divide-gray-200">
             {client.supportTickets.length === 0 ? (
-              <div className="p-6 text-center text-gray-500">
+              <div className="p-6 text-center text-gray-400">
                 No support tickets yet
               </div>
             ) : (
               client.supportTickets.map((ticket) => (
-                <div key={ticket.id} className="p-6 hover:bg-gray-50 transition-colors cursor-pointer"
+                <div key={ticket.id} className="p-6 hover:bg-gray-800 transition-colors cursor-pointer"
                   onClick={() => window.location.href = `/admin/tickets/${ticket.id}`}>
                   <div className="flex items-start justify-between mb-2">
                     <div>
-                      <p className="font-semibold text-gray-900">#{ticket.ticketNumber}</p>
-                      <h3 className="text-sm text-gray-700 mt-1 font-medium">{ticket.subject}</h3>
+                      <p className="font-semibold text-white">#{ticket.ticketNumber}</p>
+                      <h3 className="text-sm text-gray-300 mt-1 font-medium">{ticket.subject}</h3>
                     </div>
                     <span className={`inline-block px-3 py-1 text-xs font-semibold rounded-full ${getStatusBadgeColor(ticket.status)}`}>
                       {formatStatus(ticket.status)}
@@ -216,7 +216,7 @@ export default function ClientDetail() {
                     <span className={`inline-block px-2 py-1 text-xs font-semibold rounded ${getPriorityBadgeColor(ticket.priority)}`}>
                       {formatStatus(ticket.priority)}
                     </span>
-                    <span className="text-xs text-gray-500">
+                    <span className="text-xs text-gray-400">
                       {formatDate(ticket.createdAt)}
                     </span>
                   </div>

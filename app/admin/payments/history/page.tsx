@@ -59,9 +59,9 @@ export default function AdminPaymentHistoryPage() {
       case 'pending':
         return 'bg-yellow-100 text-yellow-800'
       case 'failed':
-        return 'bg-red-100 text-red-800'
+        return 'bg-red-100 text-red-300'
       default:
-        return 'bg-gray-100 text-gray-800'
+        return 'bg-gray-800 text-gray-200'
     }
   }
 
@@ -80,7 +80,7 @@ export default function AdminPaymentHistoryPage() {
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="text-center">
           <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-red-700 border-r-transparent mb-4"></div>
-          <p className="text-gray-600">Loading payment history...</p>
+          <p className="text-gray-400">Loading payment history...</p>
         </div>
       </div>
     )
@@ -90,8 +90,8 @@ export default function AdminPaymentHistoryPage() {
     <>
       <div className="mb-8 flex items-center justify-between">
         <div>
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">Payment History</h1>
-          <p className="text-gray-600">View all processed contractor payments</p>
+          <h1 className="text-4xl font-bold text-white mb-2">Payment History</h1>
+          <p className="text-gray-400">View all processed contractor payments</p>
         </div>
         <Link
           href="/admin/payments"
@@ -105,7 +105,7 @@ export default function AdminPaymentHistoryPage() {
       </div>
 
       {error && (
-        <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+        <div className="mb-6 p-4 bg-red-900/20 border border-red-800 rounded-lg">
           <p className="text-red-700 text-sm">{error}</p>
         </div>
       )}
@@ -113,19 +113,19 @@ export default function AdminPaymentHistoryPage() {
       {/* Summary Cards */}
       {payouts.length > 0 && (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-            <p className="text-gray-600 text-sm font-medium">Total Completed</p>
+          <div className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 p-6">
+            <p className="text-gray-400 text-sm font-medium">Total Completed</p>
             <p className="text-3xl font-bold text-green-700 mt-2">{formatCurrency(getTotalAmount())}</p>
           </div>
 
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-            <p className="text-gray-600 text-sm font-medium">Total Payouts</p>
-            <p className="text-3xl font-bold text-gray-900 mt-2">{payouts.length}</p>
+          <div className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 p-6">
+            <p className="text-gray-400 text-sm font-medium">Total Payouts</p>
+            <p className="text-3xl font-bold text-white mt-2">{payouts.length}</p>
           </div>
 
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-            <p className="text-gray-600 text-sm font-medium">Unique Contractors</p>
-            <p className="text-3xl font-bold text-gray-900 mt-2">
+          <div className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 p-6">
+            <p className="text-gray-400 text-sm font-medium">Unique Contractors</p>
+            <p className="text-3xl font-bold text-white mt-2">
               {new Set(payouts.map((p) => p.contractorId)).size}
             </p>
           </div>
@@ -142,7 +142,7 @@ export default function AdminPaymentHistoryPage() {
               className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                 statusFilter === status
                   ? 'bg-red-700 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
               }`}
             >
               {status === 'all' ? 'All' : formatStatus(status)}
@@ -152,55 +152,55 @@ export default function AdminPaymentHistoryPage() {
       </div>
 
       {payouts.length === 0 ? (
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 text-center">
+        <div className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 p-8 text-center">
           <svg className="h-12 w-12 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">No Payment History</h3>
-          <p className="text-gray-600">No payouts have been processed yet</p>
+          <h3 className="text-lg font-semibold text-white mb-2">No Payment History</h3>
+          <p className="text-gray-400">No payouts have been processed yet</p>
         </div>
       ) : (
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+        <div className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="bg-gray-50 border-b border-gray-200">
+              <thead className="bg-gray-800 border-b border-gray-700">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
                     Date
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
                     Contractor
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
                     Projects
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
                     Amount
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
                     Status
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
                     Transfer ID
                   </th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
                 {payouts.map((payout) => (
-                  <tr key={payout.id} className="hover:bg-gray-50 transition">
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                  <tr key={payout.id} className="hover:bg-gray-800 transition">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-white">
                       {formatDate(payout.processedAt)}
                     </td>
                     <td className="px-6 py-4">
                       <div>
-                        <p className="font-medium text-gray-900">{payout.contractorName}</p>
-                        <p className="text-sm text-gray-600">{payout.contractorEmail}</p>
+                        <p className="font-medium text-white">{payout.contractorName}</p>
+                        <p className="text-sm text-gray-400">{payout.contractorEmail}</p>
                       </div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-400">
                       {payout.projectCount}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-white">
                       {formatCurrency(payout.amount)}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
@@ -213,7 +213,7 @@ export default function AdminPaymentHistoryPage() {
                         {formatStatus(payout.status)}
                       </span>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 font-mono">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-400 font-mono">
                       {payout.stripeTransferId ? (
                         <code title={payout.stripeTransferId} className="text-xs">
                           {payout.stripeTransferId.substring(0, 12)}...
