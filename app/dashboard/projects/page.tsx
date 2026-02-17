@@ -66,29 +66,29 @@ export default async function ProjectsPage() {
     <div>
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-3xl md:text-4xl font-bold text-black mb-2 font-playfair">
+        <h1 className="text-3xl md:text-4xl font-bold text-primary mb-2 font-playfair">
           Projects
         </h1>
-        <p className="text-gray-600 text-lg">
+        <p className="text-secondary text-lg">
           Track the progress of your ongoing and completed projects.
         </p>
       </div>
 
       {/* Error State */}
       {error && (
-        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6">
+        <div className="alert-error mb-6">
           {error}
         </div>
       )}
 
       {/* Empty State */}
       {projects.length === 0 && !error && (
-        <div className="bg-white rounded-xl p-12 shadow-sm border border-gray-200 text-center">
+        <div className="card-light text-center p-12">
           <div className="text-6xl mb-4">📋</div>
-          <h2 className="text-2xl font-bold text-black mb-2 font-playfair">
+          <h2 className="text-2xl font-bold text-primary mb-2 font-playfair">
             No Projects Yet
           </h2>
-          <p className="text-gray-600">
+          <p className="text-secondary">
             Your projects will appear here once we begin working together.
           </p>
         </div>
@@ -97,7 +97,7 @@ export default async function ProjectsPage() {
       {/* Active Projects */}
       {activeProjects.length > 0 && (
         <div className="mb-10">
-          <h2 className="text-2xl font-bold text-black mb-4 font-playfair">
+          <h2 className="text-2xl font-bold text-primary mb-4 font-playfair">
             Active Projects ({activeProjects.length})
           </h2>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -111,7 +111,7 @@ export default async function ProjectsPage() {
       {/* Completed Projects */}
       {completedProjects.length > 0 && (
         <div>
-          <h2 className="text-2xl font-bold text-black mb-4 font-playfair">
+          <h2 className="text-2xl font-bold text-primary mb-4 font-playfair">
             Completed Projects ({completedProjects.length})
           </h2>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

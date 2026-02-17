@@ -54,7 +54,7 @@ export default function CheckoutSuccessPage() {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-green-50 to-blue-50">
-      <div className="bg-white rounded-lg shadow-lg p-8 max-w-md w-full text-center">
+      <div className="bg-gray-800 rounded-lg shadow-lg p-8 max-w-md w-full text-center">
         {status === 'checking' && (
           <>
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-100 mb-6">
@@ -65,7 +65,7 @@ export default function CheckoutSuccessPage() {
             <h2 className="text-2xl font-bold text-gray-900 mb-2">
               Processing Payment
             </h2>
-            <p className="text-gray-600">
+            <p className="text-gray-400">
               Please wait while we confirm your payment...
             </p>
           </>
@@ -91,8 +91,8 @@ export default function CheckoutSuccessPage() {
             <h2 className="text-2xl font-bold text-gray-900 mb-2">
               Payment Successful
             </h2>
-            <p className="text-gray-600 mb-6">{message}</p>
-            <p className="text-sm text-gray-500 mb-6">
+            <p className="text-gray-400 mb-6">{message}</p>
+            <p className="text-sm text-gray-400 mb-6">
               Redirecting to billing dashboard...
             </p>
             <Link
@@ -124,11 +124,11 @@ export default function CheckoutSuccessPage() {
             <h2 className="text-2xl font-bold text-gray-900 mb-2">
               Payment Failed
             </h2>
-            <p className="text-gray-600 mb-6">{message}</p>
+            <p className="text-gray-400 mb-6">{message}</p>
             <div className="flex gap-3">
               <Link
                 href="/dashboard/billing"
-                className="flex-1 px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 font-medium transition-colors"
+                className="flex-1 px-4 py-2 bg-gray-200 text-gray-300 rounded-lg hover:bg-gray-300 font-medium transition-colors"
               >
                 Back to Billing
               </Link>

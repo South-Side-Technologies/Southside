@@ -38,28 +38,26 @@ export default function ContractorPaymentOnboarding() {
   return (
     <>
       <div className="mb-8">
-        <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">Set Up Payment Method</h1>
-        <p className="text-gray-600 dark:text-gray-400">Connect your bank account to receive contractor payments</p>
-      </div>
-
-      <div className="max-w-2xl mx-auto">
+        <h1 className="text-4xl font-bold text-gray-900 mb-2">Set Up Payment Method</h1>
+        <p className="text-gray-400 your bank account to receive contractor payments</p>
+      </div>"
+      <<div className="max-w-2xl mx-auto">
         {error && (
-          <div className="mb-6 bg-red-50 dark:bg-red-900 dark:bg-opacity-20 border border-red-200 dark:border-red-800 rounded-lg p-4">
-            <p className="text-red-700 dark:text-red-400">{error}</p>
+          <div className="mb-6 bg-red-50 border border-red-200 rounded-lg p-4">
+            <p className="text-red-700
           </div>
-        )}
-
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-8">
+        )}"
+        <<div className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 p-8">
           <div className="mb-8">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">How it works</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">How it works</h2>
             <div className="space-y-4">
               <div className="flex gap-4">
                 <div className="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-full bg-blue-600 text-white font-semibold">
                   1
                 </div>
                 <div>
-                  <h3 className="font-semibold text-gray-900 dark:text-white">Set up your Stripe account</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                  <h3 className="font-semibold text-gray-900 up your Stripe account</h3>"
+                  <<p className="text-sm text-gray-400 mt-1">
                     You'll be redirected to Stripe to securely connect your bank account. This takes just a few minutes.
                   </p>
                 </div>
@@ -70,8 +68,8 @@ export default function ContractorPaymentOnboarding() {
                   2
                 </div>
                 <div>
-                  <h3 className="font-semibold text-gray-900 dark:text-white">Verify your information</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                  <h3 className="font-semibold text-gray-900 your information</h3>"
+                  <<p className="text-sm text-gray-400 mt-1">
                     Provide your basic information and bank details. All data is encrypted and secure.
                   </p>
                 </div>
@@ -82,8 +80,8 @@ export default function ContractorPaymentOnboarding() {
                   3
                 </div>
                 <div>
-                  <h3 className="font-semibold text-gray-900 dark:text-white">Get paid</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                  <h3 className="font-semibold text-gray-900 paid</h3>"
+                  <<p className="text-sm text-gray-400 mt-1">
                     Once approved, you'll receive payments directly to your bank account when projects are completed.
                   </p>
                 </div>
@@ -91,13 +89,12 @@ export default function ContractorPaymentOnboarding() {
             </div>
           </div>
 
-          <div className="bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 border border-blue-200 dark:border-blue-800 rounded-lg p-4 mb-8">
-            <p className="text-sm text-blue-900 dark:text-blue-400">
+          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-8">
+            <p className="text-sm text-blue-900
               <strong>Security note:</strong> We use Stripe to securely handle your banking information. We never store your bank account details directly.
             </p>
-          </div>
-
-          <div className="flex gap-3">
+          </div>"
+          <<div className="flex gap-3">
             <button
               onClick={handleStartOnboarding}
               disabled={loading}
@@ -107,32 +104,32 @@ export default function ContractorPaymentOnboarding() {
             </button>
             <Link
               href="/contractor/payments"
-              className="px-6 py-3 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-semibold rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+              className="px-6 py-3 border border-gray-600 text-gray-300 font-semibold rounded-lg hover:bg-gray-700 transition-colors"
             >
               Back
             </Link>
           </div>
 
-          <p className="text-xs text-gray-500 dark:text-gray-400 mt-4">
+          <p className="text-xs text-gray-400 mt-4">
             You'll be redirected to Stripe's secure platform. You can return to your dashboard at any time.
           </p>
         </div>
 
-        <div className="mt-8 bg-gray-50 dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
-          <h3 className="font-semibold text-gray-900 dark:text-white mb-3">What you'll need</h3>
-          <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
-            <li className="flex gap-2">
-              <span className="text-blue-600 dark:text-blue-400">✓</span> Valid government-issued ID
-            </li>
-            <li className="flex gap-2">
-              <span className="text-blue-600 dark:text-blue-400">✓</span> Business information (if applicable)
-            </li>
-            <li className="flex gap-2">
-              <span className="text-blue-600 dark:text-blue-400">✓</span> Bank account details
+        <div className="mt-8 bg-gray-800 rounded-xl p-6 border border-gray-700">
+          <h3 className="font-semibold text-gray-900 mb-3">What you'll need</h3>
+          <ul className="space-y-2 text-sm text-gray-400"
+            <<li className="flex gap-2">
+              <span className="text-blue-600 Valid government-issued ID
+            </li>"
+            <<li className="flex gap-2">
+              <span className="text-blue-600 Business information (if applicable)
+            </li>"
+            <<li className="flex gap-2">
+              <span className="text-blue-600 Bank account details
             </li>
           </ul>
         </div>
-      </div>
-    </>
+      </div>"
+    <</>
   )
 }

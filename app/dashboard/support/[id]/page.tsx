@@ -56,9 +56,9 @@ export default function TicketDetail() {
       case 'resolved':
         return 'bg-green-100 text-green-700'
       case 'closed':
-        return 'bg-gray-100 text-gray-700'
+        return 'bg-gray-800 text-gray-300'
       default:
-        return 'bg-gray-100 text-gray-700'
+        return 'bg-gray-800 text-gray-300'
     }
   }
 
@@ -73,7 +73,7 @@ export default function TicketDetail() {
       case 'urgent':
         return 'bg-red-200 text-red-900'
       default:
-        return 'bg-gray-100 text-gray-700'
+        return 'bg-gray-800 text-gray-300'
     }
   }
 
@@ -105,11 +105,11 @@ export default function TicketDetail() {
         {/* Main Content */}
         <div className="lg:col-span-2">
           {/* Ticket Header */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+          <div className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 p-6 mb-6">
             <div className="flex items-start justify-between mb-4">
               <div>
                 <h2 className="text-2xl font-bold text-gray-900">{ticket.subject}</h2>
-                <p className="text-gray-600 text-sm mt-1">{formatDate(ticket.createdAt)}</p>
+                <p className="text-gray-400 text-sm mt-1">{formatDate(ticket.createdAt)}</p>
               </div>
               <div className="flex gap-2">
                 <span className={`inline-block px-3 py-1 text-xs font-semibold rounded-full ${getStatusBadgeColor(ticket.status)}`}>
@@ -123,7 +123,7 @@ export default function TicketDetail() {
 
             {/* Description */}
             {ticket.description && (
-              <div className="text-gray-700 whitespace-pre-wrap">{ticket.description}</div>
+              <div className="text-gray-300 whitespace-pre-wrap">{ticket.description}</div>
             )}
           </div>
 
@@ -136,45 +136,45 @@ export default function TicketDetail() {
         {/* Sidebar */}
         <div className="space-y-6">
           {/* Ticket Info */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <div className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 p-6">
             <h3 className="font-semibold text-gray-900 mb-4">Ticket Details</h3>
             <div className="space-y-3 text-sm">
               <div>
-                <p className="text-gray-600">Status</p>
+                <p className="text-gray-400">Status</p>
                 <p className="font-medium text-gray-900">{formatStatus(ticket.status)}</p>
               </div>
               <div>
-                <p className="text-gray-600">Priority</p>
+                <p className="text-gray-400">Priority</p>
                 <p className="font-medium text-gray-900">{formatStatus(ticket.priority)}</p>
               </div>
               <div>
-                <p className="text-gray-600">Created</p>
+                <p className="text-gray-400">Created</p>
                 <p className="font-medium text-gray-900">{formatDate(ticket.createdAt)}</p>
               </div>
               <div>
-                <p className="text-gray-600">Last Updated</p>
+                <p className="text-gray-400">Last Updated</p>
                 <p className="font-medium text-gray-900">{formatDate(ticket.updatedAt)}</p>
               </div>
             </div>
           </div>
 
           {/* Support Info */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <div className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 p-6">
             <h3 className="font-semibold text-gray-900 mb-4">Support Information</h3>
             <div className="space-y-3 text-sm">
               <div>
-                <p className="text-gray-600">Contact Email</p>
+                <p className="text-gray-400">Contact Email</p>
                 <p className="font-medium text-gray-900 break-all">{ticket.user.email}</p>
               </div>
               {ticket.user.name && (
                 <div>
-                  <p className="text-gray-600">Contact Name</p>
+                  <p className="text-gray-400">Contact Name</p>
                   <p className="font-medium text-gray-900">{ticket.user.name}</p>
                 </div>
               )}
               {ticket.user.companyName && (
                 <div>
-                  <p className="text-gray-600">Company</p>
+                  <p className="text-gray-400">Company</p>
                   <p className="font-medium text-gray-900">{ticket.user.companyName}</p>
                 </div>
               )}

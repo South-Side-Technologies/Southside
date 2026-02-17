@@ -32,23 +32,23 @@ function formatCurrency(amount: number): string {
 export default function InvoiceTable({ invoices }: InvoiceTableProps) {
   if (invoices.length === 0) {
     return (
-      <div className="bg-white rounded-xl p-8 shadow-sm border border-gray-200 text-center">
-        <p className="text-gray-500 text-lg">No invoices yet</p>
+      <div className="bg-gray-800 rounded-xl p-8 shadow-sm border border-gray-700 text-center">
+        <p className="text-gray-400 text-lg">No invoices yet</p>
         <p className="text-gray-400 text-sm mt-2">Invoices will appear here when available</p>
       </div>
     )
   }
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+    <div className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 overflow-hidden">
       {/* Mobile View - Cards */}
       <div className="md:hidden divide-y divide-gray-200">
         {invoices.map((invoice) => (
           <div key={invoice.id} className="p-4">
             <div className="flex items-start justify-between mb-3">
               <div>
-                <p className="font-mono text-sm text-gray-600 mb-1">{invoice.invoiceNumber}</p>
-                <p className="text-lg font-bold text-black">{formatCurrency(invoice.amount)}</p>
+                <p className="font-mono text-sm text-gray-400 mb-1">{invoice.invoiceNumber}</p>
+                <p className="text-lg font-bold text-white">{formatCurrency(invoice.amount)}</p>
               </div>
               <span
                 className={`px-3 py-1 rounded-full text-xs font-semibold ${
@@ -58,7 +58,7 @@ export default function InvoiceTable({ invoices }: InvoiceTableProps) {
                 {statusLabels[invoice.status]}
               </span>
             </div>
-            <p className="text-sm text-gray-600 mb-3">{invoice.date}</p>
+            <p className="text-sm text-gray-400 mb-3">{invoice.date}</p>
             <a
               href={invoice.downloadUrl}
               download
@@ -73,22 +73,22 @@ export default function InvoiceTable({ invoices }: InvoiceTableProps) {
       {/* Desktop View - Table */}
       <div className="hidden md:block overflow-x-auto">
         <table className="w-full">
-          <thead className="bg-gray-50 border-b border-gray-200">
+          <thead className="bg-gray-800 border-b border-gray-700">
             <tr>
-              <th className="text-left py-4 px-6 text-sm font-semibold text-gray-700">Invoice #</th>
-              <th className="text-left py-4 px-6 text-sm font-semibold text-gray-700">Date</th>
-              <th className="text-left py-4 px-6 text-sm font-semibold text-gray-700">Amount</th>
-              <th className="text-left py-4 px-6 text-sm font-semibold text-gray-700">Status</th>
-              <th className="text-right py-4 px-6 text-sm font-semibold text-gray-700">Action</th>
+              <th className="text-left py-4 px-6 text-sm font-semibold text-gray-300">Invoice #</th>
+              <th className="text-left py-4 px-6 text-sm font-semibold text-gray-300">Date</th>
+              <th className="text-left py-4 px-6 text-sm font-semibold text-gray-300">Amount</th>
+              <th className="text-left py-4 px-6 text-sm font-semibold text-gray-300">Status</th>
+              <th className="text-right py-4 px-6 text-sm font-semibold text-gray-300">Action</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
             {invoices.map((invoice) => (
-              <tr key={invoice.id} className="hover:bg-gray-50 transition-colors">
+              <tr key={invoice.id} className="hover:bg-gray-800 transition-colors">
                 <td className="py-4 px-6">
                   <span className="font-mono text-sm text-gray-900">{invoice.invoiceNumber}</span>
                 </td>
-                <td className="py-4 px-6 text-sm text-gray-700">{invoice.date}</td>
+                <td className="py-4 px-6 text-sm text-gray-300">{invoice.date}</td>
                 <td className="py-4 px-6">
                   <span className="font-semibold text-gray-900">{formatCurrency(invoice.amount)}</span>
                 </td>

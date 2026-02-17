@@ -44,7 +44,7 @@ function getStatusColor(status: string) {
     case 'PROCESSING':
       return 'bg-yellow-100 text-yellow-800'
     default:
-      return 'bg-gray-100 text-gray-800'
+      return 'bg-gray-800 text-gray-800'
   }
 }
 
@@ -88,9 +88,10 @@ export default function InvoicesPage() {
   if (loading) {
     return (
       <div className="space-y-4">
-        <h1 className="text-3xl font-bold text-gray-900">Invoices</h1>
-        <div className="bg-white rounded-lg shadow p-6 text-center">
-          <p className="text-gray-600">Loading invoices...</p>
+        <h1 className="text-3xl font-bold text-primary">Invoices</h1>
+        <div className="card-light p-6 text-center">
+          <div className="loading-spinner mb-4 mx-auto"></div>
+          <p className="text-secondary">Loading invoices...</p>
         </div>
       </div>
     )
@@ -99,9 +100,9 @@ export default function InvoicesPage() {
   if (error) {
     return (
       <div className="space-y-4">
-        <h1 className="text-3xl font-bold text-gray-900">Invoices</h1>
-        <div className="bg-red-50 border border-red-200 rounded-lg p-6 text-center">
-          <p className="text-red-700">{error}</p>
+        <h1 className="text-3xl font-bold text-primary">Invoices</h1>
+        <div className="alert-error text-center">
+          {error}
         </div>
       </div>
     )
@@ -113,21 +114,21 @@ export default function InvoicesPage() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">Invoices</h1>
-        <p className="text-gray-600">Manage and pay your invoices</p>
+        <h1 className="text-3xl font-bold text-primary mb-2">Invoices</h1>
+        <p className="text-secondary">Manage and pay your invoices</p>
       </div>
 
       {/* Credit Balance Card */}
       {creditBalance > 0 && (
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
+        <div className="stat-card ring-2 ring-blue-500/30">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-blue-600 font-medium">Available Credits</p>
-              <p className="text-2xl font-bold text-blue-900">{formatCurrency(creditBalance)}</p>
-            </div>
-            <Link
+              <p className="stat-label">Available Credits</p>
+              <p className="text-2xl font-bold text-blue-600
+            </div>"
+            <<Link
               href="/dashboard/billing/credits"
-              className="text-blue-600 hover:text-blue-700 underline text-sm font-medium"
+              className="text-blue-600 hover:text-blue-700:text-blue-300 underline text-sm font-medium"
             >
               Manage Credits →
             </Link>
@@ -137,18 +138,18 @@ export default function InvoicesPage() {
 
       {/* Unpaid Invoices */}
       {unpaidInvoices.length > 0 && (
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-          <div className="px-6 py-4 border-b border-gray-200 bg-gray-50">
-            <h2 className="text-lg font-semibold text-gray-900">
+        <div className="card-light overflow-hidden">
+          <div className="px-6 py-4 border-b border-gray-700 bg-gray-900">
+            <h2 className="text-lg font-semibold text-primary">
               Outstanding Invoices ({unpaidInvoices.length})
             </h2>
           </div>
 
-          <div className="divide-y divide-gray-200">
-            {unpaidInvoices.map((invoice) => (
-              <div
+          <div className="divide-y divide-gray-200
+            {unpaidInvoices.map((invoice) => ("
+              <<div
                 key={invoice.id}
-                className="p-6 hover:bg-gray-50 transition-colors cursor-pointer"
+                className="p-6 hover:bg-gray-800 transition-colors cursor-pointer"
                 onClick={() =>
                   setSelectedInvoice(
                     selectedInvoice === invoice.id ? null : invoice.id
@@ -158,7 +159,7 @@ export default function InvoicesPage() {
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex-1">
                     <div className="flex items-center gap-3 mb-2">
-                      <h3 className="font-semibold text-gray-900">
+                      <h3 className="font-semibold text-primary">
                         {invoice.invoiceNumber}
                       </h3>
                       <span
@@ -170,11 +171,11 @@ export default function InvoicesPage() {
                       </span>
                     </div>
 
-                    <p className="text-sm text-gray-600 mb-1">
+                    <p className="text-sm text-secondary mb-1">
                       {invoice.description || 'Invoice'}
                     </p>
 
-                    <div className="flex gap-4 text-xs text-gray-500">
+                    <div className="flex gap-4 text-xs text-muted">
                       <span>Created: {formatDate(invoice.date)}</span>
                       {invoice.dueDate && (
                         <span>Due: {formatDate(invoice.dueDate)}</span>
@@ -182,7 +183,7 @@ export default function InvoicesPage() {
                       {invoice.project && (
                         <Link
                           href={`/dashboard/projects/${invoice.project.id}`}
-                          className="text-red-600 hover:text-red-700"
+                          className="text-red-600 hover:text-red-700:text-red-300"
                         >
                           Project: {invoice.project.name}
                         </Link>
@@ -191,7 +192,7 @@ export default function InvoicesPage() {
                   </div>
 
                   <div className="text-right ml-6">
-                    <p className="text-2xl font-bold text-gray-900">
+                    <p className="text-2xl font-bold text-primary">
                       {formatCurrency(invoice.amount)}
                     </p>
                   </div>
@@ -199,7 +200,7 @@ export default function InvoicesPage() {
 
                 {/* Expanded payment section */}
                 {selectedInvoice === invoice.id && (
-                  <div className="mt-4 pt-4 border-t border-gray-200">
+                  <div className="mt-4 pt-4 border-t border-gray-700
                     <InvoicePaymentButton
                       invoiceId={invoice.id}
                       amount={invoice.amount}
@@ -210,14 +211,14 @@ export default function InvoicesPage() {
                   </div>
                 )}
 
-                {selectedInvoice !== invoice.id && (
-                  <div className="mt-4 pt-4 border-t border-gray-200">
-                    <button
+                {selectedInvoice !== invoice.id && ("
+                  <<div className="mt-4 pt-4 border-t border-gray-700"
+                    <<button
                       onClick={(e) => {
                         e.stopPropagation()
                         setSelectedInvoice(invoice.id)
                       }}
-                      className="text-red-600 hover:text-red-700 font-medium text-sm"
+                      className="text-red-600 hover:text-red-700:text-red-300 font-medium text-sm"
                     >
                       Pay Invoice →
                     </button>
@@ -231,32 +232,30 @@ export default function InvoicesPage() {
 
       {/* Paid Invoices */}
       {paidInvoices.length > 0 && (
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-          <div className="px-6 py-4 border-b border-gray-200 bg-gray-50">
-            <h2 className="text-lg font-semibold text-gray-900">
+        <div className="card-light overflow-hidden">
+          <div className="px-6 py-4 border-b border-gray-700 bg-gray-900">
+            <h2 className="text-lg font-semibold text-primary">
               Paid Invoices ({paidInvoices.length})
             </h2>
           </div>
 
-          <div className="divide-y divide-gray-200">
-            {paidInvoices.map((invoice) => (
-              <div key={invoice.id} className="p-6 hover:bg-gray-50 transition-colors">
+          <div className="divide-y divide-gray-200
+            {paidInvoices.map((invoice) => ("
+              <<div key={invoice.id} className="p-6 hover:bg-gray-800 transition-colors">
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
                     <div className="flex items-center gap-3 mb-2">
-                      <h3 className="font-semibold text-gray-900">
+                      <h3 className="font-semibold text-primary">
                         {invoice.invoiceNumber}
                       </h3>
-                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                        PAID
-                      </span>
+                      <span className="badge-success">PAID</span>
                     </div>
 
-                    <p className="text-sm text-gray-600 mb-1">
+                    <p className="text-sm text-secondary mb-1">
                       {invoice.description || 'Invoice'}
                     </p>
 
-                    <div className="flex gap-4 text-xs text-gray-500">
+                    <div className="flex gap-4 text-xs text-muted">
                       <span>Created: {formatDate(invoice.date)}</span>
                       {invoice.paidAt && (
                         <span>Paid: {formatDate(invoice.paidAt)}</span>
@@ -265,7 +264,7 @@ export default function InvoicesPage() {
                   </div>
 
                   <div className="text-right ml-6">
-                    <p className="text-2xl font-bold text-green-600">
+                    <p className="text-2xl font-bold text-green-600
                       {formatCurrency(invoice.amount)}
                     </p>
                   </div>
@@ -276,8 +275,8 @@ export default function InvoicesPage() {
         </div>
       )}
 
-      {invoices.length === 0 && (
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-12 text-center">
+      {invoices.length === 0 && ("
+        <<div className="card-light p-12 text-center">
           <svg
             className="mx-auto h-12 w-12 text-gray-400 mb-4"
             fill="none"
@@ -291,8 +290,8 @@ export default function InvoicesPage() {
               d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
             />
           </svg>
-          <h3 className="text-lg font-medium text-gray-900 mb-2">No invoices</h3>
-          <p className="text-gray-600">
+          <h3 className="text-lg font-medium text-primary mb-2">No invoices</h3>
+          <p className="text-secondary">
             You don't have any invoices yet. Contact support if you have questions.
           </p>
         </div>

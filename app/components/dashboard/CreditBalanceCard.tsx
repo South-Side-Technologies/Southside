@@ -72,7 +72,7 @@ export default function CreditBalanceCard() {
 
   if (loading) {
     return (
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 animate-pulse">
+      <div className="bg-gray-800 rounded-lg shadow-sm border border-gray-700 p-6 animate-pulse">
         <div className="h-4 bg-gray-200 rounded w-1/3 mb-4"></div>
         <div className="h-8 bg-gray-200 rounded w-1/2 mb-4"></div>
       </div>
@@ -84,10 +84,10 @@ export default function CreditBalanceCard() {
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-      <div className="bg-gradient-to-r from-blue-50 to-indigo-50 px-6 py-4 border-b border-gray-200">
+    <div className="bg-gray-800 rounded-lg shadow-sm border border-gray-700 overflow-hidden">
+      <div className="bg-gradient-to-r from-blue-50 to-indigo-50 px-6 py-4 border-b border-gray-700">
         <h2 className="text-lg font-semibold text-gray-900">Service Credits</h2>
-        <p className="text-sm text-gray-600 mt-1">
+        <p className="text-sm text-gray-400 mt-1">
           Use credits to pay invoices instead of using a card
         </p>
       </div>
@@ -102,7 +102,7 @@ export default function CreditBalanceCard() {
         {/* Credit Balance Display */}
         <div className="grid grid-cols-3 gap-4">
           <div className="text-center">
-            <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-1">
+            <p className="text-xs font-medium text-gray-400 uppercase tracking-wider mb-1">
               Current Balance
             </p>
             <p className="text-2xl font-bold text-blue-600">
@@ -110,8 +110,8 @@ export default function CreditBalanceCard() {
             </p>
           </div>
 
-          <div className="text-center border-l border-r border-gray-200">
-            <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-1">
+          <div className="text-center border-l border-r border-gray-700">
+            <p className="text-xs font-medium text-gray-400 uppercase tracking-wider mb-1">
               Lifetime Purchased
             </p>
             <p className="text-2xl font-bold text-gray-900">
@@ -120,7 +120,7 @@ export default function CreditBalanceCard() {
           </div>
 
           <div className="text-center">
-            <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-1">
+            <p className="text-xs font-medium text-gray-400 uppercase tracking-wider mb-1">
               Lifetime Used
             </p>
             <p className="text-2xl font-bold text-gray-900">
@@ -149,13 +149,13 @@ export default function CreditBalanceCard() {
               {creditBalance.transactions.slice(0, 5).map((tx) => (
                 <div
                   key={tx.id}
-                  className="flex items-center justify-between p-3 bg-gray-50 rounded-lg"
+                  className="flex items-center justify-between p-3 bg-gray-800 rounded-lg"
                 >
                   <div className="flex-1">
                     <p className="text-sm font-medium text-gray-900">
                       {tx.description}
                     </p>
-                    <p className="text-xs text-gray-500 mt-1">
+                    <p className="text-xs text-gray-400 mt-1">
                       {new Date(tx.createdAt).toLocaleDateString()}
                     </p>
                   </div>
@@ -169,7 +169,7 @@ export default function CreditBalanceCard() {
                       {tx.type === 'DEDUCTION' ? '-' : '+'}
                       {formatCurrency(tx.amount)}
                     </p>
-                    <p className="text-xs text-gray-500 mt-1">
+                    <p className="text-xs text-gray-400 mt-1">
                       Balance: {formatCurrency(tx.balanceAfter)}
                     </p>
                   </div>
@@ -183,14 +183,14 @@ export default function CreditBalanceCard() {
       {/* Purchase Modal */}
       {showPurchaseModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg shadow-lg p-6 max-w-md w-full mx-4">
+          <div className="bg-gray-800 rounded-lg shadow-lg p-6 max-w-md w-full mx-4">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">
               Purchase Service Credits
             </h3>
 
             <div className="space-y-4 mb-6">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-300 mb-2">
                   Credit Amount
                 </label>
                 <div className="flex items-center gap-2">
@@ -200,11 +200,11 @@ export default function CreditBalanceCard() {
                     onChange={(e) => setPurchaseAmount(Number(e.target.value))}
                     min="1"
                     step="10"
-                    className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="flex-1 px-3 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
-                  <span className="text-sm text-gray-600">credits</span>
+                  <span className="text-sm text-gray-400">credits</span>
                 </div>
-                <p className="text-xs text-gray-500 mt-2">
+                <p className="text-xs text-gray-400 mt-2">
                   Price: {formatCurrency(purchaseAmount)}
                 </p>
               </div>
@@ -220,7 +220,7 @@ export default function CreditBalanceCard() {
               <button
                 onClick={() => setShowPurchaseModal(false)}
                 disabled={purchaseLoading}
-                className="flex-1 px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 disabled:opacity-50 transition-colors font-medium text-sm"
+                className="flex-1 px-4 py-2 bg-gray-200 text-gray-300 rounded-lg hover:bg-gray-300 disabled:opacity-50 transition-colors font-medium text-sm"
               >
                 Cancel
               </button>

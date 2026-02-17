@@ -20,12 +20,12 @@ export default function AuthDebugPage() {
       <h1 className="text-2xl font-bold mb-6">OAuth Debug Information</h1>
 
       <div className="space-y-4">
-        <div className="bg-gray-100 p-4 rounded">
+        <div className="bg-gray-800 p-4 rounded">
           <h2 className="font-bold mb-2">Current Page URL:</h2>
           <code className="text-sm">{info?.currentURL}</code>
         </div>
 
-        <div className="bg-gray-100 p-4 rounded">
+        <div className="bg-gray-800 p-4 rounded">
           <h2 className="font-bold mb-2">Expected Callback URL (in Google Cloud):</h2>
           <code className="text-sm">{info?.expectedCallbackURL}</code>
         </div>
@@ -36,7 +36,7 @@ export default function AuthDebugPage() {
             <li>✓ 1. Go to Google Cloud Console → APIs & Services → Credentials</li>
             <li>✓ 2. Click on your OAuth 2.0 Client ID</li>
             <li>✓ 3. Under "Authorized redirect URIs", verify this exact URL exists:</li>
-            <li className="bg-white p-2 rounded font-mono text-xs">
+            <li className="bg-gray-800 p-2 rounded font-mono text-xs">
               https://southside.brandonslab.work/api/auth/callback/google
             </li>
             <li>✓ 4. If missing, add it and click Save</li>

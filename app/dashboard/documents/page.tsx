@@ -63,10 +63,10 @@ export default function DocumentsPage() {
     <div>
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-3xl md:text-4xl font-bold text-black mb-2 font-playfair">
+        <h1 className="text-3xl md:text-4xl font-bold text-primary mb-2 font-playfair">
           Documents
         </h1>
-        <p className="text-gray-600 text-lg">
+        <p className="text-secondary text-lg">
           Access and download your contracts, invoices, and reports.
         </p>
       </div>
@@ -75,51 +75,31 @@ export default function DocumentsPage() {
       <div className="flex flex-wrap gap-2 mb-6">
         <button
           onClick={() => setSelectedCategory('all')}
-          className={`px-4 py-2 rounded-lg font-medium text-sm transition-colors ${
-            selectedCategory === 'all'
-              ? 'bg-red-700 text-white'
-              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-          }`}
+          className={selectedCategory === 'all' ? 'btn-filter-active' : 'btn-filter-inactive'}
         >
           All
         </button>
         <button
           onClick={() => setSelectedCategory('contract')}
-          className={`px-4 py-2 rounded-lg font-medium text-sm transition-colors ${
-            selectedCategory === 'contract'
-              ? 'bg-red-700 text-white'
-              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-          }`}
+          className={selectedCategory === 'contract' ? 'btn-filter-active' : 'btn-filter-inactive'}
         >
           Contracts
         </button>
         <button
           onClick={() => setSelectedCategory('invoice')}
-          className={`px-4 py-2 rounded-lg font-medium text-sm transition-colors ${
-            selectedCategory === 'invoice'
-              ? 'bg-red-700 text-white'
-              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-          }`}
+          className={selectedCategory === 'invoice' ? 'btn-filter-active' : 'btn-filter-inactive'}
         >
           Invoices
         </button>
         <button
           onClick={() => setSelectedCategory('report')}
-          className={`px-4 py-2 rounded-lg font-medium text-sm transition-colors ${
-            selectedCategory === 'report'
-              ? 'bg-red-700 text-white'
-              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-          }`}
+          className={selectedCategory === 'report' ? 'btn-filter-active' : 'btn-filter-inactive'}
         >
           Reports
         </button>
         <button
           onClick={() => setSelectedCategory('documentation')}
-          className={`px-4 py-2 rounded-lg font-medium text-sm transition-colors ${
-            selectedCategory === 'documentation'
-              ? 'bg-red-700 text-white'
-              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-          }`}
+          className={selectedCategory === 'documentation' ? 'btn-filter-active' : 'btn-filter-inactive'}
         >
           Documentation
         </button>
@@ -129,20 +109,20 @@ export default function DocumentsPage() {
       {isLoading && (
         <div className="flex items-center justify-center min-h-[400px]">
           <div className="text-center">
-            <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-red-700 border-r-transparent mb-4"></div>
-            <p className="text-gray-600">Loading documents...</p>
+            <div className="loading-spinner mb-4"></div>
+            <p className="text-secondary">Loading documents...</p>
           </div>
         </div>
       )}
 
       {/* Error State */}
       {!isLoading && error && (
-        <div className="bg-red-50 border border-red-200 rounded-lg p-6 text-center">
-          <p className="text-red-800 font-semibold mb-2">Error Loading Documents</p>
-          <p className="text-red-600 mb-4">{error}</p>
+        <div className="alert-error text-center">
+          <p className="font-semibold mb-2">Error Loading Documents</p>
+          <p className="mb-4">{error}</p>
           <button
             onClick={fetchDocuments}
-            className="bg-red-700 hover:bg-red-800 text-white font-semibold py-2 px-4 rounded-lg transition-colors"
+            className="btn-primary py-2 px-4"
           >
             Try Again
           </button>

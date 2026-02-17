@@ -35,15 +35,15 @@ const statusLabels = {
 export default function ProjectCard({ project }: ProjectCardProps) {
   return (
     <div
-      className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow cursor-pointer"
+      className="bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-700 hover:shadow-md transition-shadow cursor-pointer"
       onClick={() => window.location.href = `/dashboard/projects/${project.id}`}
     >
       {/* Header */}
       <div className="flex items-start justify-between mb-4">
         <div className="flex-1">
-          <h3 className="text-lg font-bold text-black mb-1">{project.name}</h3>
+          <h3 className="text-lg font-bold text-white mb-1">{project.name}</h3>
           {project.description && (
-            <p className="text-sm text-gray-600">{project.description}</p>
+            <p className="text-sm text-gray-400">{project.description}</p>
           )}
         </div>
         <span
@@ -58,7 +58,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       {/* Progress Bar */}
       <div className="mb-4">
         <div className="flex items-center justify-between text-sm mb-2">
-          <span className="text-gray-600 font-medium">Progress</span>
+          <span className="text-gray-400 font-medium">Progress</span>
           <span className="text-red-700 font-bold">{project.progress}%</span>
         </div>
         <div className="w-full bg-gray-200 rounded-full h-2">
@@ -72,25 +72,25 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       {/* Details */}
       <div className="space-y-2 text-sm">
         <div className="flex items-center justify-between">
-          <span className="text-gray-600">Started</span>
+          <span className="text-gray-400">Started</span>
           <span className="text-gray-900 font-medium">{project.startDate}</span>
         </div>
         {project.estimatedCompletion && (
           <div className="flex items-center justify-between">
-            <span className="text-gray-600">Est. Completion</span>
+            <span className="text-gray-400">Est. Completion</span>
             <span className="text-gray-900 font-medium">{project.estimatedCompletion}</span>
           </div>
         )}
         <div className="flex items-center justify-between">
-          <span className="text-gray-600">Last Updated</span>
+          <span className="text-gray-400">Last Updated</span>
           <span className="text-gray-900 font-medium">{project.lastUpdated}</span>
         </div>
       </div>
 
       {/* Team Members */}
       {project.assignedTeam && project.assignedTeam.length > 0 && (
-        <div className="mt-4 pt-4 border-t border-gray-100">
-          <span className="text-sm text-gray-600 font-medium">Team:</span>
+        <div className="mt-4 pt-4 border-t border-gray-700">
+          <span className="text-sm text-gray-400 font-medium">Team:</span>
           <div className="flex items-center gap-2 mt-2">
             {project.assignedTeam.map((member, index) => (
               <div

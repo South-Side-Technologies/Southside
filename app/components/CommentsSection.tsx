@@ -89,40 +89,40 @@ export default function CommentsSection({ projectId, supportTicketId }: Comments
   }
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+    <div className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 p-6">
       <h3 className="text-lg font-semibold text-gray-900 mb-6">Comments</h3>
 
       {/* Comments List */}
       <div className="space-y-4 mb-6 max-h-96 overflow-y-auto">
         {loading ? (
-          <p className="text-gray-500 text-center py-4">Loading comments...</p>
+          <p className="text-gray-400 text-center py-4">Loading comments...</p>
         ) : error ? (
           <p className="text-red-600 text-center py-4">{error}</p>
         ) : comments.length === 0 ? (
-          <p className="text-gray-500 text-center py-4">No comments yet. Be the first to comment!</p>
+          <p className="text-gray-400 text-center py-4">No comments yet. Be the first to comment!</p>
         ) : (
           comments.map((comment) => (
             <div key={comment.id} className="border-l-4 border-red-700 pl-4 py-2">
               <div className="flex items-center justify-between mb-1">
                 <p className="font-medium text-gray-900 text-sm">{comment.user.name || comment.user.email}</p>
-                <p className="text-xs text-gray-500">
+                <p className="text-xs text-gray-400">
                   {formatTimeAgo(comment.createdAt)}
                 </p>
               </div>
-              <p className="text-gray-700 text-sm">{comment.content}</p>
+              <p className="text-gray-300 text-sm">{comment.content}</p>
             </div>
           ))
         )}
       </div>
 
       {/* New Comment Form */}
-      <form onSubmit={handleSubmitComment} className="border-t border-gray-200 pt-4">
+      <form onSubmit={handleSubmitComment} className="border-t border-gray-700 pt-4">
         <textarea
           value={newComment}
           onChange={(e) => setNewComment(e.target.value)}
           placeholder="Add a comment..."
           rows={3}
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-700 resize-none"
+          className="w-full px-3 py-2 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-700 resize-none"
         />
         <button
           type="submit"

@@ -32,37 +32,37 @@ export default function Footer({ variant = 'full' }: FooterProps) {
               <h4 className="font-bold text-lg mb-3 font-playfair">Services</h4>
               <ul className="text-gray-400 space-y-2 text-sm md:text-base">
                 <li>
-                  <Link href="/#services" className="hover:text-white transition-colors">
+                  <Link href="/services/cloud-infrastructure" className="hover:text-white transition-colors">
                     Cloud Infrastructure
                   </Link>
                 </li>
                 <li>
-                  <Link href="/#services" className="hover:text-white transition-colors">
+                  <Link href="/services/cost-optimization" className="hover:text-white transition-colors">
                     Cost Optimization
                   </Link>
                 </li>
                 <li>
-                  <Link href="/#services" className="hover:text-white transition-colors">
+                  <Link href="/services/ai-services" className="hover:text-white transition-colors">
                     AI Services
                   </Link>
                 </li>
                 <li>
-                  <Link href="/#services" className="hover:text-white transition-colors">
+                  <Link href="/services/web-development" className="hover:text-white transition-colors">
                     Web Development
                   </Link>
                 </li>
                 <li>
-                  <Link href="/#services" className="hover:text-white transition-colors">
+                  <Link href="/services/ci-cd-pipelines" className="hover:text-white transition-colors">
                     CI/CD Pipelines
                   </Link>
                 </li>
                 <li>
-                  <Link href="/#services" className="hover:text-white transition-colors">
+                  <Link href="/services/virtual-training" className="hover:text-white transition-colors">
                     Virtual Training Environments
                   </Link>
                 </li>
                 <li>
-                  <Link href="/#services" className="hover:text-white transition-colors">
+                  <Link href="/services/managed-deployment" className="hover:text-white transition-colors">
                     Deployment & Managed Services
                   </Link>
                 </li>

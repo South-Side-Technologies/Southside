@@ -59,10 +59,10 @@ export default function ContractorPage() {
 
   if (status === 'loading' || loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-50 dark:bg-gray-900">
-        <div className="text-center">
+      <div className="flex items-center justify-center min-h-screen bg-gray-800"
+        <<div className="text-center">
           <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mb-4"></div>
-          <p className="text-gray-600 dark:text-gray-400">Loading...</p>
+          <p className="text-gray-400
         </div>
       </div>
     )
@@ -82,14 +82,14 @@ export default function ContractorPage() {
 
   // Application Rejected
   if (applicationStatus?.hasApplication && applicationStatus.application?.status === 'REJECTED') {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-red-50 to-orange-100 dark:from-gray-900 dark:to-gray-800 p-8">
+    return ("
+      <<div className="min-h-screen bg-gradient-to-br from-red-50 to-orange-100 p-8">
         <div className="max-w-2xl mx-auto">
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8">
+          <div className="bg-gray-800 rounded-lg shadow-lg p-8">
             <div className="text-center mb-8">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-red-100 dark:bg-red-900 rounded-full mb-4">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-red-100 rounded-full mb-4">
                 <svg
-                  className="w-8 h-8 text-red-600 dark:text-red-400"
+                  className="w-8 h-8 text-red-600
                   fill="currentColor"
                   viewBox="0 0 20 20"
                 >
@@ -100,26 +100,25 @@ export default function ContractorPage() {
                   />
                 </svg>
               </div>
-              <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+              <h1 className="text-3xl font-bold text-gray-900 mb-2">
                 Application Not Approved
               </h1>
-              <p className="text-gray-600 dark:text-gray-400">
+              <p className="text-gray-400
                 Unfortunately, your application was not approved at this time.
               </p>
             </div>
 
-            {applicationStatus.application?.rejectionReason && (
-              <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-6 mb-8">
-                <h2 className="font-semibold text-gray-900 dark:text-white mb-3">Reason for Decision</h2>
-                <p className="text-gray-700 dark:text-gray-300">
+            {applicationStatus.application?.rejectionReason && ("
+              <<div className="bg-red-50 border border-red-200 rounded-lg p-6 mb-8">
+                <h2 className="font-semibold text-gray-900 mb-3">Reason for Decision</h2>
+                <p className="text-gray-300
                   {applicationStatus.application.rejectionReason}
                 </p>
               </div>
-            )}
-
-            <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6 mb-8">
-              <h3 className="font-semibold text-gray-900 dark:text-white mb-3">What Can You Do?</h3>
-              <ul className="space-y-2 text-sm text-gray-700 dark:text-gray-300 list-disc list-inside">
+            )}"
+            <<div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8">
+              <h3 className="font-semibold text-gray-900 mb-3">What Can You Do?</h3>
+              <ul className="space-y-2 text-sm text-gray-300 list-disc list-inside">
                 <li>Review the feedback and address any concerns</li>
                 <li>Update your application with new information</li>
                 <li>Contact support for more details or to appeal</li>
@@ -135,7 +134,7 @@ export default function ContractorPage() {
               </button>
               <Link
                 href="/dashboard"
-                className="block w-full px-6 py-3 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white font-medium rounded text-center hover:bg-gray-200 dark:hover:bg-gray-600 transition"
+                className="block w-full px-6 py-3 bg-gray-800 text-gray-900 font-medium rounded text-center hover:bg-gray-700 transition"
               >
                 Back to Dashboard
               </Link>
@@ -148,9 +147,9 @@ export default function ContractorPage() {
 
   // No application yet - show start flow
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-blue-100 dark:from-gray-900 dark:to-gray-800 p-8">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-blue-100 p-8">
       <div className="max-w-2xl mx-auto">
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+        <div className="bg-gray-800 rounded-lg shadow-lg overflow-hidden">
           {/* Header */}
           <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-8 text-white">
             <h1 className="text-4xl font-bold mb-2">Become a Contractor</h1>
@@ -162,7 +161,7 @@ export default function ContractorPage() {
           {/* Content */}
           <div className="p-8">
             <div className="mb-8">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Why Become a Contractor?</h2>
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">Why Become a Contractor?</h2>
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="flex gap-4">
                   <div className="flex-shrink-0">
@@ -173,8 +172,8 @@ export default function ContractorPage() {
                     </div>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900 dark:text-white">Flexible Work</h3>
-                    <p className="text-gray-600 dark:text-gray-400 text-sm">Work on your own schedule and choose projects</p>
+                    <h3 className="font-semibold text-gray-900 Work</h3>"
+                    <<p className="text-gray-400 text-sm">Work on your own schedule and choose projects</p>
                   </div>
                 </div>
 
@@ -187,8 +186,8 @@ export default function ContractorPage() {
                     </div>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900 dark:text-white">Competitive Pay</h3>
-                    <p className="text-gray-600 dark:text-gray-400 text-sm">Get paid directly for quality work</p>
+                    <h3 className="font-semibold text-gray-900 Pay</h3>"
+                    <<p className="text-gray-400 text-sm">Get paid directly for quality work</p>
                   </div>
                 </div>
 
@@ -201,8 +200,8 @@ export default function ContractorPage() {
                     </div>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900 dark:text-white">Build Your Network</h3>
-                    <p className="text-gray-600 dark:text-gray-400 text-sm">Connect with other professionals</p>
+                    <h3 className="font-semibold text-gray-900 Your Network</h3>"
+                    <<p className="text-gray-400 text-sm">Connect with other professionals</p>
                   </div>
                 </div>
 
@@ -215,18 +214,18 @@ export default function ContractorPage() {
                     </div>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900 dark:text-white">Easy Setup</h3>
-                    <p className="text-gray-600 dark:text-gray-400 text-sm">Simple onboarding process</p>
+                    <h3 className="font-semibold text-gray-900 Setup</h3>"
+                    <<p className="text-gray-400 text-sm">Simple onboarding process</p>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Requirements */}
-            <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-6 mb-8">
-              <h3 className="font-semibold text-gray-900 dark:text-white mb-4">What We Need From You</h3>
-              <ul className="space-y-3 text-sm text-gray-700 dark:text-gray-300">
-                <li className="flex items-start gap-3">
+            <div className="bg-gray-800 rounded-lg p-6 mb-8">
+              <h3 className="font-semibold text-gray-900 mb-4">What We Need From You</h3>
+              <ul className="space-y-3 text-sm text-gray-300"
+                <<li className="flex items-start gap-3">
                   <svg className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
@@ -263,17 +262,17 @@ export default function ContractorPage() {
               </button>
               <Link
                 href="/dashboard"
-                className="flex-1 px-6 py-4 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white font-semibold rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition text-center text-lg"
+                className="flex-1 px-6 py-4 bg-gray-800 text-gray-900 font-semibold rounded-lg hover:bg-gray-700 transition text-center text-lg"
               >
                 Learn More
               </Link>
             </div>
 
-            <p className="text-sm text-gray-600 dark:text-gray-400 text-center mt-6">
+            <p className="text-sm text-gray-400 text-center mt-6">
               Already have an application?{' '}
               <Link
                 href="/contractor/application-status"
-                className="text-blue-600 dark:text-blue-400 hover:underline font-medium"
+                className="text-blue-600 hover:underline font-medium"
               >
                 Check status
               </Link>

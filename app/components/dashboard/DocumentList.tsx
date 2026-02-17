@@ -19,7 +19,7 @@ const categoryColors = {
   contract: 'bg-purple-100 text-purple-700',
   invoice: 'bg-green-100 text-green-700',
   report: 'bg-blue-100 text-blue-700',
-  documentation: 'bg-gray-100 text-gray-700',
+  documentation: 'bg-gray-800 text-gray-300',
 }
 
 const categoryLabels = {
@@ -61,8 +61,8 @@ function formatFileSize(bytes: number): string {
 export default function DocumentList({ documents, onDownload }: DocumentListProps) {
   if (documents.length === 0) {
     return (
-      <div className="bg-white rounded-xl p-8 shadow-sm border border-gray-200 text-center">
-        <p className="text-gray-500 text-lg">No documents yet</p>
+      <div className="bg-gray-800 rounded-xl p-8 shadow-sm border border-gray-700 text-center">
+        <p className="text-gray-400 text-lg">No documents yet</p>
         <p className="text-gray-400 text-sm mt-2">Documents will appear here when available</p>
       </div>
     )
@@ -73,16 +73,16 @@ export default function DocumentList({ documents, onDownload }: DocumentListProp
       {documents.map((doc) => (
         <div
           key={doc.id}
-          className="bg-white rounded-xl p-5 shadow-sm border border-gray-200 hover:shadow-md transition-shadow"
+          className="bg-gray-800 rounded-xl p-5 shadow-sm border border-gray-700 hover:shadow-md transition-shadow"
         >
           {/* File Icon and Name */}
           <div className="flex items-start gap-3 mb-3">
             <FileIcon type={doc.type} />
             <div className="flex-1 min-w-0">
-              <h3 className="text-sm font-bold text-black truncate" title={doc.name}>
+              <h3 className="text-sm font-bold text-white truncate" title={doc.name}>
                 {doc.name}
               </h3>
-              <p className="text-xs text-gray-500 uppercase">{doc.type}</p>
+              <p className="text-xs text-gray-400 uppercase">{doc.type}</p>
             </div>
           </div>
 
@@ -96,7 +96,7 @@ export default function DocumentList({ documents, onDownload }: DocumentListProp
           </span>
 
           {/* Details */}
-          <div className="space-y-1 text-xs text-gray-600 mb-4">
+          <div className="space-y-1 text-xs text-gray-400 mb-4">
             <div>
               <span className="font-medium">Size:</span> {formatFileSize(doc.size)}
             </div>

@@ -101,19 +101,19 @@ export default function ProjectDetail() {
         <div className="lg:col-span-2">
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Project Name */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 p-6">
               <h2 className="text-2xl font-bold text-gray-900 mb-2">{project.name}</h2>
-              <p className="text-gray-600">Customer: {project.user.companyName || project.user.name}</p>
+              <p className="text-gray-400">Customer: {project.user.companyName || project.user.name}</p>
             </div>
 
             {/* Status and Progress */}
             <div className="grid grid-cols-2 gap-6">
-              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-                <label className="block text-sm font-medium text-gray-700 mb-2">Status</label>
+              <div className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 p-6">
+                <label className="block text-sm font-medium text-gray-300 mb-2">Status</label>
                 <select
                   value={formData.status}
                   onChange={(e) => setFormData({ ...formData, status: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-700"
+                  className="w-full px-3 py-2 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-700"
                 >
                   <option value="PLANNING">Planning</option>
                   <option value="IN_PROGRESS">In Progress</option>
@@ -122,15 +122,15 @@ export default function ProjectDetail() {
                 </select>
               </div>
 
-              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-                <label className="block text-sm font-medium text-gray-700 mb-2">Progress (%)</label>
+              <div className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 p-6">
+                <label className="block text-sm font-medium text-gray-300 mb-2">Progress (%)</label>
                 <input
                   type="number"
                   min="0"
                   max="100"
                   value={formData.progress}
                   onChange={(e) => setFormData({ ...formData, progress: parseInt(e.target.value) })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-700"
+                  className="w-full px-3 py-2 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-700"
                 />
                 <div className="mt-2 w-full bg-gray-200 rounded-full h-2">
                   <div
@@ -142,35 +142,35 @@ export default function ProjectDetail() {
             </div>
 
             {/* Description */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-              <label className="block text-sm font-medium text-gray-700 mb-2">Description</label>
+            <div className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 p-6">
+              <label className="block text-sm font-medium text-gray-300 mb-2">Description</label>
               <textarea
                 value={formData.description}
                 onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                 rows={4}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-700"
+                className="w-full px-3 py-2 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-700"
               />
             </div>
 
             {/* Dates */}
             <div className="grid grid-cols-2 gap-6">
-              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-                <label className="block text-sm font-medium text-gray-700 mb-2">Start Date</label>
+              <div className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 p-6">
+                <label className="block text-sm font-medium text-gray-300 mb-2">Start Date</label>
                 <input
                   type="date"
                   value={project.startDate.split('T')[0]}
                   disabled
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-600"
+                  className="w-full px-3 py-2 border border-gray-600 rounded-lg bg-gray-800 text-gray-400"
                 />
               </div>
 
-              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-                <label className="block text-sm font-medium text-gray-700 mb-2">Est. Completion</label>
+              <div className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 p-6">
+                <label className="block text-sm font-medium text-gray-300 mb-2">Est. Completion</label>
                 <input
                   type="date"
                   value={formData.estimatedCompletion}
                   onChange={(e) => setFormData({ ...formData, estimatedCompletion: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-700"
+                  className="w-full px-3 py-2 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-700"
                 />
               </div>
             </div>
@@ -189,28 +189,28 @@ export default function ProjectDetail() {
         {/* Sidebar */}
         <div className="space-y-6">
           {/* Team Members */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <div className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 p-6">
             <h3 className="font-semibold text-gray-900 mb-4">Assigned Team</h3>
             <div className="space-y-3">
               {project.assignments.length > 0 ? (
                 project.assignments.map((assignment) => (
-                  <div key={assignment.user.id} className="p-3 bg-gray-50 rounded-lg">
+                  <div key={assignment.user.id} className="p-3 bg-gray-800 rounded-lg">
                     <p className="font-medium text-gray-900 text-sm">{assignment.user.name}</p>
-                    <p className="text-gray-600 text-xs">{assignment.user.email}</p>
+                    <p className="text-gray-400 text-xs">{assignment.user.email}</p>
                   </div>
                 ))
               ) : (
-                <p className="text-gray-500 text-sm">No team members assigned</p>
+                <p className="text-gray-400 text-sm">No team members assigned</p>
               )}
             </div>
           </div>
 
           {/* Project Info */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <div className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 p-6">
             <h3 className="font-semibold text-gray-900 mb-4">Project Info</h3>
             <div className="space-y-3 text-sm">
               <div>
-                <p className="text-gray-600">Customer Email</p>
+                <p className="text-gray-400">Customer Email</p>
                 <p className="font-medium text-gray-900">{project.user.email}</p>
               </div>
             </div>

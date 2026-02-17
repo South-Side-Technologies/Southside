@@ -39,7 +39,7 @@ export default function ImpersonationBanner({ isImpersonating, impersonatedUserE
   }
 
   return (
-    <div className="bg-yellow-500 text-black py-2 px-4 text-center font-semibold">
+    <div className="bg-yellow-500 text-white py-2 px-4 text-center font-semibold">
       <div className="flex items-center justify-center gap-4">
         <span>
           ⚠️ Impersonating: <strong>{impersonatedUserEmail}</strong>

@@ -68,25 +68,25 @@ export default function RecentActivity() {
 
   if (loading) {
     return (
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+      <div className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 p-6">
         <h2 className="text-lg font-semibold text-gray-900 mb-4">Recent Activity</h2>
-        <p className="text-gray-500 text-center py-4">Loading activity...</p>
+        <p className="text-gray-400 text-center py-4">Loading activity...</p>
       </div>
     )
   }
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+    <div className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 p-6">
       <h2 className="text-lg font-semibold text-gray-900 mb-4">Recent Activity</h2>
 
       {error ? (
         <p className="text-red-600">{error}</p>
       ) : activities.length === 0 ? (
-        <p className="text-gray-500 text-center py-4">No recent activity</p>
+        <p className="text-gray-400 text-center py-4">No recent activity</p>
       ) : (
         <div className="space-y-4">
           {activities.map((activity) => (
-            <div key={`${activity.type}-${activity.id}`} className="border-l-4 border-red-700 pl-4 py-2 cursor-pointer hover:bg-gray-50 -mx-4 px-4 transition-colors">
+            <div key={`${activity.type}-${activity.id}`} className="border-l-4 border-red-700 pl-4 py-2 cursor-pointer hover:bg-gray-800 -mx-4 px-4 transition-colors">
               {activity.type === 'comment' && (
                 <Link
                   href={activity.project?.id ? `/dashboard/projects/${activity.project.id}` : activity.ticket?.id ? `/dashboard/support/${activity.ticket.id}` : '#'}
@@ -101,7 +101,7 @@ export default function RecentActivity() {
                       <span className="text-red-700 hover:underline">{activity.ticket?.subject}</span>
                     )}
                   </p>
-                  <p className="text-xs text-gray-500 mt-1">{formatTimeAgo(activity.createdAt)}</p>
+                  <p className="text-xs text-gray-400 mt-1">{formatTimeAgo(activity.createdAt)}</p>
                 </Link>
               )}
 
@@ -110,7 +110,7 @@ export default function RecentActivity() {
                   <p className="text-sm text-gray-900">
                     Project <span className="text-red-700 hover:underline font-medium">{activity.name}</span> was created
                   </p>
-                  <p className="text-xs text-gray-500 mt-1">{formatTimeAgo(activity.createdAt)}</p>
+                  <p className="text-xs text-gray-400 mt-1">{formatTimeAgo(activity.createdAt)}</p>
                 </Link>
               )}
 
@@ -119,7 +119,7 @@ export default function RecentActivity() {
                   <p className="text-sm text-gray-900">
                     Support ticket <span className="text-red-700 hover:underline font-medium">{activity.subject}</span> was created
                   </p>
-                  <p className="text-xs text-gray-500 mt-1">{formatTimeAgo(activity.createdAt)}</p>
+                  <p className="text-xs text-gray-400 mt-1">{formatTimeAgo(activity.createdAt)}</p>
                 </Link>
               )}
 
@@ -129,7 +129,7 @@ export default function RecentActivity() {
                     Project <span className="text-red-700 hover:underline font-medium">{activity.project.name}</span> status changed from{' '}
                     <span className="font-medium">{activity.oldValue}</span> to <span className="font-medium">{activity.newValue}</span>
                   </p>
-                  <p className="text-xs text-gray-500 mt-1">{formatTimeAgo(activity.createdAt)}</p>
+                  <p className="text-xs text-gray-400 mt-1">{formatTimeAgo(activity.createdAt)}</p>
                 </Link>
               )}
 
@@ -139,7 +139,7 @@ export default function RecentActivity() {
                     Support ticket <span className="text-red-700 hover:underline font-medium">{activity.ticket.subject}</span> status changed from{' '}
                     <span className="font-medium">{activity.oldValue}</span> to <span className="font-medium">{activity.newValue}</span>
                   </p>
-                  <p className="text-xs text-gray-500 mt-1">{formatTimeAgo(activity.createdAt)}</p>
+                  <p className="text-xs text-gray-400 mt-1">{formatTimeAgo(activity.createdAt)}</p>
                 </Link>
               )}
             </div>

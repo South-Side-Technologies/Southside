@@ -102,12 +102,12 @@ export default function ChatWidget() {
   }
 
   return (
-    <div className="bg-white rounded-2xl shadow-xl border border-red-100 overflow-hidden">
+    <div className="card-light rounded-2xl shadow-xl overflow-hidden">
       <div className="bg-gradient-to-r from-red-700 to-red-900 text-white px-6 py-4">
         <p className="text-lg font-bold font-playfair">South Side Chat</p>
         <p className="text-red-100 text-sm">Connect instantly with our automated assistant.</p>
       </div>
-      <div ref={scrollRef} className="max-h-80 md:max-h-96 overflow-y-auto px-6 py-5 space-y-4 bg-red-50/40">
+      <div ref={scrollRef} className="max-h-80 md:max-h-96 overflow-y-auto px-6 py-5 space-y-4 bg-gray-800">
         {messages.map((message, index) => {
           const isUser = message.role === 'user'
           return (
@@ -116,7 +116,7 @@ export default function ChatWidget() {
                 className={`max-w-[80%] rounded-2xl px-4 py-3 text-sm md:text-base shadow-sm ${
                   isUser
                     ? 'bg-red-700 text-white rounded-br-md'
-                    : 'bg-white text-gray-800 border border-red-100 rounded-bl-md'
+                    : 'bg-gray-700 text-gray-100 border border-gray-600 rounded-bl-md'
                 }`}
               >
                 {message.content}
@@ -125,7 +125,7 @@ export default function ChatWidget() {
           )
         })}
       </div>
-      <div className="px-6 py-4 bg-white border-t border-red-100">
+      <div className="px-6 py-4 bg-gray-800 border-t border-gray-700">
         <div className="flex flex-col md:flex-row gap-3">
           <textarea
             value={input}
@@ -138,7 +138,7 @@ export default function ChatWidget() {
             }}
             placeholder="Ask a question about automations, pricing, or support..."
             rows={2}
-            className="flex-1 resize-none rounded-xl border border-red-100 px-4 py-3 text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-red-300"
+            className="flex-1 resize-none rounded-xl border border-gray-600 bg-gray-700 text-white px-4 py-3 text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-red-600 placeholder-gray-400"
           />
           <button
             type="button"
@@ -149,7 +149,7 @@ export default function ChatWidget() {
             {isSending ? 'Sending...' : 'Send Message'}
           </button>
         </div>
-        {error && <p className="text-sm text-red-600 mt-2">{error}</p>}
+        {error && <p className="text-sm text-red-400 mt-2">{error}</p>}
       </div>
     </div>
   )

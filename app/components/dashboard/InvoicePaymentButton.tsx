@@ -137,7 +137,7 @@ export default function InvoicePaymentButton({
                 <button
                   onClick={() => setShowCreditOption(false)}
                   disabled={loading}
-                  className="flex-1 px-3 py-1.5 bg-gray-200 text-gray-700 rounded text-sm hover:bg-gray-300 disabled:opacity-50 transition-colors font-medium"
+                  className="flex-1 px-3 py-1.5 bg-gray-200 text-gray-300 rounded text-sm hover:bg-gray-300 disabled:opacity-50 transition-colors font-medium"
                 >
                   Cancel
                 </button>

@@ -38,7 +38,7 @@ export default function OnboardingRefresh() {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-center">
-          <p className="text-gray-600">Refreshing your onboarding link...</p>
+          <p className="text-gray-400">Refreshing your onboarding link...</p>
         </div>
       </div>
     )
@@ -48,11 +48,11 @@ export default function OnboardingRefresh() {
     <>
       <div className="mb-8">
         <h1 className="text-4xl font-bold text-gray-900 mb-2">Refresh Onboarding</h1>
-        <p className="text-gray-600">There was an issue with your onboarding link</p>
+        <p className="text-gray-400">There was an issue with your onboarding link</p>
       </div>
 
       <div className="max-w-2xl mx-auto">
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 text-center">
+        <div className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 p-8 text-center">
           {error && (
             <>
               <div className="mb-6">

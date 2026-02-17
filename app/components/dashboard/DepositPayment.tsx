@@ -36,7 +36,7 @@ function getStatusColor(status: string) {
     case 'EXPIRED':
       return 'bg-red-100 text-red-800'
     default:
-      return 'bg-gray-100 text-gray-800'
+      return 'bg-gray-800 text-gray-800'
   }
 }
 
@@ -70,7 +70,7 @@ export default function DepositPayment({ deposit }: DepositPaymentProps) {
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+    <div className="bg-gray-800 rounded-lg shadow-sm border border-gray-700 p-6">
       <div className="flex items-start justify-between mb-4">
         <div className="flex-1">
           <div className="flex items-center gap-2 mb-2">
@@ -87,7 +87,7 @@ export default function DepositPayment({ deposit }: DepositPaymentProps) {
           </div>
 
           {deposit.purpose && (
-            <p className="text-sm text-gray-600 mb-2">{deposit.purpose}</p>
+            <p className="text-sm text-gray-400 mb-2">{deposit.purpose}</p>
           )}
 
           {deposit.project && (
@@ -105,7 +105,7 @@ export default function DepositPayment({ deposit }: DepositPaymentProps) {
             {formatCurrency(deposit.amount)}
           </p>
           {deposit.paidAt && (
-            <p className="text-xs text-gray-500 mt-1">
+            <p className="text-xs text-gray-400 mt-1">
               Paid {formatDate(deposit.paidAt)}
             </p>
           )}

@@ -88,8 +88,8 @@ export default function SupportPage() {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="text-center">
-          <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-red-700 border-r-transparent mb-4"></div>
-          <p className="text-gray-600">Loading tickets...</p>
+          <div className="loading-spinner mb-4"></div>
+          <p className="text-secondary">Loading tickets...</p>
         </div>
       </div>
     )
@@ -97,12 +97,12 @@ export default function SupportPage() {
 
   if (error) {
     return (
-      <div className="bg-red-50 border border-red-200 rounded-lg p-6 text-center">
-        <p className="text-red-800 font-semibold mb-2">Error Loading Tickets</p>
-        <p className="text-red-600 mb-4">{error}</p>
+      <div className="alert-error text-center">
+        <p className="font-semibold mb-2">Error Loading Tickets</p>
+        <p className="mb-4">{error}</p>
         <button
           onClick={fetchTickets}
-          className="bg-red-700 hover:bg-red-800 text-white font-semibold py-2 px-4 rounded-lg transition-colors"
+          className="btn-primary py-2 px-4"
         >
           Try Again
         </button>
@@ -115,16 +115,16 @@ export default function SupportPage() {
       {/* Header */}
       <div className="mb-8 flex items-start justify-between">
         <div>
-          <h1 className="text-3xl md:text-4xl font-bold text-black mb-2 font-playfair">
+          <h1 className="text-3xl md:text-4xl font-bold text-primary mb-2 font-playfair">
             Support Tickets
           </h1>
-          <p className="text-gray-600 text-lg">
+          <p className="text-secondary text-lg">
             View and manage your support requests.
           </p>
         </div>
         <button
           onClick={() => setShowModal(true)}
-          className="bg-red-700 hover:bg-red-800 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
+          className="btn-primary py-3 px-6"
         >
           New Ticket
         </button>
@@ -132,14 +132,14 @@ export default function SupportPage() {
 
       {/* Open/In Progress Tickets */}
       <div className="mb-10">
-        <h2 className="text-2xl font-bold text-black mb-4 font-playfair">
+        <h2 className="text-2xl font-bold text-primary mb-4 font-playfair">
           Active Tickets ({openTickets.length})
         </h2>
         {openTickets.length > 0 ? (
           <SupportTicketList tickets={openTickets} />
         ) : (
-          <div className="bg-gray-50 border border-gray-200 rounded-lg p-8 text-center">
-            <p className="text-gray-600">No active tickets. You're all set!</p>
+          <div className="card-light p-8 text-center">
+            <p className="text-secondary">No active tickets. You're all set!</p>
           </div>
         )}
       </div>
@@ -147,7 +147,7 @@ export default function SupportPage() {
       {/* Resolved/Closed Tickets */}
       {closedTickets.length > 0 && (
         <div>
-          <h2 className="text-2xl font-bold text-black mb-4 font-playfair">
+          <h2 className="text-2xl font-bold text-primary mb-4 font-playfair">
             Closed Tickets ({closedTickets.length})
           </h2>
           <SupportTicketList tickets={closedTickets} />
@@ -157,16 +157,16 @@ export default function SupportPage() {
       {/* Create Ticket Modal */}
       {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-xl shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+          <div className="bg-gray-800 rounded-xl shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
             {/* Modal Header */}
-            <div className="border-b border-gray-200 p-6">
+            <div className="border-b border-gray-700 p-6">
               <div className="flex items-center justify-between">
-                <h2 className="text-2xl font-bold text-black font-playfair">
+                <h2 className="text-2xl font-bold text-white font-playfair">
                   Create Support Ticket
                 </h2>
                 <button
                   onClick={() => setShowModal(false)}
-                  className="text-gray-400 hover:text-gray-600 transition-colors"
+                  className="text-gray-400 hover:text-gray-400 transition-colors"
                   disabled={isSubmitting}
                 >
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -180,7 +180,7 @@ export default function SupportPage() {
             <form onSubmit={handleSubmit} className="p-6">
               {/* Subject */}
               <div className="mb-6">
-                <label htmlFor="subject" className="block text-sm font-semibold text-gray-700 mb-2">
+                <label htmlFor="subject" className="block text-sm font-semibold text-gray-300 mb-2">
                   Subject <span className="text-red-600">*</span>
                 </label>
                 <input
@@ -188,7 +188,7 @@ export default function SupportPage() {
                   id="subject"
                   value={subject}
                   onChange={(e) => setSubject(e.target.value)}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-700 focus:border-transparent"
+                  className="w-full px-4 py-3 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-700 focus:border-transparent"
                   placeholder="Brief description of the issue"
                   required
                   disabled={isSubmitting}
@@ -197,14 +197,14 @@ export default function SupportPage() {
 
               {/* Priority */}
               <div className="mb-6">
-                <label htmlFor="priority" className="block text-sm font-semibold text-gray-700 mb-2">
+                <label htmlFor="priority" className="block text-sm font-semibold text-gray-300 mb-2">
                   Priority
                 </label>
                 <select
                   id="priority"
                   value={priority}
                   onChange={(e) => setPriority(e.target.value as typeof priority)}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-700 focus:border-transparent"
+                  className="w-full px-4 py-3 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-700 focus:border-transparent"
                   disabled={isSubmitting}
                 >
                   <option value="low">Low</option>
@@ -216,7 +216,7 @@ export default function SupportPage() {
 
               {/* Description */}
               <div className="mb-6">
-                <label htmlFor="description" className="block text-sm font-semibold text-gray-700 mb-2">
+                <label htmlFor="description" className="block text-sm font-semibold text-gray-300 mb-2">
                   Description <span className="text-red-600">*</span>
                 </label>
                 <textarea
@@ -224,7 +224,7 @@ export default function SupportPage() {
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                   rows={6}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-700 focus:border-transparent resize-none"
+                  className="w-full px-4 py-3 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-700 focus:border-transparent resize-none"
                   placeholder="Please provide detailed information about your request or issue..."
                   required
                   disabled={isSubmitting}
@@ -232,11 +232,11 @@ export default function SupportPage() {
               </div>
 
               {/* Modal Footer */}
-              <div className="flex items-center justify-end gap-4 pt-4 border-t border-gray-200">
+              <div className="flex items-center justify-end gap-4 pt-4 border-t border-gray-700">
                 <button
                   type="button"
                   onClick={() => setShowModal(false)}
-                  className="px-6 py-3 text-gray-700 font-semibold hover:bg-gray-100 rounded-lg transition-colors"
+                  className="px-6 py-3 text-gray-300 font-semibold hover:bg-gray-800 rounded-lg transition-colors"
                   disabled={isSubmitting}
                 >
                   Cancel

@@ -84,11 +84,11 @@ export default function RegisterPage() {
 
       <main className="flex-grow flex items-center justify-center px-4 py-12">
         <div className="max-w-md w-full">
-          <div className="bg-white rounded-xl shadow-lg p-8 border border-gray-200">
-            <h1 className="text-3xl font-bold text-black mb-2 font-playfair text-center">
+          <div className="bg-gray-800 rounded-xl shadow-lg p-8 border border-gray-700">
+            <h1 className="text-3xl font-bold text-white mb-2 font-playfair text-center">
               Create Account
             </h1>
-            <p className="text-gray-600 text-center mb-8">
+            <p className="text-gray-400 text-center mb-8">
               Join South Side Tech to access your customer dashboard
             </p>
 
@@ -101,8 +101,8 @@ export default function RegisterPage() {
             <form onSubmit={handleSubmit} className="space-y-5">
               {/* Display logged-in email (not editable) */}
               {formData.email && (
-                <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
-                  <p className="text-sm text-gray-600">
+                <div className="bg-gray-800 border border-gray-700 rounded-lg p-4">
+                  <p className="text-sm text-gray-400">
                     Registering as:{' '}
                     <span className="font-semibold text-gray-900">{formData.email}</span>
                   </p>
@@ -110,7 +110,7 @@ export default function RegisterPage() {
               )}
 
               <div>
-                <label htmlFor="name" className="block text-sm font-semibold text-gray-700 mb-2">
+                <label htmlFor="name" className="block text-sm font-semibold text-gray-300 mb-2">
                   Full Name <span className="text-red-600">*</span>
                 </label>
                 <input
@@ -120,14 +120,14 @@ export default function RegisterPage() {
                   value={formData.name}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-700 focus:border-transparent"
+                  className="w-full px-4 py-3 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-700 focus:border-transparent"
                   placeholder="John Doe"
                   disabled={isLoading}
                 />
               </div>
 
               <div>
-                <label htmlFor="companyName" className="block text-sm font-semibold text-gray-700 mb-2">
+                <label htmlFor="companyName" className="block text-sm font-semibold text-gray-300 mb-2">
                   Company Name <span className="text-red-600">*</span>
                 </label>
                 <input
@@ -137,7 +137,7 @@ export default function RegisterPage() {
                   value={formData.companyName}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-700 focus:border-transparent"
+                  className="w-full px-4 py-3 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-700 focus:border-transparent"
                   placeholder="Your Company Inc."
                   disabled={isLoading}
                 />
@@ -152,7 +152,7 @@ export default function RegisterPage() {
               </button>
             </form>
 
-            <p className="text-center text-gray-600 text-sm mt-6">
+            <p className="text-center text-gray-400 text-sm mt-6">
               Already have an account?{' '}
               <Link href="/customer-login" className="text-red-700 hover:text-red-800 font-semibold">
                 Sign in

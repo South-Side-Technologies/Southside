@@ -110,13 +110,13 @@ export default function Questionnaire() {
 
         <main className="flex-grow flex items-center justify-center px-4 md:px-6 py-12 md:py-16">
           <div className="max-w-2xl mx-auto text-center w-full">
-            <div className="bg-white rounded-lg p-6 md:p-12 shadow-md">
+            <div className="bg-gray-800 rounded-lg p-6 md:p-12 shadow-md">
               <div className="text-5xl mb-4">✅</div>
-              <h2 className="text-2xl md:text-3xl font-bold text-black mb-4 font-playfair">Thank You!</h2>
-              <p className="text-gray-700 mb-6 text-sm md:text-base">
+              <h2 className="text-2xl md:text-3xl font-bold text-white mb-4 font-playfair">Thank You!</h2>
+              <p className="text-gray-300 mb-6 text-sm md:text-base">
                 Your questionnaire has been submitted successfully. We'll review your information and get back to you shortly with tailored solutions for your business.
               </p>
-              <p className="text-gray-600 text-sm mb-6">
+              <p className="text-gray-400 text-sm mb-6">
                 Redirecting you to your dashboard...
               </p>
               <div className="inline-block h-6 w-6 animate-spin rounded-full border-4 border-solid border-red-700 border-r-transparent"></div>
@@ -134,7 +134,7 @@ export default function Questionnaire() {
         <main className="flex-grow flex items-center justify-center px-4 py-12">
           <div className="text-center">
             <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-red-700 border-r-transparent mb-4"></div>
-            <p className="text-gray-600">Loading your information...</p>
+            <p className="text-gray-400">Loading your information...</p>
           </div>
         </main>
         <Footer variant="minimal" />
@@ -149,7 +149,7 @@ export default function Questionnaire() {
       <main className="flex-grow">
         <section className="py-8 md:py-16 px-4 md:px-6">
           <div className="max-w-2xl mx-auto">
-            <h2 className="text-2xl md:text-3xl font-bold text-black mb-6 md:mb-8 font-playfair">Let's Understand Your Needs</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-6 md:mb-8 font-playfair">Let's Understand Your Needs</h2>
 
             {error && (
               <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6 text-sm md:text-base">
@@ -157,72 +157,72 @@ export default function Questionnaire() {
               </div>
             )}
 
-            <form onSubmit={handleSubmit} className="bg-white rounded-lg p-6 md:p-8 shadow-md space-y-6">
+            <form onSubmit={handleSubmit} className="bg-gray-800 rounded-lg p-6 md:p-8 shadow-md space-y-6">
               {/* Contact Information */}
               <div className="space-y-4">
-                <h3 className="text-lg md:text-xl font-bold text-black font-playfair">Contact Information</h3>
+                <h3 className="text-lg md:text-xl font-bold text-white font-playfair">Contact Information</h3>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Company Name *</label>
+                  <label className="block text-sm font-medium text-gray-300 mb-2">Company Name *</label>
                   <input
                     type="text"
                     name="companyName"
                     value={formData.companyName}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base"
+                    className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base"
                     placeholder="Your company name"
                   />
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Contact Name *</label>
+                    <label className="block text-sm font-medium text-gray-300 mb-2">Contact Name *</label>
                     <input
                       type="text"
                       name="contactName"
                       value={formData.contactName}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base"
+                      className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base"
                       placeholder="Your name"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Email *</label>
+                    <label className="block text-sm font-medium text-gray-300 mb-2">Email *</label>
                     <input
                       type="email"
                       name="email"
                       value={formData.email}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base"
+                      className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base"
                       placeholder="your@email.com"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Phone *</label>
+                  <label className="block text-sm font-medium text-gray-300 mb-2">Phone *</label>
                   <input
                     type="tel"
                     name="phone"
                     value={formData.phone}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base"
+                    className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base"
                     placeholder="(555) 123-4567"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Company Size *</label>
+                  <label className="block text-sm font-medium text-gray-300 mb-2">Company Size *</label>
                   <select
                     name="companySize"
                     value={formData.companySize}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base"
+                    className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base"
                   >
                     <option value="">Select company size</option>
                     <option value="1-10">1-10 employees</option>
@@ -236,7 +236,7 @@ export default function Questionnaire() {
 
               {/* Interested Services */}
               <div className="space-y-4">
-                <h3 className="text-lg md:text-xl font-bold text-black font-playfair">Which services interest you?</h3>
+                <h3 className="text-lg md:text-xl font-bold text-white font-playfair">Which services interest you?</h3>
                 <div className="space-y-3">
                   {[
                     'Cloud Infrastructure Management',
@@ -258,7 +258,7 @@ export default function Questionnaire() {
                         onChange={(e) => handleCheckboxChange(e, 'interestedServices')}
                         className="w-5 h-5 text-blue-500 rounded mt-1"
                       />
-                      <span className="ml-3 text-gray-700 text-sm md:text-base">{service}</span>
+                      <span className="ml-3 text-gray-300 text-sm md:text-base">{service}</span>
                     </label>
                   ))}
                 </div>
@@ -266,8 +266,8 @@ export default function Questionnaire() {
 
               {/* Automation Technologies */}
               <div className="space-y-4">
-                <h3 className="text-lg md:text-xl font-bold text-black font-playfair">What technologies could we help you automate?</h3>
-                <p className="text-gray-600 text-sm md:text-base mb-3">Select any software or systems you currently use that could benefit from automation</p>
+                <h3 className="text-lg md:text-xl font-bold text-white font-playfair">What technologies could we help you automate?</h3>
+                <p className="text-gray-400 text-sm md:text-base mb-3">Select any software or systems you currently use that could benefit from automation</p>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-3">
                   {[
                     'Airtable',
@@ -312,7 +312,7 @@ export default function Questionnaire() {
                         onChange={(e) => handleCheckboxChange(e, 'automationTechnologies')}
                         className="w-5 h-5 text-blue-500 rounded mt-1"
                       />
-                      <span className="ml-3 text-gray-700 text-sm md:text-base">{tech}</span>
+                      <span className="ml-3 text-gray-300 text-sm md:text-base">{tech}</span>
                     </label>
                   ))}
                 </div>
@@ -324,7 +324,7 @@ export default function Questionnaire() {
                       value={formData.otherTechnology}
                       onChange={handleInputChange}
                       placeholder="Please describe the technology..."
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base"
+                      className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base"
                     />
                   </div>
                 )}
@@ -333,13 +333,13 @@ export default function Questionnaire() {
               {/* Budget and Timeline */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Budget Range *</label>
+                  <label className="block text-sm font-medium text-gray-300 mb-2">Budget Range *</label>
                   <select
                     name="budget"
                     value={formData.budget}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base"
+                    className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base"
                   >
                     <option value="">Select budget range</option>
                     <option value="<$10k">Less than $10,000</option>
@@ -350,13 +350,13 @@ export default function Questionnaire() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Timeline *</label>
+                  <label className="block text-sm font-medium text-gray-300 mb-2">Timeline *</label>
                   <select
                     name="timeline"
                     value={formData.timeline}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base"
+                    className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base"
                   >
                     <option value="">Select timeline</option>
                     <option value="ASAP">ASAP</option>
@@ -369,13 +369,13 @@ export default function Questionnaire() {
 
               {/* Additional Information */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Additional Information</label>
+                <label className="block text-sm font-medium text-gray-300 mb-2">Additional Information</label>
                 <textarea
                   name="additionalInfo"
                   value={formData.additionalInfo}
                   onChange={handleInputChange}
                   rows={4}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base"
+                  className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base"
                   placeholder="Tell us more about your project or requirements..."
                 />
               </div>

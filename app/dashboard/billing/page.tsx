@@ -69,15 +69,15 @@ export default function BillingPage() {
     <div className="space-y-8">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">Billing & Payments</h1>
-        <p className="text-gray-600">
+        <h1 className="text-3xl font-bold text-primary mb-2">Billing & Payments</h1>
+        <p className="text-secondary">
           Manage your subscription, invoices, and service credits
         </p>
       </div>
 
       {error && (
-        <div className="bg-red-50 border border-red-200 rounded-lg p-4">
-          <p className="text-sm text-red-700">{error}</p>
+        <div className="alert-error">
+          <p className="text-sm">{error}</p>
         </div>
       )}
 
@@ -94,7 +94,7 @@ export default function BillingPage() {
           <CreditBalanceCard />
 
           {/* Quick Actions */}
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+          <div className="bg-gray-800 rounded-lg shadow-sm border border-gray-700 p-6">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h3>
             <div className="grid grid-cols-2 gap-3">
               <Link
@@ -128,21 +128,21 @@ export default function BillingPage() {
         {/* Right Column - Summary Cards */}
         <div className="space-y-6">
           {/* Account Status */}
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-            <h3 className="text-sm font-medium text-gray-600 uppercase tracking-wider mb-3">
+          <div className="bg-gray-800 rounded-lg shadow-sm border border-gray-700 p-6">
+            <h3 className="text-sm font-medium text-gray-400 uppercase tracking-wider mb-3">
               Account Status
             </h3>
             <div className="space-y-3">
               {subscription ? (
                 <>
                   <div>
-                    <p className="text-xs text-gray-500">Subscription</p>
+                    <p className="text-xs text-gray-400">Subscription</p>
                     <p className="text-sm font-semibold text-gray-900">
                       {subscription.plan}
                     </p>
                   </div>
                   <div>
-                    <p className="text-xs text-gray-500">Status</p>
+                    <p className="text-xs text-gray-400">Status</p>
                     <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
                       subscription.status === 'ACTIVE'
                         ? 'bg-green-100 text-green-800'
@@ -153,7 +153,7 @@ export default function BillingPage() {
                   </div>
                   {subscription.nextBillingDate && (
                     <div>
-                      <p className="text-xs text-gray-500">Next Billing</p>
+                      <p className="text-xs text-gray-400">Next Billing</p>
                       <p className="text-sm font-medium text-gray-900">
                         {formatDate(subscription.nextBillingDate)}
                       </p>
@@ -162,7 +162,7 @@ export default function BillingPage() {
                 </>
               ) : (
                 <div className="text-center py-4">
-                  <p className="text-sm text-gray-600">No active subscription</p>
+                  <p className="text-sm text-gray-400">No active subscription</p>
                   <Link href="/dashboard/billing/plans" className="text-blue-600 hover:text-blue-700 text-xs font-medium mt-2 block">
                     Browse Plans →
                   </Link>
@@ -172,8 +172,8 @@ export default function BillingPage() {
           </div>
 
           {/* Outstanding Balance */}
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-            <h3 className="text-sm font-medium text-gray-600 uppercase tracking-wider mb-3">
+          <div className="bg-gray-800 rounded-lg shadow-sm border border-gray-700 p-6">
+            <h3 className="text-sm font-medium text-gray-400 uppercase tracking-wider mb-3">
               Outstanding Balance
             </h3>
             <p className="text-3xl font-bold text-gray-900">
@@ -183,7 +183,7 @@ export default function BillingPage() {
                   .reduce((sum, inv) => sum + inv.amount, 0)
               )}
             </p>
-            <p className="text-xs text-gray-500 mt-2">
+            <p className="text-xs text-gray-400 mt-2">
               {recentInvoices.filter((inv) => inv.status !== 'PAID').length} unpaid invoice
               {recentInvoices.filter((inv) => inv.status !== 'PAID').length !== 1 ? 's' : ''}
             </p>
@@ -204,8 +204,8 @@ export default function BillingPage() {
 
       {/* Recent Invoices */}
       {recentInvoices.length > 0 && (
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-          <div className="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
+        <div className="bg-gray-800 rounded-lg shadow-sm border border-gray-700 overflow-hidden">
+          <div className="px-6 py-4 border-b border-gray-700 flex items-center justify-between">
             <h2 className="text-lg font-semibold text-gray-900">Recent Invoices</h2>
             <Link href="/dashboard/billing/invoices" className="text-sm text-red-600 hover:text-red-700 font-medium">
               View All →
@@ -214,25 +214,25 @@ export default function BillingPage() {
 
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="bg-gray-50 border-b border-gray-200">
+              <thead className="bg-gray-800 border-b border-gray-700">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
                     Invoice
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
                     Date
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
                     Amount
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
                     Status
                   </th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
                 {recentInvoices.map((invoice) => (
-                  <tr key={invoice.id} className="hover:bg-gray-50">
+                  <tr key={invoice.id} className="hover:bg-gray-800">
                     <td className="px-6 py-4 whitespace-nowrap">
                       <Link
                         href={`/dashboard/billing/invoices/${invoice.id}`}
@@ -241,7 +241,7 @@ export default function BillingPage() {
                         {invoice.invoiceNumber}
                       </Link>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
                       {formatDate(invoice.date)}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">

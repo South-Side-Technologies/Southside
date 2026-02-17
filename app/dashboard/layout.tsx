@@ -15,10 +15,10 @@ export default async function DashboardLayout({
   const questionnaireCompleted = currentUser?.questionnaireCompleted ?? false
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50">
+    <div className="min-h-screen flex flex-col bg-gray-900">
       <Header variant="authenticated" currentUser={currentUser} />
 
-      <div className="flex flex-1">
+      <div className="flex flex-1 lg:ml-64">
         <DashboardNav showFullNav={questionnaireCompleted} />
 
         <main className="flex-1 p-6 md:p-8 overflow-auto">

@@ -58,7 +58,7 @@ function getStatusColor(status: string) {
     case 'FAILED':
       return 'bg-red-100 text-red-800'
     default:
-      return 'bg-gray-100 text-gray-800'
+      return 'bg-gray-800 text-gray-800'
   }
 }
 
@@ -75,7 +75,7 @@ function getTypeColor(type: string) {
     case 'REFUND':
       return 'bg-red-100 text-red-700'
     default:
-      return 'bg-gray-100 text-gray-700'
+      return 'bg-gray-800 text-gray-300'
   }
 }
 
@@ -168,8 +168,8 @@ export default function PaymentHistoryPage() {
     return (
       <div className="space-y-4">
         <h1 className="text-3xl font-bold text-gray-900">Payment History</h1>
-        <div className="bg-white rounded-lg shadow p-6 text-center">
-          <p className="text-gray-600">Loading payment history...</p>
+        <div className="bg-gray-800 rounded-lg shadow p-6 text-center">
+          <p className="text-gray-400">Loading payment history...</p>
         </div>
       </div>
     )
@@ -179,7 +179,7 @@ export default function PaymentHistoryPage() {
     <div className="space-y-8">
       <div>
         <h1 className="text-3xl font-bold text-gray-900 mb-2">Payment History</h1>
-        <p className="text-gray-600">View all your payments and transactions</p>
+        <p className="text-gray-400">View all your payments and transactions</p>
       </div>
 
       {error && (
@@ -190,35 +190,35 @@ export default function PaymentHistoryPage() {
 
       {/* Summary Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-          <p className="text-sm text-gray-600 font-medium mb-2">Total Payments</p>
+        <div className="bg-gray-800 rounded-lg shadow-sm border border-gray-700 p-6">
+          <p className="text-sm text-gray-400 font-medium mb-2">Total Payments</p>
           <p className="text-3xl font-bold text-gray-900">{payments.length}</p>
-          <p className="text-xs text-gray-500 mt-2">All time</p>
+          <p className="text-xs text-gray-400 mt-2">All time</p>
         </div>
 
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-          <p className="text-sm text-gray-600 font-medium mb-2">Total Spent</p>
+        <div className="bg-gray-800 rounded-lg shadow-sm border border-gray-700 p-6">
+          <p className="text-sm text-gray-400 font-medium mb-2">Total Spent</p>
           <p className="text-3xl font-bold text-green-600">{formatCurrency(totalSpent)}</p>
-          <p className="text-xs text-gray-500 mt-2">Completed payments</p>
+          <p className="text-xs text-gray-400 mt-2">Completed payments</p>
         </div>
 
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-          <p className="text-sm text-gray-600 font-medium mb-2">Payment Methods</p>
+        <div className="bg-gray-800 rounded-lg shadow-sm border border-gray-700 p-6">
+          <p className="text-sm text-gray-400 font-medium mb-2">Payment Methods</p>
           <p className="text-3xl font-bold text-gray-900">2</p>
-          <p className="text-xs text-gray-500 mt-2">Card + Credits</p>
+          <p className="text-xs text-gray-400 mt-2">Card + Credits</p>
         </div>
       </div>
 
       {/* Filter */}
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+      <div className="bg-gray-800 rounded-lg shadow-sm border border-gray-700 p-4">
         <div className="flex items-center gap-2 flex-wrap">
-          <span className="text-sm text-gray-600 font-medium">Filter by type:</span>
+          <span className="text-sm text-gray-400 font-medium">Filter by type:</span>
           <button
             onClick={() => setFilter('all')}
             className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
               filter === 'all'
                 ? 'bg-red-700 text-white'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
             }`}
           >
             All
@@ -228,7 +228,7 @@ export default function PaymentHistoryPage() {
             className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
               filter === 'INVOICE'
                 ? 'bg-blue-600 text-white'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
             }`}
           >
             Invoices
@@ -238,7 +238,7 @@ export default function PaymentHistoryPage() {
             className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
               filter === 'SUBSCRIPTION'
                 ? 'bg-purple-600 text-white'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
             }`}
           >
             Subscriptions
@@ -248,7 +248,7 @@ export default function PaymentHistoryPage() {
             className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
               filter === 'CREDIT_PURCHASE'
                 ? 'bg-green-600 text-white'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
             }`}
           >
             Credits
@@ -258,32 +258,32 @@ export default function PaymentHistoryPage() {
 
       {/* Payment Table */}
       {filteredPayments.length > 0 ? (
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+        <div className="bg-gray-800 rounded-lg shadow-sm border border-gray-700 overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="bg-gray-50 border-b border-gray-200">
+              <thead className="bg-gray-800 border-b border-gray-700">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
                     Date
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
                     Description
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
                     Type
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
                     Amount
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
                     Status
                   </th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
                 {filteredPayments.map((payment) => (
-                  <tr key={payment.id} className="hover:bg-gray-50 transition-colors">
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                  <tr key={payment.id} className="hover:bg-gray-800 transition-colors">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
                       {formatDate(payment.createdAt)}
                     </td>
                     <td className="px-6 py-4 text-sm text-gray-900">
@@ -325,7 +325,7 @@ export default function PaymentHistoryPage() {
           </div>
         </div>
       ) : (
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-12 text-center">
+        <div className="bg-gray-800 rounded-lg shadow-sm border border-gray-700 p-12 text-center">
           <svg
             className="mx-auto h-12 w-12 text-gray-400 mb-4"
             fill="none"
@@ -340,7 +340,7 @@ export default function PaymentHistoryPage() {
             />
           </svg>
           <h3 className="text-lg font-medium text-gray-900 mb-2">No payments yet</h3>
-          <p className="text-gray-600 mb-6">
+          <p className="text-gray-400 mb-6">
             Your payment history will appear here once you make your first payment
           </p>
           <Link

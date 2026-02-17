@@ -82,7 +82,7 @@ export default function ContractorTickets() {
 
   if (error) {
     return (
-      <div className="text-red-600 dark:text-red-400 p-4 bg-red-50 dark:bg-red-900 dark:bg-opacity-20 rounded-lg">
+      <div className="text-red-600 p-4 bg-red-50 rounded-lg">
         {error}
       </div>
     )
@@ -91,8 +91,8 @@ export default function ContractorTickets() {
   return (
     <>
       <div className="mb-8">
-        <h1 className="text-4xl font-bold text-gray-900 dark:text-white">Support Tickets</h1>
-        <p className="text-gray-600 dark:text-gray-400 mt-2">View and update your assigned tickets</p>
+        <h1 className="text-4xl font-bold text-gray-900 Tickets</h1>"
+        <<p className="text-gray-400 mt-2">View and update your assigned tickets</p>
       </div>
 
       {/* Status Filters */}
@@ -104,7 +104,7 @@ export default function ContractorTickets() {
             className={`px-4 py-2 rounded-lg font-medium whitespace-nowrap transition ${
               statusFilter === status
                 ? 'bg-red-700 text-white'
-                : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700'
+                : 'bg-gray-800 text-gray-300 border border-gray-700 hover:bg-gray-700'
             }`}
           >
             {status === 'ALL' ? 'All' : status.replace(/_/g, ' ')} ({statusCounts[status]})
@@ -113,48 +113,48 @@ export default function ContractorTickets() {
       </div>
 
       {/* Tickets Table */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
+      <div className="bg-gray-800 rounded-xl shadow-sm border border-gray-700 overflow-hidden">
         {loading ? (
-          <div className="px-6 py-8 text-center text-gray-500 dark:text-gray-400">Loading tickets...</div>
-        ) : filteredTickets.length > 0 ? (
-          <div className="overflow-x-auto">
+          <div className="px-6 py-8 text-center text-gray-400 tickets...</div>
+        ) : filteredTickets.length > 0 ? ("
+          <<div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="bg-gray-50 dark:bg-gray-700 border-b border-gray-200 dark:border-gray-600">
+              <thead className="bg-gray-800 border-b border-gray-700">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
                     Ticket #
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
                     Subject
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
                     Priority
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
                     Status
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
                     Customer
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
                     Created
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-                {filteredTickets.map((ticket) => (
-                  <tr
+              <tbody className="divide-y divide-gray-200
+                {filteredTickets.map((ticket) => ("
+                  <<tr
                     key={ticket.id}
-                    className="hover:bg-gray-50 dark:hover:bg-gray-700 transition cursor-pointer"
+                    className="hover:bg-gray-800 transition cursor-pointer"
                     onClick={() => window.location.href = `/contractor/tickets/${ticket.id}`}
                   >
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-red-700 dark:text-red-400">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-red-700
                       {ticket.ticketNumber}
-                    </td>
-                    <td className="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white">
+                    </td>"
+                    <<td className="px-6 py-4 text-sm font-medium text-gray-900
                       {ticket.subject}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
+                    </td>"
+                    <<td className="px-6 py-4 whitespace-nowrap">
                       <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getPriorityColor(ticket.priority)}`}>
                         {ticket.priority}
                       </span>
@@ -164,10 +164,10 @@ export default function ContractorTickets() {
                         {ticket.status}
                       </span>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-400">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-400
                       {ticket.user.companyName || ticket.user.name || 'N/A'}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-400">
+                    </td>"
+                    <<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-400
                       {new Date(ticket.createdAt).toLocaleDateString()}
                     </td>
                   </tr>
@@ -175,12 +175,12 @@ export default function ContractorTickets() {
               </tbody>
             </table>
           </div>
-        ) : (
-          <div className="px-6 py-8 text-center text-gray-500 dark:text-gray-400">
+        ) : ("
+          <<div className="px-6 py-8 text-center text-gray-400
             No tickets found with the selected status
           </div>
         )}
-      </div>
-    </>
+      </div>"
+    <</>
   )
 }
