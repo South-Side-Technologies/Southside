@@ -262,6 +262,7 @@ Dark-themed input for emphasis.
 3. Don't override component classes unless absolutely necessary
 4. Don't create new colors instead of using existing ones
 5. Don't forget dark mode when adding new styles
+6. **Don't use white or off-white backgrounds** (`bg-white`, `bg-gray-50`, etc.) for pages or cards. Use dark cards (`bg-gray-800`, `card-dark`) or colored backgrounds instead for better visual hierarchy and consistency
 
 ## Dark Mode
 

@@ -7,11 +7,27 @@ import Link from 'next/link'
 
 export default function LoginPage() {
   const [loading, setLoading] = useState(false)
+  const [mockAuthEnabled, setMockAuthEnabled] = useState(false)
   const searchParams = useSearchParams()
   const error = searchParams.get('error')
   const callbackUrl = searchParams.get('callbackUrl') || '/dashboard'
   const router = useRouter()
   const { data: session } = useSession()
+
+  // Check if mock auth is enabled
+  useEffect(() => {
+    const checkMockAuth = async () => {
+      try {
+        // Try to reach mock auth endpoint (supports testMode query param for production testing)
+        const response = await fetch('/api/auth/mock?testMode=true', { method: 'POST', body: JSON.stringify({}) })
+        // If the endpoint responds with anything other than 403, mock auth is available
+        setMockAuthEnabled(response.status !== 403)
+      } catch (e) {
+        setMockAuthEnabled(false)
+      }
+    }
+    checkMockAuth()
+  }, [])
 
   // Determine which area the user is trying to access
   const isContractorPage = callbackUrl?.includes('/contractor')
@@ -41,14 +57,48 @@ export default function LoginPage() {
     }
   }
 
+  const handleMockSignIn = async () => {
+    console.log('[Login] Mock sign-in clicked')
+    setLoading(true)
+    try {
+      // Call mock auth endpoint with testMode flag
+      const response = await fetch('/api/auth/mock?testMode=true', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: 'test@example.com',
+          name: 'Test User',
+        }),
+      })
+
+      if (!response.ok) {
+        throw new Error('Mock auth failed')
+      }
+
+      const data = await response.json()
+      console.log('[Login] Mock auth response:', data)
+
+      // Now sign in with credentials provider using the mock endpoint
+      const result = await signIn('credentials', {
+        redirect: true,
+        callbackUrl: callbackUrl,
+        email: 'test@example.com',
+      })
+      console.log('[Login] signIn result:', result)
+    } catch (error) {
+      console.error('[Login] Mock sign-in error:', error)
+      setLoading(false)
+    }
+  }
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-red-50 to-gray-100 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-gray-900 px-4">
       <div className="w-full max-w-md">
         <div className="bg-gray-800 rounded-2xl shadow-xl border border-gray-700 p-8">
           {/* Logo/Header */}
           <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold text-red-700 mb-2">South Side</h1>
-            <p className="text-gray-400 text-lg">
+            <h1 className="text-4xl font-bold text-red-600 mb-2">South Side</h1>
+            <p className="text-gray-300 text-lg">
               {isContractorPage && 'Contractor Portal'}
               {isAdminPage && 'Admin Dashboard'}
               {isDashboardPage && 'Client Portal'}
@@ -64,8 +114,8 @@ export default function LoginPage() {
 
           {/* Error Message */}
           {error && (
-            <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
-              <p className="text-red-700 text-sm">
+            <div className="mb-6 p-4 bg-red-900 border border-red-700 rounded-lg">
+              <p className="text-red-200 text-sm">
                 {error === 'OAuthSignin' && 'Failed to sign in. Please try again.'}
                 {error === 'OAuthCallback' && 'An error occurred during sign in. Please try again.'}
                 {error === 'EmailSignInError' && 'Failed to sign in with that email.'}
@@ -75,11 +125,24 @@ export default function LoginPage() {
             </div>
           )}
 
+          {/* Mock Sign In Button (Test Mode) */}
+          {mockAuthEnabled && (
+            <button
+              onClick={handleMockSignIn}
+              disabled={loading}
+              className="w-full flex items-center justify-center gap-3 bg-yellow-700 border-2 border-yellow-600 text-yellow-100 rounded-lg py-3 px-4 hover:bg-yellow-600 hover:border-yellow-500 transition disabled:opacity-50 disabled:cursor-not-allowed mb-3"
+            >
+              <span className="font-medium">
+                {loading ? 'Signing in...' : '🧪 Test Sign In'}
+              </span>
+            </button>
+          )}
+
           {/* Google Sign In Button */}
           <button
             onClick={handleGoogleSignIn}
             disabled={loading}
-            className="w-full flex items-center justify-center gap-3 bg-gray-800 border-2 border-gray-600 text-gray-300 rounded-lg py-3 px-4 hover:bg-gray-700 hover:border-red-300:border-red-700 transition disabled:opacity-50 disabled:cursor-not-allowed mb-6"
+            className="w-full flex items-center justify-center gap-3 bg-gray-700 border-2 border-gray-600 text-gray-200 rounded-lg py-3 px-4 hover:bg-gray-600 hover:border-red-500 transition disabled:opacity-50 disabled:cursor-not-allowed mb-6"
           >
             <svg className="w-5 h-5" viewBox="0 0 24 24">
               <path
@@ -105,40 +168,40 @@ export default function LoginPage() {
           </button>
 
           {/* Account Creation Info */}
-          <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-            <p className="text-blue-700 text-sm text-center">
+          <div className="mb-6 p-4 bg-gray-900 border border-gray-700 rounded-lg">
+            <p className="text-gray-300 text-sm text-center">
               💡 New user? Your account will be created automatically when you sign in with Google for the first time.
             </p>
           </div>
 
           {/* Footer */}
-          <div className="mt-8 pt-6 border-t border-gray-700"
-            <<p className="text-center text-xs text-gray-400 mb-3">
+          <div className="mt-8 pt-6 border-t border-gray-700">
+            <p className="text-center text-xs text-gray-400 mb-3">
               By signing in, you agree to our Terms of Service and Privacy Policy
             </p>
-            <div className="flex justify-center gap-4 text-xs text-gray-400"
-              <<Link href="#" className="hover:text-gray-300
+            <div className="flex justify-center gap-4 text-xs text-gray-400">
+              <Link href="#" className="hover:text-gray-300">
                 Terms
               </Link>
-              <span>•</span>"
-              <<Link href="#" className="hover:text-gray-300
+              <span>•</span>
+              <Link href="#" className="hover:text-gray-300">
                 Privacy
               </Link>
-              <span>•</span>"
-              <<Link href="#" className="hover:text-gray-300
+              <span>•</span>
+              <Link href="#" className="hover:text-gray-300">
                 Support
               </Link>
             </div>
           </div>
         </div>
 
-        {/* Additional Info - Changes based on context */}"
-        <<div className="mt-8 text-center text-sm text-gray-400
+        {/* Additional Info - Changes based on context */}
+        <div className="mt-8 text-center text-sm text-gray-400">
           {isContractorPage && <p>Accept projects • Track progress • Manage earnings</p>}
           {isAdminPage && <p>Manage contractors • Approve applications • Track payouts</p>}
           {isDashboardPage && <p>Manage projects • Collaborate with your team • Track support tickets</p>}
         </div>
-      </div>"
-    <</div>
+      </div>
+    </div>
   )
 }

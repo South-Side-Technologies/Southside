@@ -1,5 +1,6 @@
 import NextAuth, { type NextAuthOptions } from 'next-auth'
 import GoogleProvider from 'next-auth/providers/google'
+import CredentialsProvider from 'next-auth/providers/credentials'
 import { PrismaAdapter } from '@next-auth/prisma-adapter'
 import prisma from '../../../lib/db/prisma'
 import { ADMIN_EMAILS } from '../../../lib/auth/roles'
@@ -51,6 +52,26 @@ export const authOptions: NextAuthOptions = {
         }
       },
       wellKnown: 'https://accounts.google.com/.well-known/openid-configuration',
+    }),
+    // Mock credentials provider for testing
+    CredentialsProvider({
+      name: 'Test Credentials',
+      credentials: {
+        email: { label: 'Email', type: 'text' },
+      },
+      async authorize(credentials) {
+        console.log('[NextAuth MockProvider] Mock auth attempt:', credentials?.email)
+        if (!credentials?.email) {
+          return null
+        }
+        // Return user object for mock authentication
+        return {
+          id: credentials.email,
+          email: credentials.email,
+          name: 'Test User',
+          image: `https://api.dicebear.com/7.x/avataaars/svg?seed=${credentials.email}`,
+        }
+      },
     }),
   ],
   callbacks: {

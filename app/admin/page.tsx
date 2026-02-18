@@ -1,11 +1,7 @@
-import { headers } from 'next/headers'
 import Link from 'next/link'
-import { getUserFromHeaders } from '../lib/auth/get-user'
 import { prisma } from '../lib/db/prisma'
 
 export default async function AdminDashboard() {
-  const headersList = await headers()
-  const currentUser = getUserFromHeaders(headersList)
 
   // Get statistics
   const stats = await Promise.all([
@@ -51,7 +47,7 @@ export default async function AdminDashboard() {
           <p className="stat-value">{totalUsers}</p>
           <Link
             href="/admin/users"
-            className="text-sm text-red-400 hover:text-red-700:text-red-300 font-medium mt-2 inline-block"
+            className="text-sm text-red-400 hover:text-red-300 font-medium mt-2 inline-block"
           >
             Manage users →
           </Link>
@@ -65,7 +61,7 @@ export default async function AdminDashboard() {
           <p className="stat-value">{totalClients}</p>
           <Link
             href="/admin/clients"
-            className="text-sm text-red-400 hover:text-red-700:text-red-300 font-medium mt-2 inline-block"
+            className="text-sm text-red-400 hover:text-red-300 font-medium mt-2 inline-block"
           >
             Manage clients →
           </Link>
@@ -90,7 +86,7 @@ export default async function AdminDashboard() {
           <p className="stat-value">{totalDocuments}</p>
           <Link
             href="/admin/documents/upload"
-            className="text-sm text-red-400 hover:text-red-700:text-red-300 font-medium mt-2 inline-block"
+            className="text-sm text-red-400 hover:text-red-300 font-medium mt-2 inline-block"
           >
             Upload document →
           </Link>
@@ -139,7 +135,7 @@ export default async function AdminDashboard() {
         <div className="mt-4">
           <Link
             href="/admin/users"
-            className="text-sm text-red-400 hover:text-red-700:text-red-300 font-semibold"
+            className="text-sm text-red-400 hover:text-red-300 font-semibold"
           >
             View all users →
           </Link>

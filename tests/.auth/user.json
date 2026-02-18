@@ -1,0 +1,45 @@
+{
+  "cookies": [
+    {
+      "name": "__Host-next-auth.csrf-token",
+      "value": "897cb1c72e8cf6582360e48af9e46a06fd86eaa4a799d07e6a0fab81e57e9980%7Cde2bee30a95023fcc6ff01e8cb95ce35946465fadc7463021f8130a0773b5cfd",
+      "domain": "southside.brandonslab.work",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "__Secure-next-auth.callback-url",
+      "value": "%2Fdashboard",
+      "domain": "southside.brandonslab.work",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "__Secure-next-auth.session-token",
+      "value": "eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..E-btICq2WGM6dfjG.z7aYM7HWGcgSRALulgbOpQfTZLxLxZb4WGn3NyHtjVrZ2bVgyq-iSsvE2QEzMITfFzqvJz7T4Q1_nD9oN1Fe63rJyxozIH-foAsLucqFjfZf2Vt8mazZIXjadvWY3UPYGLMe1zz9BFPM_MQB3_k1XCFGM-JERQMPrf1ISvM2muAIgQvPbTvly2XnmhsG9VhLMscRpJbrSuhn40hvwEFymacIrDx76gYtD_jy1wPS7QQTYVZFyMF-iv_4hCymQkIQXgGnHCKKOZhLka3gImFAS8gMTRi5ePrnM1Kzsaoa87MylfFHsdoI0rn-xjyZw9xqfj1mciM8kp8MBGdJEm3gE3G-AGpYn9v4juK-JBNsiQMs91hFWbSWwLi0_TMH9Ml8-rG0J7ttA4NDSFzgZ_0GMu1GsDcdjLvCeFcicba1QemphsOghEcddYYtx0R579WwvIpH7_tkLkJm-KucHkiSVsAftkgx054c.9nyvMUcJGOJfoKqfO--xzg",
+      "domain": "southside.brandonslab.work",
+      "path": "/",
+      "expires": 1774043365.869646,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    }
+  ],
+  "origins": [
+    {
+      "origin": "https://southside.brandonslab.work",
+      "localStorage": [
+        {
+          "name": "nextauth.message",
+          "value": "{\"event\":\"session\",\"data\":{\"trigger\":\"getSession\"},\"timestamp\":1771451097}"
+        }
+      ]
+    }
+  ]
+}

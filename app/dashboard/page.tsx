@@ -77,7 +77,7 @@ export default async function DashboardPage() {
           <p className="stat-value">{stats.activeProjects}</p>
           <Link
             href="/dashboard/projects"
-            className="text-sm text-red-600 hover:text-red-700:text-red-300 font-medium mt-2 inline-block"
+            className="text-sm text-red-600 hover:text-red-300 font-medium mt-2 inline-block"
           >
             View all →
           </Link>
@@ -91,7 +91,7 @@ export default async function DashboardPage() {
           <p className="stat-value">{stats.openTickets}</p>
           <Link
             href="/dashboard/support"
-            className="text-sm text-red-600 hover:text-red-700:text-red-300 font-medium mt-2 inline-block"
+            className="text-sm text-red-600 hover:text-red-300 font-medium mt-2 inline-block"
           >
             View tickets →
           </Link>
@@ -105,7 +105,7 @@ export default async function DashboardPage() {
           <p className="stat-value">{stats.documents}</p>
           <Link
             href="/dashboard/documents"
-            className="text-sm text-red-600 hover:text-red-700:text-red-300 font-medium mt-2 inline-block"
+            className="text-sm text-red-600 hover:text-red-300 font-medium mt-2 inline-block"
           >
             Browse →
           </Link>
@@ -119,7 +119,7 @@ export default async function DashboardPage() {
           <p className="text-lg font-bold text-red-700">{stats.nextInvoice}</p>
           <Link
             href="/dashboard/billing"
-            className="text-sm text-red-600 hover:text-red-700:text-red-300 font-medium mt-2 inline-block"
+            className="text-sm text-red-600 hover:text-red-300 font-medium mt-2 inline-block"
           >
             View billing →
           </Link>

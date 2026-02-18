@@ -48,10 +48,10 @@ export default function ApplicationStatusPage() {
 
   if (status === 'loading' || loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-800"
-        <<div className="text-center">
+      <div className="flex items-center justify-center min-h-screen bg-gray-800">
+        <div className="text-center">
           <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mb-4"></div>
-          <p className="text-gray-400 application status...</p>
+          <p className="text-gray-400">Loading application status...</p>
         </div>
       </div>
     )
@@ -63,14 +63,14 @@ export default function ApplicationStatusPage() {
 
   // No application found
   if (!applicationStatus?.hasApplication) {
-    return ("
-      <<div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-8">
+    return (
+      <div className="min-h-screen bg-gray-900 p-8">
         <div className="max-w-2xl mx-auto">
           <div className="bg-gray-800 rounded-lg shadow-lg p-8">
             <div className="text-center mb-8">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-gray-800 rounded-full mb-4">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 rounded-full mb-4">
                 <svg
-                  className="w-8 h-8 text-gray-400
+                  className="w-8 h-8 text-blue-600"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -83,15 +83,16 @@ export default function ApplicationStatusPage() {
                   />
                 </svg>
               </div>
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">
+              <h1 className="text-3xl font-bold text-white mb-2">
                 No Application Found
               </h1>
-              <p className="text-gray-400
+              <p className="text-gray-300">
                 You haven't submitted a contractor application yet.
               </p>
-            </div>"
-            <<div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8">
-              <h2 className="font-semibold text-gray-900 mb-3">Get Started</h2>
+            </div>
+
+            <div className="bg-gray-800 border border-gray-700 rounded-lg p-6 mb-8">
+              <h2 className="font-semibold text-white mb-3">Get Started</h2>
               <p className="text-gray-300 text-sm mb-4">
                 Ready to become a contractor? Complete the application to join our network of professionals.
               </p>
@@ -120,13 +121,13 @@ export default function ApplicationStatusPage() {
   // Application Pending
   if (applicationStatus.application?.status === 'PENDING') {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-8">
+      <div className="min-h-screen bg-gray-900 p-8">
         <div className="max-w-2xl mx-auto">
           <div className="bg-gray-800 rounded-lg shadow-lg p-8">
             <div className="text-center mb-8">
               <div className="inline-flex items-center justify-center w-16 h-16 bg-yellow-100 rounded-full mb-4">
                 <svg
-                  className="w-8 h-8 text-yellow-600
+                  className="w-8 h-8 text-yellow-600"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                 >
@@ -137,19 +138,20 @@ export default function ApplicationStatusPage() {
                   />
                 </svg>
               </div>
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">
+              <h1 className="text-3xl font-bold text-white mb-2">
                 Application Under Review
               </h1>
-              <p className="text-gray-400
+              <p className="text-gray-300">
                 Your contractor application is being reviewed by our team.
               </p>
-            </div>"
-            <<div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8">
-              <h2 className="font-semibold text-gray-900 mb-4">Application Details</h2>
+            </div>
+
+            <div className="bg-gray-800 border border-gray-700 rounded-lg p-6 mb-8">
+              <h2 className="font-semibold text-white mb-4">Application Details</h2>
               <dl className="space-y-3">
                 <div className="flex justify-between">
-                  <dt className="text-gray-400"
-                  <<dd className="font-medium">
+                  <dt className="text-gray-400">Status</dt>
+                  <dd className="font-medium text-white">
                     <span className="inline-block px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm">
                       Pending Review
                     </span>
@@ -157,22 +159,23 @@ export default function ApplicationStatusPage() {
                 </div>
                 {applicationStatus.application?.companyName && (
                   <div className="flex justify-between">
-                    <dt className="text-gray-400"
-                    <<dd className="font-medium text-gray-900
+                    <dt className="text-gray-400">Company</dt>
+                    <dd className="font-medium text-white">
                       {applicationStatus.application.companyName}
                     </dd>
                   </div>
-                )}"
-                <<div className="flex justify-between">
-                  <dt className="text-gray-400"
-                  <<dd className="font-medium text-gray-900
+                )}
+                <div className="flex justify-between">
+                  <dt className="text-gray-400">Submitted</dt>
+                  <dd className="font-medium text-white">
                     {new Date(applicationStatus.application!.submittedAt).toLocaleDateString()}
                   </dd>
                 </div>
               </dl>
-            </div>"
-            <<div className="bg-green-50 border border-green-200 rounded-lg p-6 mb-8">
-              <h3 className="font-semibold text-gray-900 mb-3">What's Next?</h3>
+            </div>
+
+            <div className="bg-gray-800 border border-gray-700 rounded-lg p-6 mb-8">
+              <h3 className="font-semibold text-white mb-3">What's Next?</h3>
               <ol className="space-y-2 text-sm text-gray-300 list-decimal list-inside">
                 <li>Our team will review your application and background</li>
                 <li>We may contact you for additional information</li>
@@ -181,14 +184,15 @@ export default function ApplicationStatusPage() {
               </ol>
             </div>
 
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8">
-              <h3 className="font-semibold text-gray-900 mb-3">In the Meantime</h3>
-              <p className="text-sm text-gray-300
+            <div className="bg-gray-800 border border-gray-700 rounded-lg p-6 mb-8">
+              <h3 className="font-semibold text-white mb-3">In the Meantime</h3>
+              <p className="text-sm text-gray-300">
                 You can set up your payment information now so you're ready to receive payouts as soon as your application is approved.
               </p>
-            </div>"
-            <<div className="space-y-4">
-              <p className="text-sm text-gray-400 text-center">
+            </div>
+
+            <div className="space-y-4">
+              <p className="text-sm text-gray-300 text-center">
                 This usually takes 1-3 business days. We'll notify you once your
                 application is approved or if we need more information.
               </p>
@@ -208,13 +212,13 @@ export default function ApplicationStatusPage() {
   // Application Rejected
   if (applicationStatus.application?.status === 'REJECTED') {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-red-50 to-orange-100 p-8">
+      <div className="min-h-screen bg-gray-900 p-8">
         <div className="max-w-2xl mx-auto">
           <div className="bg-gray-800 rounded-lg shadow-lg p-8">
             <div className="text-center mb-8">
               <div className="inline-flex items-center justify-center w-16 h-16 bg-red-100 rounded-full mb-4">
                 <svg
-                  className="w-8 h-8 text-red-600
+                  className="w-8 h-8 text-red-600"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                 >
@@ -225,24 +229,25 @@ export default function ApplicationStatusPage() {
                   />
                 </svg>
               </div>
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">
+              <h1 className="text-3xl font-bold text-white mb-2">
                 Application Not Approved
               </h1>
-              <p className="text-gray-400
+              <p className="text-gray-300">
                 Unfortunately, your application was not approved at this time.
               </p>
             </div>
 
-            {applicationStatus.application?.rejectionReason && ("
-              <<div className="bg-red-50 border border-red-200 rounded-lg p-6 mb-8">
-                <h2 className="font-semibold text-gray-900 mb-3">Reason for Decision</h2>
-                <p className="text-gray-300
+            {applicationStatus.application?.rejectionReason && (
+              <div className="bg-gray-800 border border-gray-700 rounded-lg p-6 mb-8">
+                <h2 className="font-semibold text-white mb-3">Reason for Decision</h2>
+                <p className="text-gray-300">
                   {applicationStatus.application.rejectionReason}
                 </p>
               </div>
-            )}"
-            <<div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8">
-              <h3 className="font-semibold text-gray-900 mb-3">What Can You Do?</h3>
+            )}
+
+            <div className="bg-gray-800 border border-gray-700 rounded-lg p-6 mb-8">
+              <h3 className="font-semibold text-white mb-3">What Can You Do?</h3>
               <ul className="space-y-2 text-sm text-gray-300 list-disc list-inside">
                 <li>Review the feedback and address any concerns</li>
                 <li>Update your application with new information</li>
@@ -264,13 +269,13 @@ export default function ApplicationStatusPage() {
 
   // Application Approved
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-100 p-8">
+    <div className="min-h-screen bg-gray-900 p-8">
       <div className="max-w-2xl mx-auto">
         <div className="bg-gray-800 rounded-lg shadow-lg p-8">
           <div className="text-center mb-8">
             <div className="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-4">
               <svg
-                className="w-8 h-8 text-green-600
+                className="w-8 h-8 text-green-600"
                 fill="currentColor"
                 viewBox="0 0 20 20"
               >
@@ -281,23 +286,25 @@ export default function ApplicationStatusPage() {
                 />
               </svg>
             </div>
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">
+            <h1 className="text-3xl font-bold text-white mb-2">
               Congratulations! 🎉
             </h1>
-            <p className="text-gray-400
+            <p className="text-gray-300">
               Your contractor application has been approved!
             </p>
-          </div>"
-          <<div className="bg-green-50 border border-green-200 rounded-lg p-6 mb-8">
-            <h2 className="font-semibold text-gray-900 mb-4">You're All Set</h2>
+          </div>
+
+          <div className="bg-gray-800 border border-gray-700 rounded-lg p-6 mb-8">
+            <h2 className="font-semibold text-white mb-4">You're All Set</h2>
             <p className="text-gray-300 text-sm mb-4">
               Your contractor profile is now active. You can access the contractor dashboard and start reviewing projects.
             </p>
-            <p className="text-sm text-gray-400
+            <p className="text-sm text-gray-300">
               If you haven't already, set up your payment information to receive payouts.
             </p>
-          </div>"
-          <<div className="flex gap-4">
+          </div>
+
+          <div className="flex gap-4">
             <Link
               href="/contractor/dashboard"
               className="flex-1 px-6 py-3 bg-green-600 text-white font-medium rounded hover:bg-green-700 transition text-center"
