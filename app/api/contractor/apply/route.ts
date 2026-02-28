@@ -101,6 +101,22 @@ export async function POST(request: NextRequest) {
       },
     })
 
+    // Add CONTRACTOR role to user on application submission
+    const dbUser = await prisma.user.findUnique({
+      where: { id: userId },
+    })
+
+    if (dbUser) {
+      const roles = Array.isArray(dbUser.roles) ? dbUser.roles : [dbUser.roles]
+      if (!roles.includes('CONTRACTOR')) {
+        roles.push('CONTRACTOR')
+        await prisma.user.update({
+          where: { id: userId },
+          data: { roles },
+        })
+      }
+    }
+
     // Log activity
     await prisma.activityLog.create({
       data: {
@@ -117,7 +133,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       success: true,
       applicationId: application.id,
-      message: 'Application submitted successfully. Awaiting admin review.',
+      message: 'Application submitted successfully.',
     })
   } catch (error: any) {
     console.error('Error submitting contractor application:', error)

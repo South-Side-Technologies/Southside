@@ -16,7 +16,9 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Not authenticated' }, { status: 401 })
     }
 
-    requireContractor(session.user)
+    if (!session.user.roles?.includes('CONTRACTOR')) {
+      return NextResponse.json({ error: 'Contractor access required' }, { status: 403 })
+    }
 
     // Get current user to check if they already have a Connect account
     const user = await prisma.user.findUnique({
@@ -39,10 +41,11 @@ export async function POST(request: NextRequest) {
 
     if (!accountId) {
       // Create new Connect account
-      const accountResult = await createConnectAccount(user.email, user.name || undefined)
+      const accountResult = await createConnectAccount(user.email!, user.name || undefined)
 
       if (!accountResult.success) {
-        return NextResponse.json({ error: accountResult.error }, { status: 500 })
+        console.error('Failed to create Connect account:', accountResult.error)
+        return NextResponse.json({ error: `Stripe account creation failed: ${accountResult.error}` }, { status: 500 })
       }
 
       accountId = accountResult.accountId
@@ -55,10 +58,11 @@ export async function POST(request: NextRequest) {
     }
 
     // Create onboarding link
-    const linkResult = await createOnboardingLink(accountId)
+    const linkResult = await createOnboardingLink(accountId!)
 
     if (!linkResult.success) {
-      return NextResponse.json({ error: linkResult.error }, { status: 500 })
+      console.error('Failed to create onboarding link:', linkResult.error)
+      return NextResponse.json({ error: `Onboarding link creation failed: ${linkResult.error}` }, { status: 500 })
     }
 
     return NextResponse.json({
@@ -67,7 +71,7 @@ export async function POST(request: NextRequest) {
   } catch (error: any) {
     console.error('Error starting onboarding:', error)
     return NextResponse.json(
-      { error: 'Failed to start onboarding' },
+      { error: error.message || 'Failed to start onboarding' },
       { status: 500 }
     )
   }
